@@ -1,0 +1,12 @@
+set title "Medio Quicksort"
+set key top left vertical inside
+set grid
+set xlabel "Talla (n)"
+set ylabel "Tiempo (ms)"
+
+plot "Quicksort.dat" using 1:2 with lines title "Quicksort"
+set terminal pdf
+set output "Quicksort.pdf" 
+replot
+#pause -1 "Pulsa Enter para continuar..."
+unset output

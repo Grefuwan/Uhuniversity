@@ -1,0 +1,65 @@
+/*CREATE TABLE Rally(
+codRally VARCHAR (4),
+Nombre VARCHAR (50),
+Pais VARCHAR (20),
+Fecha date,
+CONSTRAINT codigoRally PRIMARY KEY (codRally)
+);*/
+
+CREATE TABLE Tramo (
+codRally VARCHAR (4),
+numeroTramo INT,
+totalKms NUMBER(5,2),
+dificultad VARCHAR(1),
+CONSTRAINT codigoRally PRIMARY KEY (codRally, numeroTramo), --Ponerlos por separado
+CONSTRAINT codRallyReferen FOREIGN KEY (codRally) REFERENCES RALLY (codRally),
+CONSTRAINT dificultadValida CHECK (dificultad IN('A', 'B', 'C') AND DEFAULT ('B') NOT NULL)
+);
+
+
+CREATE TABLE Coche (
+codCoche VARCHAR (4),
+marca VARCHAR (10),
+modelo VARCHAR (20),
+cilindrada int,
+CONSTRAINT CodCocheClave PRIMARY KEY(codCoche),
+CONSTRAINT CilindradaValida CHECK (cilindrada < 3000 AND cilindrada > 2000)
+);
+
+
+CREATE TABLE Piloto (
+codPiloto VARCHAR (4),
+nombreP VARCHAR (50),
+grupoS VARCHAR (2),
+rh VARCHAR (1),
+nombreCop VARCHAR (50),
+coche VARCHAR (4),
+puntos INT,
+
+CONSTRAINT CodPilotoClave PRIMARY KEY (codPiloto),
+CONSTRAINT CocheClaveAjena FOREIGN KEY (coche) REFERENCES COCHE (codCoche),
+CONSTRAINT NombrePilotoValido CHECK 
+);
+
+
+CREATE TABLE Participa(
+codRally VARCHAR (4),
+codPiloto VARCHAR (4),
+penalizacion INT,
+tiempoRally INT,
+CONSTRAINT codRallyClave PRIMARY KEY (codRally),
+CONSTRAINT codPilotoClave PRIMARY KEY (codPiloto),
+CONSTRAINT codRallyRefer FOREIGN KEY (codRally) REFERENCES RALLY (codRally),
+CONSTRAINT codPilotoRefer FOREIGN KEY (codPiloto) REFERENCES PILOTO (codPiloto),
+CONSTRAINT penalizacionValida CHECK (penalizacion DEFAULT '0' NOT NULL AND penalizacion > 0),
+CONSTRAINT tiempoRallyValido CHECK (tiempoRally DEFAULT '0' NOT NULL AND tiempoRally > 0)
+);
+
+
+CREATE TABLE Corre(
+codPiloto VARCHAR (4),
+codRally VARCHAR (4),
+numeroTramo INT,
+tiempo INT,
+--Ponerle las referencias
+);

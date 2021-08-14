@@ -1,0 +1,22 @@
+	#ESTE ES UN SCRIPT DE GNUPLOT PARA COMPARACION DE LOS CASOS DE UN ALGORITMO
+set title " tiempos SecuencialPeorTeorico , SecuencialMedioTeorico y SecuencialMejorTeorico"
+set key top left vertical inside
+set grid
+set xlabel "Talla (n)"
+set ylabel "Tiempo (OE´s)"
+
+
+N(x) = a*x + b
+fit N(x) "SecuencialPeorSecuencialMedioSecuencialMejorTeorico.dat" using 1:2 via a,b
+M(x) = c*x + d
+fit M(x) "SecuencialPeorSecuencialMedioSecuencialMejorTeorico.dat" using 1:3 via c,d
+C(x) = e
+fit C(x) "SecuencialPeorSecuencialMedioSecuencialMejorTeorico.dat" using 1:4 via e
+
+plot "SecuencialPeorSecuencialMedioSecuencialMejorTeorico.dat" using 1:2  title "SecuencialPeorTeorico", N(x), "SecuencialPeorSecuencialMedioSecuencialMejorTeorico.dat" using 1:3  title "SecuencialMedioTeorico", M(x), "SecuencialPeorSecuencialMedioSecuencialMejorTeorico.dat" using 1:4  title "SecuencialMejorTeorico",C(x)
+
+
+set terminal pdf
+set output "SecuencialPeorSecuencialMedioSecuencialMejorTeorico.pdf"
+replot
+pause 5 "Pulsa Enter para continuar..."

@@ -1,0 +1,188 @@
+EI.9
+
+
+-----------------------------------------------------------------------------
+EI.10
+
+
+-----------------------------------------------------------------------------
+EI.11
+
+
+-----------------------------------------------------------------------------
+EI.12
+
+
+-----------------------------------------------------------------------------
+EI.13
+
+
+-----------------------------------------------------------------------------
+
+EI.14
+
+SELECT nombre
+FROM EI.ALUMNO
+WHERE lugar=	(SELECT lugar
+		FROM EI.ALUMNO
+		WHERE nombre='Samuel Toscano')
+	AND nh=	(SELECT nH
+		FROM EI.ALUMNO
+		WHERE nombre ='Beatriz Rico');
+-----------------------------------------------------------------------------
+
+EI.15
+
+SELECT nombre
+FROM EI.ALUMNO
+WHERE nAl IN (	SELECT M.alum
+		FROM EI.ASIGNATURA A INNER JOIN EI.MATRICULA M USING (idAsig)
+		WHERE A.nombre = 'Bases de Datos II')
+AND nAl NOT IN (SELECT M.alum
+		FROM EI.ASIGNATURA A INNER JOIN EI.MATRICULA M USING (idAsig)
+		WHERE A.nombre = 'Bases de Datos I');
+
+-----------------------------------------------------------------------------
+EI.16
+
+SELECT nombre
+FROM EI.PROFESOR
+WHERE despacho <> 'FC-7366' AND
+	ant < ANY (	SELECT ant
+			FROM EI.Profesor
+			WHERE despacho = 'FC-7366');
+
+-----------------------------------------------------------------------------
+EI.17
+
+SELECT AL.nombre
+FROM (EI.MATRICULA M INNER JOIN EI.ASIGNATURA A USING idAsig)) INNER JOIN EI.ALUMNO AL ON AL.nAL = alum
+WHERE A.nombre = 'Base de Datos I' AND año = 2002
+	AND sep > ALL ( SELECT feb_jun
+			FROM EI.MATRICULA M INNER JOIN EI.ASIGNATURA A USING (idAsig)
+			WHERE nombre = 'Bases de Datos I' AND
+				año = 2002 AND feb_jun IS NOT NULL);
+
+-----------------------------------------------------------------------------
+EI.18
+
+SELECT DISTINCT P.despacho
+FROM EI.PROFESOR P
+WHERE NOT EXISTS (	SELECT *
+			FROM EI.ASIGNATURA A
+			WHERE P.nPr=A.prof);
+
+-----------------------------------------------------------------------------
+EI.19
+
+SELECT A.nombre
+FROM EI.ALUMNO A
+WHERE EXISTS (	SELECT *
+		FROM EI.MATRICULA M
+		WHERE (año=2000 OR año=2002) AND A.nAl=M.alum)
+AND NOT EXISTS	(SELECT *
+		FROM EI.MATRICULA M
+		WHERE año=2001 AND A.nAl=M.alum);
+
+-----------------------------------------------------------------------------
+EI.20
+
+--Sin EXISTS--
+SELECT nombre, despacho
+FROM EI.PrOFESOR P1
+WHERE despacho NOT IN (	SELECT despacho
+			FROM EI.PROFESOR P2
+			WHERE P2.nPr<>P1.nPr);
+
+--Con EXISTS--
+SELECT nombre, despacho
+FROM EI.PROFESOR P1
+WHERE NOT EXISTS (	SELECT *
+			FROM EI.PROFESOR P2
+			WHERE P2.despacho = P1.despacho AND P2.nPr<>P1.nPr);
+-----------------------------------------------------------------------------
+EI.21
+
+SELECT P.nombre, A.nombre
+FROM EI.PROFESOR P LEFT OUTER JOIN EI.ASIGNATURA A ON P.nPr=A.prof;
+---------------------------------------------------------------------------
+EI.22
+
+SELECT COUNT (DISTINCT despacho)
+FROM EI.PROFESOR;
+-----------------------------------------------------------------------------
+EI.23
+
+SELECT COUNT(*), MAX (sep) AS Maxima, MIN (sep) AS Minima, AVG (sep) AS Media
+FROM EI.ASIGNATURA A INNER JOIN EI.MATRICULA M USING (idAsig)
+WHERE A.nombre = 'Bases de Datos I' AND M.año=2002;
+-----------------------------------------------------------------------------
+EI.24
+
+SELECT A.nombre
+FROM EI.ASIGNATURA A
+WHERE 	(SELECT COUNT (*)
+	FROM EI.RECOMENDACIONES R
+	WHERE A.idAsig = R.idAsig1)>=2; -- Compara que el nº que devuelve el count sea mayor o igual que 2
+-----------------------------------------------------------------------------
+EI.25
+
+SELECT P1.nombre
+FROM EI.PROFESOR P1
+WHERE 	(SELECT COUNT (*)
+	FROM EI.PROFESOR P2
+	WHERE P1.ant < P2.ant)>=5;
+-----------------------------------------------------------------------------
+EI.26
+
+SELECT A.nombre, M.año, COUNT(feb_jun) AS Presentados, AVG(feb_jun) AS Media
+FROM EI.ASIGNATURA A INNER JOIN EI.MATRICULA USING (idAsig)
+GROUP BY A.nombre, M.año; --Como tu quieres agrupar por nombre y año, los quieres ver, por lo que los pones en el SELECT
+-----------------------------------------------------------------------------
+EI.27
+
+SELECT A.nombre, ASIG.nombre, COUNT (*)
+FROM (EI.ALUMNO A INNER JOIN EI.MATRICULA M ON A.nAl = M.alum) INNER JOIN EI.ASIGNATURA ASIG USING (idAsig)
+GROUP BY A.nombre, ASIG.nombre
+HAVING COUNT(*) >=3;
+-----------------------------------------------------------------------------
+EI.28
+
+SELECT A.nombre
+FROM EI.ALUMNO INNER JOIN EI.MATRICULA M ON A.nAl = M.alum
+WHERE año = 2002
+GROUP BY A.nombre
+HAVING AVG(feb_jun)>=5;
+-----------------------------------------------------------------------------
+EI.29
+
+SELECT A.nombre, COUNT (*)
+FROM EI.ASIGNATURA A INNER JOIN EI.MATRICULA M USING (idAsig)
+WHERE año = 2002
+GROUP BY A.nombre
+HAVING COUNT (*) >= ALL (SELECT COUNT (*)
+			FROM EI.MATRICULA
+			WHERE año = 2002
+			GROUP BY idAsig);
+-----------------------------------------------------------------------------
+EI.30
+
+SELECT A.nombre, COUNT (*)
+FROM EI.ASIGNATURA A INNER JOIN EI.MATRICULA M USING (idAsig)
+WHERE M.año=2002 AND M.feb_jun<5 AND idAsig IN 	(SELECT M.idAsig
+						FROM EI.MATRICULA M
+						WHERE M.año=2002
+						GROUP BY M.idAsig
+						HAVING COUNT (*)>50)
+GROUP BY A.nombre;
+-----------------------------------------------------------------------------
+EI.Division en SQL
+
+SELECT nombre
+FROM EI.ALUMNO Al
+WHERE NOT EXISTS	(SELECT *
+			FROM EI.ASIGNATURA A INNER JOIN EI.PROFESOR P ON A.Prof = P.nPr
+			WHERE P.nombre = 'Santiago Barjoa Lopez'
+				AND NOT EXISTS 	(SELECT *
+						FROM EI.MATRICULA M
+						WHERE Al.nAl = M.alum AND A.idAsig = M.idAsig))

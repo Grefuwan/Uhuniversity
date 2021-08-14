@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1603133501 source:c:\users\usuario\downloads\practica0\main.cpp
+	<iostream>
+	"complejo.h"
+
+1603133516 source:c:\users\usuario\downloads\practica0\src\complejo.cpp
+	<iostream>
+	"complejo.h"
+	"complejo.h"
+
+1603133501 c:\users\usuario\downloads\practica0\include\complejo.h
+
+1603267888 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 0\p0 aa\practica0\main.cpp
+	<iostream>
+	"complejo.h"
+
+1603269402 e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 0\p0 aa\practica0\include\complejo.h
+
+1603269402 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 0\p0 aa\practica0\src\complejo.cpp
+	<iostream>
+	"complejo.h"
+	"complejo.h"
+

@@ -1,0 +1,103 @@
+--WRC.1 - Muestra todos los datos de los rallies que se celebren antes del 1 de octubre de 2009, en un país que tenga más de 6 caracteres de longitud.
+SELECT *
+FROM WRC.RALLY
+WHERE FECHA < '01/10/2009' AND PAIS LIKE '_______%';
+
+-----------------------------------------------------------------------------
+--WRC-2.  Muestra el nombre de todos los pilotos y sus copilotos, ordenados alfabéticamente por el  nombre de piloto, pero sólo de aquellos pilotos cuyo nombre no comience por M 
+SELECT NOMBREP, NOMBRECOP
+FROM WRC.PILOTO
+WHERE NOMBREP NOT LIKE 'M%'
+ORDER BY NOMBREP ASC;
+
+-----------------------------------------------------------------------------
+--WRC-3.  Muestra el nombre de los pilotos y su grupo sanguíneo, pero sólo de aquellos cuyo nombre  empiece por M y su grupo sanguíneo tenga 2 caracteres
+
+-----------------------------------------------------------------------------
+--WRC-10. Utilizando una subconsulta, muestra el nombre de los rallies en los que haya corrido algún vehículo en los que los copilotos no fuesen ni Marc Martí (con acento)ni Timo Rautiainen 
+SELECT DISTINCT nombre
+FROM WRC.PARTICIPA INNER JOIN WRC.RALLY USING (codrally)
+WHERE codpiloto NOT IN (SELECT codpiloto
+                        FROM WRC.PILOTO
+                        WHERE nombreCop = 'Marc Martí' or nombreCop = 'Timo Rautiainen');
+
+-----------------------------------------------------------------------------
+--WRC-11. Muestra el nombre de los pilotos que hayan participado en el Rally de Cataluña pilotando un Subaru y hayan acumulado menos de 10 segundos de penalización
+SELECT DISTINCT nombrep
+FROM (WRC.RALLY INNER JOIN WRC.PARTICIPA USING (codRally)) INNER JOIN WRC.PILOTO USING (codPiloto)
+WHERE nombre = 'Rally de Cataluña' AND penalizacion < 10 
+    AND coche IN (SELECT codcoche
+                  FROM WRC.COCHE
+                  WHERE marca = 'Subaru');
+
+-----------------------------------------------------------------------------
+--WRC-12. Muestra un listado con el nombre de los rallies en los que haya corrido algún piloto con grupo sanguíneo A y rh +
+
+-----------------------------------------------------------------------------
+--(H)WRC-16. Utilizando consultas correlacionadas, muestra el nombre de los pilotos que no han corrido el rally de Cataluña
+SELECT P.NOMBREP
+FROM WRC.PILOTO P
+WHERE NOT EXISTS (SELECT nombre
+                  FROM WRC.RALLY R INNER JOIN WRC.PARTICIPA T USING (codrally)
+                  WHERE R.NOMBRE LIKE '%Cataluña' AND T.CODPILOTO=P.CODPILOTO);
+-----------------------------------------------------------------------------
+--WRC-17. Muestra el nombre de los pilotos que tengan más puntos que algún otro piloto que conduzca un coche con igual o menor cilindrada 
+SELECT P.NOMBREP
+FROM WRC.PILOTO P INNER JOIN WRC.COCHE K ON P.COCHE = K.CODCOCHE
+WHERE P.PUNTOS > ALL (SELECT P.PUNTOS
+                      FROM WRC.PILOTO P)--Probar a poner lo del EI.24
+AND K.CILINDRADA >= ALL (SELECT K.CILINDRADA
+                        FROM WRC.COCHE K);--Probar a poner lo del EI.24
+-----------------------------------------------------------------------------
+--(H)WRC-18. Muestra el nombre de los pilotos que hayan corrido el Rally de Cataluña pero no el de Gran Bretaña 
+SELECT P.NOMBREP
+FROM WRC.PILOTO P
+WHERE EXISTS (SELECT *
+              FROM WRC.RALLY R INNER JOIN WRC.PARTICIPA T USING (codrally)
+              WHERE  R.NOMBRE LIKE '%Cataluña' AND T.CODPILOTO=P.CODPILOTO)
+                
+  AND NOT EXISTS (SELECT *
+                  FROM WRC.RALLY R INNER JOIN WRC.PARTICIPA T USING (codrally)
+                  WHERE R.NOMBRE LIKE'%Bretaña' AND T.CODPILOTO = P.CODPILOTO);
+
+-----------------------------------------------------------------------------
+--WRC-19. Muestra el nombre de los pilotos que hayan corrido algún tramo de dificultad A, pero no hayan conseguido finalizar algún tramo de menos de 30 kms
+
+
+-----------------------------------------------------------------------------
+--WRC-20. Muestra la marca y el modelo de los coches que tienen una cilindrada mayor que, al menos, otros dos coches 
+
+
+-----------------------------------------------------------------------------
+--WRC-21. Muestra el nombre de los pilotos que hayan corrido todos los tramos que ha finalizado Marcus Gronholm en el Rally de Montecarlo (excluyendo, claro, al propio Marcus Gronholm)
+
+
+-----------------------------------------------------------------------------
+--WRC-22. Muestra el nombre de los rallies junto con el número de tramos de cada uno de ellos
+
+
+-----------------------------------------------------------------------------
+--WRC-23. Para cada rally, muestra el nombre del rally junto con el número del tramo y los tiempos máximo y mínimo invertidos en dicho tramo, ordenados, dentro de cada rally, desde el menor al mayor tiempo mínimo invertido
+
+
+-----------------------------------------------------------------------------
+--WRC-24. Para cada rally, muestra el nombre del rally junto con el nombre de los pilotos que hayan corrido algún tramo de dicho rally y el tiempo total invertido por cada piloto en cada rally (sin restar la penalización)
+
+
+-----------------------------------------------------------------------------
+--WRC-25. Muestra el nombre del piloto, el número de tramos completados y el total de kilómetros de cada piloto que ha corrido en el Rally de Montecarlo ordenados de mayor a menor kilometraje recorrido
+
+
+-----------------------------------------------------------------------------
+--WRC-26. Para cada rally cuyo total de kilómetros de recorrido sea mayor que 100, mostrar su código y su media de kilómetros
+
+
+-----------------------------------------------------------------------------
+--WRC-27. Muestra el nombre de los rallies junto con el número de tramos de cada uno de ellos, pero sólo aquellos rallies que tengan más de 2 tramos
+
+
+-----------------------------------------------------------------------------
+--WRC-28. Muestra el nombre, grupo sanguíneo, rh y número de puntos del piloto que ha realizado más tramos de dificultad A 
+
+
+-----------------------------------------------------------------------------

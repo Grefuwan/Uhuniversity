@@ -1,0 +1,12 @@
+set title "Medio Ternaria Rc"
+set key top left vertical inside
+set grid
+set xlabel "Talla (n)"
+set ylabel "Tiempo (ms)"
+
+plot "TernariaR.dat" using 1:2 with lines title "Ternaria"
+set terminal pdf
+set output "TernariaRc.pdf" 
+replot
+#pause -1 "Pulsa Enter para continuar..."
+unset output

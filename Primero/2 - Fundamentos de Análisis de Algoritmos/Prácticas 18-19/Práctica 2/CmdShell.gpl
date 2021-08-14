@@ -1,0 +1,12 @@
+set title "Medio Shell"
+set key top left vertical inside
+set grid
+set xlabel "Talla (n)"
+set ylabel "Tiempo (ms)"
+
+plot "Shell.dat" using 1:2 with lines title "Shell"
+set terminal pdf
+set output "Shell.pdf" 
+replot
+#pause -1 "Pulsa Enter para continuar..."
+unset output

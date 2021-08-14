@@ -1,0 +1,12 @@
+set title "Medio Burbuja"
+set key top left vertical inside
+set grid
+set xlabel "Talla (n)"
+set ylabel "Tiempo (ms)"
+
+plot "Burbuja.dat" using 1:2 with lines title "Burbuja"
+set terminal pdf
+set output "Burbuja.pdf" 
+replot
+#pause -1 "Pulsa Enter para continuar..."
+unset output

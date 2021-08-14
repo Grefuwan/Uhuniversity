@@ -1,0 +1,10 @@
+·VARRAY: Declara vectores (elementos ordenados del mismo tipo; no tienen por qué ser numeros)
+·RECORD: Registros (Variables de tipos distintos en un mismo grupo logico)
+
+·%TYPE: Referencia los tipos de los atributos
+	TYPE alumnoReg IS RECORD (
+		codAlumno ALUMNO.nAl%TYPE,
+		comentarios VARCHAR2(90) );
+·%SUBTYPE: Referencia tuplas de tablas existentes
+	SUBTYPE profesorReg IS PROFESOR%ROWTYPE;
+

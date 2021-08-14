@@ -1,0 +1,12 @@
+set title "Comparacion tiempos BinariaRc y TernariaRc"
+set key top left vertical inside
+set grid
+set xlabel "Talla (n)"
+set ylabel "Tiempo (ms)"
+
+plot "BinariaRc.dat" using 1:2 with lines title "BinariaRc", "TernariaRc.dat" using 1:2 with lines title "TernariaRc"
+set terminal pdf
+replot
+set output "BinariaRcTernariaRc.pdf" 
+#pause -1 "Pulsa Enter para continuar..."
+unset output

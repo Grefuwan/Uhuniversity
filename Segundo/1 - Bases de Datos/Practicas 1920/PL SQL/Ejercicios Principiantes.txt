@@ -1,0 +1,73 @@
+--1.- Hola mundo
+
+begin
+	dbms_output.put_line ('Hola mundo');
+end;
+
+--------------------------------------------------------------------
+--2.- Declarar una variable numerica y mostrar si es mayor que 10
+
+DECLARE
+numero number(8) := 5;
+
+BEGIN
+	if (numero > 10) then
+		dbms_output.put_line('El numero es mayor que 10');
+	else
+		dbms_output.put_line('El numero es menor que 10');
+	endif;
+end;
+
+--------------------------------------------------------------------
+--3.- Declarar una variable numerica, pedir su valor y mostrarlo
+DECLARE
+numero number(8) := &numero;
+
+BEGIN
+	dbms_output.put_line('El valor introducido es ' || numero);
+
+end;
+
+--------------------------------------------------------------------
+--4.- Mostrar los numeros del 1 al 10 con un bucle While
+declare
+  i number(8) := 1;
+begin
+  while (i<=10)
+  loop
+    dbms_output.put_line(i);
+    i := i+1;
+  end loop;
+end;
+
+--------------------------------------------------------------------
+--5.- Mostrar los numeros del 1 al 10 con un bucle For
+begin
+  for i in 1..10
+  loop
+    dbms_output.put_line(i);
+  end loop;
+end;
+
+--------------------------------------------------------------------
+--6.- Mostrar los numeros del 1 al 10 con un bucle Loop
+declare
+  i number(8) := 1;
+begin
+  loop
+    dbms_output.put_line(i);
+    exit when i=10; --Cuando se cumpla la condicion, entonces sale; si no, no.
+    i := i+1;
+  end loop;
+end;
+
+--------------------------------------------------------------------
+--7.- Mostrar el nombre de un cliente dado su codigo
+
+--------------------------------------------------------------------
+--8.- Mostrar el precioVenta y la gama de un producto dado su codigo
+
+--------------------------------------------------------------------
+--9.- Mostrar toda la informacion de un pedido dado su codigo (fechaEsperada, fechaEntrega, fechaPedido, estado, comentarios)
+
+--------------------------------------------------------------------

@@ -1,0 +1,13 @@
+set title "Tiempo de ordenacion por Quicksort"
+set key top left vertical inside
+set grid
+set xlabel "Talla (n)"set ylabel "Tiempo (ms)" 
+N(x) = a*x*x + b*x + c
+fit N(x) "tQuicksort.dat" using 1:2 via a,b,c
+plot N(x) title "Aproximación", "tQuicksort.dat" using 1:2 title "Resultado empírico"
+
+set terminal pdf
+set output "busquedaQuicksort.pdf"
+replot
+#pause -1 "Pulsa Enter para continuar..."
+unset output

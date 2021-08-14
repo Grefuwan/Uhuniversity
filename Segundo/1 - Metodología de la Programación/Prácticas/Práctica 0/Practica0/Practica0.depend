@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1602667839 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 0\practica0\src\complejo.cpp
+	"Complejo.h"
+	<iostream>
+
+1602667865 e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 0\practica0\include\complejo.h
+	<iostream>
+
+1602667735 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 0\practica0\main.cpp
+	<iostream>
+	"Complejo.h"
+

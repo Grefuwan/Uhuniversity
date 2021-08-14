@@ -1,0 +1,36 @@
+create or replace FUNCTION v_GanadorRally (v_RallyBuscado RALLY.NOMBRE%TYPE) RETURN PILOTO.NOMBREP%TYPE IS
+
+v_codRally RALLY.CODRALLY%TYPE;
+v_codPiloto PILOTO.CODPILOTO%TYPE;
+v_nombreP PILOTO.NOMBREP%TYPE;
+num_tramos INTEGER;
+
+BEGIN
+
+SELECT RALLY.CODRALLY INTO v_codRally   --Guarda en v_codRally el codigo del Rally buscado
+FROM RALLY
+WHERE RALLY.NOMBRE = v_RallyBuscado;
+
+SELECT COUNT(*) INTO num_tramos             --Guarda en num_tramos el nº de tramos del Rally buscado
+FROM TRAMO
+WHERE TRAMO.CODRALLY = v_codRally;
+
+--Consulta Ganador
+SELECT CORRE.CODPILOTO INTO v_codPiloto           --Guarda en v_codPiloto el codigo del piloto ganador
+FROM CORRE
+WHERE CORRE.codRally = v_codRally
+GROUP BY CORRE.codPiloto
+HAVING COUNT(*) <= num_tramos AND SUM(CORRE.tiempo) <= ALL (SELECT SUM(CORRE.tiempo)
+                                                    FROM CORRE
+                                                    WHERE CORRE.codRally=v_codRally
+                                                    GROUP BY CORRE.codPiloto
+                                                    HAVING COUNT(*) = num_tramos);
+
+SELECT PILOTO.nombreP INTO v_nombreP
+FROM PILOTO
+WHERE PILOTO.codPiloto = v_codPiloto;
+
+
+RETURN (v_nombreP);
+
+END;

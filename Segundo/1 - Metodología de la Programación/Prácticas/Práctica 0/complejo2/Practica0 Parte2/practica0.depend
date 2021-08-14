@@ -1,0 +1,60 @@
+# depslib dependency file v1.0
+1603709743 source:c:\users\usuario\downloads\practica0\main.cpp
+	<iostream>
+	"complejo.h"
+	<iostream>
+	<iomanip>
+	<cstdlib>
+	<fstream>
+	"complejo.h"
+	<iostream>
+	<iomanip>
+	<cstdlib>
+	"complejo.h"
+
+1603710693 source:c:\users\usuario\downloads\practica0\src\complejo.cpp
+	<iostream>
+	"complejo.h"
+	"complejo.h"
+
+1603710693 c:\users\usuario\downloads\practica0\include\complejo.h
+	<iostream>
+
+1603305182 source:c:\users\amarquez\downloads\practica0\main.cpp
+	<iostream>
+	"complejo.h"
+	<iostream>
+	<iomanip>
+	<cstdlib>
+	<fstream>
+	"complejo.h"
+
+1603304825 c:\users\amarquez\downloads\practica0\include\complejo.h
+	<iostream>
+
+1603305056 source:c:\users\amarquez\downloads\practica0\src\complejo.cpp
+	<iostream>
+	"complejo.h"
+	"complejo.h"
+
+1603875155 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 0\complejo2\practica0 parte2\main.cpp
+	<iostream>
+	"complejo.h"
+	<iostream>
+	<iomanip>
+	<cstdlib>
+	<fstream>
+	"complejo.h"
+	<iostream>
+	<iomanip>
+	<cstdlib>
+	"complejo.h"
+
+1603877792 e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 0\complejo2\practica0 parte2\include\complejo.h
+	<iostream>
+
+1603877792 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 0\complejo2\practica0 parte2\src\complejo.cpp
+	<iostream>
+	"complejo.h"
+	"complejo.h"
+

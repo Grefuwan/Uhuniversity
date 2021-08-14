@@ -1,0 +1,36 @@
+# depslib dependency file v1.0
+1583923779 source:c:\users\grefuwan\desktop\practica 1\src\autobuses.cpp
+	"Autobuses.h"
+
+1583923779 c:\users\grefuwan\desktop\practica 1\include\autobuses.h
+
+1583923766 source:c:\users\grefuwan\desktop\practica 1\src\itinerario.cpp
+	"Itinerario.h"
+
+1583923766 c:\users\grefuwan\desktop\practica 1\include\itinerario.h
+
+1588016573 source:c:\users\grefuwan\documents\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 1\practica 1 (programa)\src\autobuses.cpp
+	"Autobuses.h"
+
+1585741448 c:\users\grefuwan\documents\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 1\practica 1 (programa)\include\autobuses.h
+	<stdlib.h>
+	<iostream>
+	<fstream>
+	<string.h>
+
+1588016895 source:c:\users\grefuwan\documents\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 1\practica 1 (programa)\src\itinerario.cpp
+	"Itinerario.h"
+
+1588008160 c:\users\grefuwan\documents\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 1\practica 1 (programa)\include\itinerario.h
+	<stdlib.h>
+	<iostream>
+	<fstream>
+	<string.h>
+
+1588016573 source:c:\users\grefuwan\documents\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 1\practica 1 (programa)\main.cpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	"Autobuses.h"
+	"Itinerario.h"
+

@@ -1,0 +1,12 @@
+set title "Medio Binaria Rc"
+set key top left vertical inside
+set grid
+set xlabel "Talla (n)"
+set ylabel "Tiempo (ms)"
+
+plot "BinariaR.dat" using 1:2 with lines title "Binaria"
+set terminal pdf
+set output "BinariaRc.pdf" 
+replot
+#pause -1 "Pulsa Enter para continuar..."
+unset output

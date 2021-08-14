@@ -1,0 +1,75 @@
+# depslib dependency file v1.0
+1558180183 source:c:\users\juang\desktop\p2 ed1\cola.cpp
+	"cola.h"
+	<stdlib.h>
+
+1558174243 c:\users\juang\desktop\p2 ed1\cola.h
+	<iostream>
+
+1558192015 source:c:\users\juang\desktop\p2 ed1\lista.cpp
+	"lista.h"
+
+1558173799 c:\users\juang\desktop\p2 ed1\lista.h
+	"cola.h"
+
+1558180348 source:c:\users\juang\desktop\p2 ed1\peluqueria.cpp
+	"Peluqueria.h"
+	"lista.h"
+	"cola.h"
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<cstring>
+
+1558175323 c:\users\juang\desktop\p2 ed1\peluqueria.h
+	"cola.h"
+	"lista.h"
+	<iostream>
+
+1558173939 source:c:\users\juang\desktop\p2 ed1\main.cpp
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<cstring>
+	"Peluqueria.h"
+	"cola.h"
+	"lista.h"
+
+1559237402 source:c:\users\juang\documents\uhu\2º cuatrimestre\estructura de datos i\practicas\practica 2\programa\p2 ed1\cola.cpp
+	"cola.h"
+	<stdlib.h>
+
+1559236944 c:\users\juang\documents\uhu\2º cuatrimestre\estructura de datos i\practicas\practica 2\programa\p2 ed1\cola.h
+	<iostream>
+
+1559238399 source:c:\users\juang\documents\uhu\2º cuatrimestre\estructura de datos i\practicas\practica 2\programa\p2 ed1\lista.cpp
+	"lista.h"
+	<iostream>
+
+1559161334 c:\users\juang\documents\uhu\2º cuatrimestre\estructura de datos i\practicas\practica 2\programa\p2 ed1\lista.h
+	"cola.h"
+	<cstring>
+
+1559245274 source:c:\users\juang\documents\uhu\2º cuatrimestre\estructura de datos i\practicas\practica 2\programa\p2 ed1\main.cpp
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<cstring>
+	"Peluqueria.h"
+	"cola.h"
+	"lista.h"
+
+1559118337 c:\users\juang\documents\uhu\2º cuatrimestre\estructura de datos i\practicas\practica 2\programa\p2 ed1\peluqueria.h
+	"cola.h"
+	"lista.h"
+	<iostream>
+
+1559238311 source:c:\users\juang\documents\uhu\2º cuatrimestre\estructura de datos i\practicas\practica 2\programa\p2 ed1\peluqueria.cpp
+	"Peluqueria.h"
+	"lista.h"
+	"cola.h"
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<cstring>
+

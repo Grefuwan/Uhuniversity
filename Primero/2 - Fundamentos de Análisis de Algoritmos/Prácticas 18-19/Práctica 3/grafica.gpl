@@ -1,0 +1,11 @@
+set title "Tiempo de ordenacion por TernariaR"
+set key top left vertical inside
+set grid
+set xlabel "Talla (n)"set ylabel "Tiempo (ms)" 
+N(x) = fit N(x) "tTernariaR.dat" using 1:2 via plot N(x) title "Aproximación", "tTernariaR.dat" using 1:2 title "Resultado empírico"
+
+set terminal pdf
+set output "busquedaTernariaR.pdf"
+replot
+#pause -1 "Pulsa Enter para continuar..."
+unset output

@@ -1,0 +1,15 @@
+ #Este es un scrpit de gnuplot para el estudio de 1 metodo
+set title "Seleccion"
+set key top left vertical inside
+set grid
+set xlabel "Talla (n)"
+set ylabel "Tiempo(ms)"
+N(x) =a*x*x + b*x + c
+fit N(x) "Seleccion.dat" using 1:2 via a,b,c
+fit N(x) "Seleccion.dat" using 1:2 via a,b,c
+plot "Seleccion.dat" using 1:2 title "Seleccion", N(x)
+set terminal pdf
+set output "Seleccion.pdf"
+replot
+pause -1 "Pulsa Enter para continuar..."
+unset output

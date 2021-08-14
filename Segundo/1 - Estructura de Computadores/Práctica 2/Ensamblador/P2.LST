@@ -1,0 +1,147 @@
+Turbo Assembler	 Version 3.2	    01/11/21 13:49:03	    Page 1
+P2.ASM
+
+
+
+      1	0000			     .MODEL SMALL    ;Directiva	que indique que	el programa no ocupará	más de	64K
+      2	0000			     .CODE		     ;No habrá	.DATA porque se	definiran en el	mismo Codigo
+      3
+      4					     org 100h	     ;100h = 256 -- Indica que el programa lo inicie a partir de esa	    +
+      5				     direccion;	en la 0	está el S.O.
+      6
+      7	0100			     Programa_Int:   ;Etiqueta de Direccion de Memoria
+      8
+      9	0100  E9 008E			     JMP Reside		     ;Bifurcacion Incondicional, Salto a Reside
+     10	0103  00			     CONT	     DB	0	     ;Contador para las	interrupciones.	Cuando llegue a	18, +
+     11				     será 1 segundo
+     12	0104  30 30 3A 30 30		     MSJ	     DB	'00:00'	     ;Cronometro
+     13	0109  00			     segundos	     DB	0
+     14	010A  00			     minutos	     DB	0
+     15
+     16	010B			     Rutina_Servicio PROC    ;Conjunto de instrucciones	de la Rutina de	Atencion de la Interrupcion
+     17	010B  FA			     CLI     ;Instruccion Clear	I, pone	a 0 el Biestable I (Inhibicion de Interrupciones).  +
+     18				     Si	está a	0, las peticiones de interrupcion por linea INT	no se atienden;	si está a 1, sí.
+     19					     ;Salvar el	contenido de los registros implicados en la rutina
+     20	010C  2E: FE 06	0103r		     INC CONT		     ;Incremento contador
+     21	0111  2E: 80 3E	0103r 12	     CMP CONT, 18    ;Comparo si llego a 18 interrupciones (1seg)
+     22	0117  72 76				     JB	EXIT		     ;Si no, me	salgo
+     23	0119  2E: C6 06	0103r 00	     MOV CONT, 0	     ;Si llego a 18, reseteo el	contador
+     24
+     25	011F  B8 B800			     MOV AX, 0B800h	     ;Muevo a AX la direccion del segmento de memoria de video
+     26	0122  8E C0			     MOV ES, AX			     ;Muevo a ES AX, es	decir, la direccion del	segmento de +
+     27				     memoria de	video
+     28	0124  B4 0F			     MOV AH, 00001111b	     ;Letras blancas fondo negro
+     29
+     30	0126  BE 0000			     MOV SI, 0		     ;Contador para MSJ
+     31	0129  BF 0094			     MOV DI, 148	     ;Nos posicionamos en la pantalla justo al final de	la primera  +
+     32				     linea
+     33
+     34	012C				     escritura1:	     ;Escritura	Contador Cronometro
+     35	012C  2E: 8A 84	0104r			     MOV AL,MSJ[si]
+     36	0131  26: 89 05				     MOV ES:[DI], AX
+     37	0134  83 C7 02				     ADD DI,2
+     38	0137  46				     INC SI
+     39	0138  83 FE 0E			     CMP SI, 14
+     40	013B  76 EF			     JBE escritura1
+     41
+     42	013D  2E: FE 06	0109r		     INC segundos	     ;Incrementa los segundos
+     43	0142  2E: 80 3E	0109r 3C	     CMP segundos, 60	     ;Los compara con 60
+     44	0148  75 0B				     JNE sigue		     ;Si segundos<60 se	va a sigue
+     45	014A  2E: C6 06	0109r 00	     MOV segundos, 0	     ;Si son 60, pone segundos=0 e incrementa 1	minuto
+     46	0150  2E: FE 06	010Ar		     INC minutos
+     47
+     48	0155				     sigue:
+     49	0155  2E: 80 3E	010Ar 3C	     CMP minutos, 60	     ;Compara los minutos con 60
+     50	015B  75 06				     JNE sigue2		     ;Si son menores de	60 (1 hora), sale a sigue2
+     51	015D  2E: C6 06	010Ar 00	     MOV minutos, 0	     ;Si es 60,	los pone a 0
+     52
+     53	0163				     sigue2:
+     54	0163  2E: A0 010Ar		     MOV AL,minutos	     ;Muevo a AL los minutos
+     55	0167  B4 00				     MOV AH, 0		     ;Conversor	Binario->ASCII ;AH=0
+     56	0169  B2 0A				     MOV DL, 10		     ;DL=10
+     57	016B  F6 F2				     DIV DL		     ;AX=AX/DL
+Turbo Assembler	 Version 3.2	    01/11/21 13:49:03	    Page 2
+P2.ASM
+
+
+
+     58	016D  0D 3030				     OR	AX, 3030h    ;Converte el binario de AX	en ASCII
+     59	0170  2E: A2 010Dr		     MOV MSJ[9], AL	     ;Decenas de los minutos a AL
+     60	0174  2E: 88 26	010Er		     MOV MSJ[10], AH	     ;Unidades de los minutos a	AH
+     61	0179  2E: A0 0109r		     MOV AL, segundos	     ;Muevo a AL los segundos
+     62	017D  B4 00				     MOV AH, 0		     ;Conversor	Binario->ASCII ;AH=0
+     63	017F  B2 0A				     MOV DL, 10		     ;DL=10
+     64	0181  F6 F2				     DIV DL		     ;AX=AX/DL
+     65	0183  0D 3030				     OR	AX, 3030h    ;Converte el binario de AX	en ASCII
+     66	0186  2E: A2 0110r		     MOV MSJ[12], AL
+     67	018A  2E: 88 26	0111r		     MOV MSJ[13], AH
+     68
+     69	018F				     EXIT:
+     70
+     71					     ;Recupera el valor	de los registros implicados en la rutina
+     72	018F  FB			     STI     ;Vuelve a permitir	las Interrupciones, poniendo a 1 el Biestable I
+     73	0190  CF			     IRET    ;Instruccion de Retorno de	Interrupcion
+     74	0191			     ENDP
+     75
+     76	0191			     Reside: ;Etiqueta para determinar la direccion siguiente a	la ultima de la	rutina que debe	    +
+     77				     quedar residente
+     78						     ;Define el	Vector de Interrupcion
+     79	0191  BA 010Br			     MOV DX, offset Rutina_Servicio  ;Movemos a	DX el offset de	Rutina_Servicio	(Dir Mem)
+     80	0194  B8 0000			     MOV AX, 0	     ;Movemos a	AX el valor 0 para luego llevarlo a ES (Extra)
+     81	0197  8E C0			     MOV ES, AX	     ;Movemos a	ES el registro AX. Luego ES será 0
+     82	0199  BE 0070			     MOV SI, 1Ch*4   ;Muevo a SI el Codigo de Interrupcion * 4 (2 Offset y 2 Segment de	la  +
+     83				     interrupcion 1Ch)
+     84	019C  FA			     CLI     ;Instruccion Clear	I, pone	a 0 el Biestable I (Inhibicion de Interrupciones).  +
+     85				     Si	está a	0, las peticiones de interrupcion por linea INT	no se atienden;	si está a 1, sí.
+     86	019D  26: 89 14			     MOV ES:[SI], DX ;Ahora, como ES=0 y SI=1C*4, muevo	el offset Rutina_Servicio a la	    +
+     87				     direccion de memoria donde	comienza la Rutina de Atencion de Interrupcion
+     88	01A0  26: 8C 4C	02		     MOV ES:[SI+2], CS	     ;En las 2 direcciones siguientes meto el Segmento de Codigo
+     89	01A4  FB			     STI     ;Vuelve a permitir	las Interrupciones, poniendo a 1 el Biestable I
+     90	01A5  BA 0191r			     MOV DX, offset Reside   ;En vez de	devolver el control al S.O., hago que quede en	    +
+     91				     memoria Rutina_Servicio
+     92	01A8  CD 27			     INT 27h				     ;Hará que	se quede en memoria hasta que salga +
+     93				     del emulador del MS-Dos
+     94
+     95				     END Programa_Int
+Turbo Assembler	 Version 3.2	    01/11/21 13:49:03	    Page 3
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "01/11/21"
+??FILENAME			  Text	 "P2	  "
+??TIME				  Text	 "13:49:03"
+??VERSION			  Number 0314
+@32BIT				  Text	 0
+@CODE				  Text	 _TEXT
+@CODESIZE			  Text	 0
+@CPU				  Text	 0101H
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 P2
+@INTERFACE			  Text	 00H
+@MODEL				  Text	 2
+@STACK				  Text	 DGROUP
+@WORDSIZE			  Text	 2
+CONT				  Byte	 _TEXT:0103
+ESCRITURA1			  Near	 _TEXT:012C
+EXIT				  Near	 _TEXT:018F
+MINUTOS				  Byte	 _TEXT:010A
+MSJ				  Byte	 _TEXT:0104
+PROGRAMA_INT			  Near	 _TEXT:0100
+RESIDE				  Near	 _TEXT:0191
+RUTINA_SERVICIO			  Near	 _TEXT:010B
+SEGUNDOS			  Byte	 _TEXT:0109
+SIGUE				  Near	 _TEXT:0155
+SIGUE2				  Near	 _TEXT:0163
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  _DATA				  16  0000 Word	  Public  DATA
+_TEXT				  16  01AA Word	  Public  CODE
+

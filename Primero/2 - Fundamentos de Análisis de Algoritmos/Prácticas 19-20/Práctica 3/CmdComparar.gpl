@@ -1,0 +1,12 @@
+		#ESTE ES UN SCRIPT DE GNUPLOT PARA COMPARACION DE 2 METODOS
+set title "Comparacion de tiemposSecuencialIt y InterpolacionIt"
+set key top left vertical inside
+set grid
+set xlabel "Talla (n)"
+set ylabel "Tiempo (ms)"
+plot "SecuencialIt.dat" using 1:2 with lines title "SecuencialIt", "InterpolacionIt.dat" using 1:2 with lines title "InterpolacionIt"
+set terminal pdf
+set output "SecuencialItInterpolacionIt.pdf"
+replot
+unset output
+pause -1 "Pulsa Enter para continuar..."

@@ -1,0 +1,142 @@
+# depslib dependency file v1.0
+1606427839 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia)\prueba1.cpp
+	<cstdlib>
+	<iostream>
+	"Fecha.h"
+	"Cliente.h"
+
+1606049898 e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia)\include\fecha.h
+	<iostream>
+
+1606132989 e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia)\include\cliente.h
+	<iostream>
+	"Fecha.h"
+
+1606430197 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia)\src\fecha.cpp
+	"Fecha.h"
+
+1606500350 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia)\src\cliente.cpp
+	<cstdlib>
+	<cstring>
+	<iomanip>
+	<sstream>
+	"Cliente.h"
+
+1606605641 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia)\src\contrato.cpp
+	"Contrato.h"
+
+1606655576 e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia)\include\contrato.h
+	<iostream>
+	"Fecha.h"
+
+1606682133 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia)\src\contratotp.cpp
+	"ContratoTP.h"
+
+1606655576 e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia)\include\contratotp.h
+	<iostream>
+	"Contrato.h"
+
+1606682147 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia)\src\contratomovil.cpp
+	"ContratoMovil.h"
+
+1606655576 e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia)\include\contratomovil.h
+	<Contrato.h>
+	<iostream>
+	<stdlib.h>
+	<string.h>
+	"Fecha.h"
+	"Contrato.h"
+
+1606606402 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia)\prueba2.cpp
+	<cstdlib>
+	<iostream>
+	<iomanip>
+	"Fecha.h"
+	"Contrato.h"
+	"ContratoTP.h"
+	"ContratoMovil.h"
+
+1606681657 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia)\src\empresa.cpp
+	"Empresa.h"
+
+1606678974 e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia)\include\empresa.h
+	"Fecha.h"
+	"Cliente.h"
+	"Contrato.h"
+	"ContratoTP.h"
+	"ContratoMovil.h"
+
+1606679559 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia)\prueba3.cpp
+	<cstdlib>
+	<iostream>
+	<iomanip>
+	"Fecha.h"
+	"Cliente.h"
+	"Contrato.h"
+	"ContratoTP.h"
+	"ContratoMovil.h"
+	"Empresa.h"
+
+1606679559 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia) - funcional adaptacion\prueba3.cpp
+	<cstdlib>
+	<iostream>
+	<iomanip>
+	"Fecha.h"
+	"Cliente.h"
+	"Contrato.h"
+	"ContratoTP.h"
+	"ContratoMovil.h"
+	"Empresa.h"
+
+1606049898 e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia) - funcional adaptacion\include\fecha.h
+	<iostream>
+
+1606132989 e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia) - funcional adaptacion\include\cliente.h
+	<iostream>
+	"Fecha.h"
+
+1606655576 e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia) - funcional adaptacion\include\contrato.h
+	<iostream>
+	"Fecha.h"
+
+1606655576 e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia) - funcional adaptacion\include\contratotp.h
+	<iostream>
+	"Contrato.h"
+
+1606655576 e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia) - funcional adaptacion\include\contratomovil.h
+	<Contrato.h>
+	<iostream>
+	<stdlib.h>
+	<string.h>
+	"Fecha.h"
+	"Contrato.h"
+
+1606686430 e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia) - funcional adaptacion\include\empresa.h
+	"Fecha.h"
+	"Cliente.h"
+	"Contrato.h"
+	"ContratoTP.h"
+	"ContratoMovil.h"
+
+1606500350 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia) - funcional adaptacion\src\cliente.cpp
+	<cstdlib>
+	<cstring>
+	<iomanip>
+	<sstream>
+	"Cliente.h"
+
+1606605641 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia) - funcional adaptacion\src\contrato.cpp
+	"Contrato.h"
+
+1606682147 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia) - funcional adaptacion\src\contratomovil.cpp
+	"ContratoMovil.h"
+
+1606682133 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia) - funcional adaptacion\src\contratotp.cpp
+	"ContratoTP.h"
+
+1606686430 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia) - funcional adaptacion\src\fecha.cpp
+	"Fecha.h"
+
+1606686471 source:e:\documentos\universidad\uhu\2\1 - metodología de la programación\prácticas\práctica 1\practica 1 (mia) - funcional adaptacion\src\empresa.cpp
+	"Empresa.h"
+

@@ -1,0 +1,94 @@
+create or replace PROCEDURE ProcedUno (v_nombrePiloto PILOTO.NOMBREP%TYPE, v_nombreRally RALLY.NOMBRE%TYPE, v_penalizacion PARTICIPA.PENALIZACION%TYPE) IS
+
+--Variables
+  
+  v_nombrePilBusc piloto.nombrep%type;
+  v_puntosPenBusc participa.penalizacion%type;
+  v_codRally rally.codrally%type;
+  v_codPiloto piloto.codpiloto%type;
+  
+  existe_piloto INTEGER;
+  no_existe_piloto EXCEPTION;
+  existe_rally INTEGER;
+  no_existe_rally EXCEPTION;
+
+--Cursores
+CURSOR c_Piloto IS
+  SELECT PI.nombreP
+  FROM PILOTO PI INNER JOIN PARTICIPA PA using (codPiloto) INNER JOIN RALLY R USING (codRally)
+  WHERE R.nombre=v_nombreRally;
+
+CURSOR c_Penaliza IS
+  SELECT PA.penalizacion
+  FROM PILOTO PI INNER JOIN PARTICIPA PA using (codPiloto) INNER JOIN RALLY R USING (codRally)
+  WHERE R.nombre=v_nombreRally;
+
+BEGIN
+
+--Abrir cursores
+open c_piloto;
+open c_Penaliza;
+
+  SELECT COUNT(*) INTO existe_piloto
+  FROM PILOTO PI INNER JOIN PARTICIPA PA using (codPiloto) INNER JOIN RALLY R USING (codRally)
+  WHERE PI.NOMBREP = v_nombrePiloto AND R.nombre=v_nombreRally;
+  
+  IF existe_piloto = 0 THEN
+  RAISE no_existe_piloto;
+  END IF;
+
+  
+--  SELECT DISTINCT count (codrally) INTO existe_rally
+--  FROM (rally inner join participa using (codrally)) inner join piloto using (codpiloto)
+--  WHERE nombre=v_nombreRally;
+  
+  SELECT COUNT(*) INTO existe_rally
+  FROM RALLY R
+  WHERE R.NOMBRE = v_nombreRally;
+  
+  IF existe_rally = 0 THEN
+  RAISE no_existe_rally;
+  END IF;
+
+--Mostrar sin actualizar
+  DBMS_OUTPUT.PUT_LINE (' ' || v_nombreRally || '  (Original)  ');
+  DBMS_OUTPUT.PUT_LINE('------------------------------------');
+   loop
+    FETCH c_piloto into v_nombrePilBusc;
+    FETCH c_penaliza into v_puntosPenBusc;
+    exit when c_piloto%notfound;
+    dbms_output.put_line(v_nombrePilBusc||'      '||v_puntosPenBusc);
+  end loop;
+
+--Actualizacion
+UPDATE PARTICIPA SET penalizacion = penalizacion+v_penalizacion WHERE codRally = v_codRally AND codPiloto = v_codPiloto;
+
+--Reinicio de cursores
+close c_piloto;
+close c_penaliza;
+open c_piloto;
+open c_penaliza;
+
+--Mostrar actualizado
+  DBMS_OUTPUT.PUT_LINE('');
+  DBMS_OUTPUT.PUT_LINE(v_nombreRally||'     (Despues de la actualización)');
+  DBMS_OUTPUT.PUT_LINE('==============================================');
+  LOOP
+    FETCH c_piloto INTO v_nombrePilBusc;
+    FETCH c_penaliza INTO v_puntosPenBusc;
+    EXIT WHEN c_piloto%notfound;
+    dbms_output.put_line(v_nombrePilBusc||'      '||v_puntosPenBusc);
+  END LOOP;
+  
+--Cerrar cursores
+close c_piloto;
+close c_penaliza;
+
+--Excepciones
+EXCEPTION
+  WHEN no_existe_piloto then
+    DBMS_OUTPUT.PUT_LINE ('ERROR: No existe el piloto de nombre ' || v_nombrePiloto);
+  WHEN no_existe_rally then
+    DBMS_OUTPUT.PUT_LINE ('ERROR: No existe el rally de nombre ' || v_nombreRally);
+
+END;

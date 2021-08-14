@@ -1,0 +1,38 @@
+# depslib dependency file v1.0
+1553250588 source:c:\users\usuario\desktop\practica1\productos.cpp
+
+1553250622 source:c:\users\usuario\desktop\practica1\ventas.cpp
+
+1553252095 source:c:\users\usuario\desktop\practica1\main.cpp
+	<iostream>
+
+1556234479 source:c:\users\juang\documents\uhu\2º cuatrimestre\estructura de datos i\practicas\practica 1\main.cpp
+	<iostream>
+	<cstdlib>
+	"Productos.h"
+	"Ventas.h"
+
+1555606639 source:c:\users\juang\documents\uhu\2º cuatrimestre\estructura de datos i\practicas\practica 1\base.cpp
+
+1556267465 source:c:\users\juang\documents\uhu\2º cuatrimestre\estructura de datos i\practicas\practica 1\productos.cpp
+	<iostream>
+	<stdlib.h>
+	"Productos.h"
+	"Ventas.h"
+
+1555964538 c:\users\juang\documents\uhu\2º cuatrimestre\estructura de datos i\practicas\practica 1\productos.h
+	<fstream>
+	"Ventas.h"
+
+1556232233 c:\users\juang\documents\uhu\2º cuatrimestre\estructura de datos i\practicas\practica 1\ventas.h
+	<iostream>
+	<fstream>
+	<cstring>
+
+1556266663 source:c:\users\juang\documents\uhu\2º cuatrimestre\estructura de datos i\practicas\practica 1\ventas.cpp
+	<iostream>
+	<stdlib.h>
+	<fstream>
+	"Ventas.h"
+	"Productos.h"
+

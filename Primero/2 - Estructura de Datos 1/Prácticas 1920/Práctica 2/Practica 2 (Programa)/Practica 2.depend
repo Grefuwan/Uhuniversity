@@ -1,0 +1,120 @@
+# depslib dependency file v1.0
+1514144174 source:c:\users\grefuwan\documents\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 2\practica 2 (programa)\main.cpp
+	<iostream>
+
+1589792908 source:c:\users\grefuwan\documents\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 2\practica 2 (programa)\src\tadcola.cpp
+	"tadcola.h"
+
+1589792892 c:\users\grefuwan\documents\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 2\practica 2 (programa)\include\tadcola.h
+	<iostream>
+
+1589802409 source:c:\users\grefuwan\documents\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 2\practica 2 (programa)\src\tadcolapri.cpp
+	"TADColaPri.h"
+
+1589794555 c:\users\grefuwan\documents\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 2\practica 2 (programa)\include\tadcolapri.h
+	"tadcola.h"
+
+1591027463 source:e:\documentos\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 2\practica 2 (programa)\src\tadcola.cpp
+	"tadcola.h"
+
+1591134979 e:\documentos\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 2\practica 2 (programa)\include\tadcola.h
+	<iostream>
+	<stdlib.h>
+	<string.h>
+
+1591179211 source:e:\documentos\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 2\practica 2 (programa)\main.cpp
+	<iostream>
+	<stdlib.h>
+	<time.h>
+	"TADColaPri.h"
+	"tadcola.h"
+	"ListaC.h"
+	"ListaD.h"
+	"ListaCD.h"
+
+1591134794 e:\documentos\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 2\practica 2 (programa)\include\tadcolapri.h
+	"tadcola.h"
+	<fstream>
+
+1591135059 source:e:\documentos\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 2\practica 2 (programa)\src\tadcolapri.cpp
+	"TADColaPri.h"
+
+1591176488 source:e:\documentos\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 2\practica 2 (programa)\src\listac.cpp
+	"ListaC.h"
+	<iostream>
+
+1591180886 e:\documentos\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 2\practica 2 (programa)\include\listac.h
+	<cstdlib>
+	<cstring>
+	"tadcola.h"
+
+1591026330 source:e:\documentos\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 2\practica 2 (programa)\src\listacd.cpp
+	"listaCD.h"
+	<iostream>
+
+1591025339 e:\documentos\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 2\practica 2 (programa)\include\listacd.h
+	<cstdlib>
+	<cstring>
+	"tadcola.h"
+
+1591026535 source:e:\documentos\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 2\practica 2 (programa)\src\listad.cpp
+	"listaD.h"
+	<iostream>
+
+1591180885 e:\documentos\universidad\uhu\1\2 - estructura de datos i\prácticas\práctica 2\practica 2 (programa)\include\listad.h
+	<cstdlib>
+	<cstring>
+	"tadcola.h"
+
+1591175611 source:f:\estudios\uhu\1º\2 - estructura de datos i\prácticas 1920\práctica 2\practica 2 (programa)\main.cpp
+	<iostream>
+	<stdlib.h>
+	<time.h>
+	"TADColaPri.h"
+	"tadcola.h"
+	"ListaC.h"
+	"ListaD.h"
+	"ListaCD.h"
+
+1591131194 f:\estudios\uhu\1º\2 - estructura de datos i\prácticas 1920\práctica 2\practica 2 (programa)\include\tadcolapri.h
+	"tadcola.h"
+	<fstream>
+
+1591131379 f:\estudios\uhu\1º\2 - estructura de datos i\prácticas 1920\práctica 2\practica 2 (programa)\include\tadcola.h
+	<iostream>
+	<stdlib.h>
+	<string.h>
+
+1591177286 f:\estudios\uhu\1º\2 - estructura de datos i\prácticas 1920\práctica 2\practica 2 (programa)\include\listac.h
+	<cstdlib>
+	<cstring>
+	"tadcola.h"
+
+1591177285 f:\estudios\uhu\1º\2 - estructura de datos i\prácticas 1920\práctica 2\practica 2 (programa)\include\listad.h
+	<cstdlib>
+	<cstring>
+	"tadcola.h"
+
+1591021739 f:\estudios\uhu\1º\2 - estructura de datos i\prácticas 1920\práctica 2\practica 2 (programa)\include\listacd.h
+	<cstdlib>
+	<cstring>
+	"tadcola.h"
+
+1591172888 source:f:\estudios\uhu\1º\2 - estructura de datos i\prácticas 1920\práctica 2\practica 2 (programa)\src\listac.cpp
+	"ListaC.h"
+	<iostream>
+
+1591022730 source:f:\estudios\uhu\1º\2 - estructura de datos i\prácticas 1920\práctica 2\practica 2 (programa)\src\listacd.cpp
+	"listaCD.h"
+	<iostream>
+
+1591177379 source:f:\estudios\uhu\1º\2 - estructura de datos i\prácticas 1920\práctica 2\practica 2 (programa)\src\listad.cpp
+	"listaD.h"
+	<iostream>
+
+1591023863 source:f:\estudios\uhu\1º\2 - estructura de datos i\prácticas 1920\práctica 2\practica 2 (programa)\src\tadcola.cpp
+	"tadcola.h"
+
+1591131459 source:f:\estudios\uhu\1º\2 - estructura de datos i\prácticas 1920\práctica 2\practica 2 (programa)\src\tadcolapri.cpp
+	"TADColaPri.h"
+
