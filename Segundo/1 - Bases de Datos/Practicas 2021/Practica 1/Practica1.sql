@@ -81,7 +81,7 @@ ALTER TABLE TARIFA
 ALTER TABLE T1
 	MODIFY atributoX NOT NULL
 	
---Al borrar una compañia sedeben borrar todas las tarifas de dicha compañia.
+--Al borrar una compañia se deben borrar todas las tarifas de dicha compañia.
 ALTER TABLE TARIFA
 	DROP CONSTRAINT tarifaAjena
 ALTER TABLE TARIFA

@@ -131,6 +131,7 @@ FROM (((MF.CLIENTE Co INNER JOIN MF.Telefono Tfo ON Co.dni=Tfo.cliente)
 		INNER JOIN MF.Telefono Tfd ON Tfd.Numero = Ll.tf_destino)
 		INNER JOIN MF.Cliente Cd ON Cd.dni = Tfd.cliente
 WHERE Tfo.compañia <> Tfd.compañia AND Ll.duracion>900;
+
 --EI 14 - Obtener una lista de los alumnos que hayan nacido en la misma ciudad que Samuel Toscano Villegas y tengan el mismo numero de hermanos que Beatriz Rico Vazquez
 SELECT nombre
 FROM EI.ALUMNO

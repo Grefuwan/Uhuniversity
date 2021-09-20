@@ -33,7 +33,6 @@ CREATE OR REPLACE
 			RETURN -1;
 END;
 
-
 EXECUTE dbms_output.put_line(facturacion('654123321', 2006));
 
 
@@ -45,10 +44,10 @@ SET SERVEROUTPUT ON;
 CREATE OR REPLACE
 	PROCEDURE LlamadaFacturacion(p_anno INTEGER) IS
 	
-		CURSOR c_telefonos(annoCursor INTEGER)
+		CURSOR c_telefonos(c_anno INTEGER)
 			IS 	SELECT DISTINCT LL.tf_origen 
 				FROM MF.LLAMADA LL
-				WHERE EXTRACT(YEAR FROM LL.fecha_hora) = annoCursor;
+				WHERE EXTRACT(YEAR FROM LL.fecha_hora) = c_anno;
 		BEGIN
 			FOR r_telefonos IN c_telefonos(p_anno) LOOP
 				dbms_output.put_line(r_telefono.tf_origen || ' - ' || facturacion(r_telefono.tf_origen, p_anno));
