@@ -56,17 +56,28 @@ public class VistaLogin extends javax.swing.JFrame {
 
         jComboBox_Server.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Oracle", "SQL" }));
 
+        jTextField_IP.setText("172.17.20.75");
         jTextField_IP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_IPActionPerformed(evt);
             }
         });
 
+        jTextField_Service.setText("rabida");
+        jTextField_Service.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_ServiceActionPerformed(evt);
+            }
+        });
+
+        jTextField_Usuario.setText("DDSI_012");
         jTextField_Usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_UsuarioActionPerformed(evt);
             }
         });
+
+        jPasswordField1.setText("DDSI_012");
 
         jButton_Conectar.setText("Conectar");
         jButton_Conectar.addActionListener(new java.awt.event.ActionListener() {
@@ -92,17 +103,17 @@ public class VistaLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel_Server, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_IP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel_Service, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                    .addComponent(jLabel_Service, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
                     .addComponent(jLabel_Usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel_Password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPasswordField1)
-                    .addComponent(jTextField_Usuario)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField_IP, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                     .addComponent(jTextField_Service)
-                    .addComponent(jTextField_IP)
-                    .addComponent(jComboBox_Server, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(213, 213, 213))
+                    .addComponent(jTextField_Usuario)
+                    .addComponent(jPasswordField1)
+                    .addComponent(jComboBox_Server, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(123, 123, 123))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton_Conectar)
@@ -158,6 +169,10 @@ public class VistaLogin extends javax.swing.JFrame {
     private void jButton_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SalirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_SalirActionPerformed
+
+    private void jTextField_ServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_ServiceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_ServiceActionPerformed
 
     /**
      * @param args the command line arguments

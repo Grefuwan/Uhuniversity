@@ -6,6 +6,8 @@ package ddsi.pr1;
 
 import Controlador.ControladorLogin;
 import java.sql.SQLException;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 /**
  *
@@ -16,18 +18,19 @@ public class App {
     
     public static void main(String[] args) {
         try {
-        
-            ControladorLogin cLogin = new ControladorLogin();
-            
-        }catch(SQLException e){
-        
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels() ){
+                if ("Nimbus".equals(info.getName() ) ){
+                    UIManager.setLookAndFeel(info.getClassName() );
+                    break;
+                }
+            }            
+        } catch(Exception e){
+            //Si Nimbus no está disponible, poner la GUI con otra interfaz
             System.out.println("Error conexion");
-            
         }
-        
-        
+       
+        ControladorLogin cLogin = new ControladorLogin();
+       
     }
-    
-    
     
 }

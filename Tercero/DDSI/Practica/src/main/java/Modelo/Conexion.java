@@ -26,8 +26,9 @@ public class Conexion {
     
     public Conexion(String sgbd, String ip, String servicio_bd, String usuario, String password) throws SQLException{
         
-        String ip_conexion = "jdbc:" + sgbd + ":thin:@" + ip + ":" + servicio_bd;
-        
+        String ip_conexion = "jdbc:" + sgbd + ":thin:@" + ip + ":1521:" + servicio_bd;
+//        System.out.println(ip_conexion);
+//        System.out.println(password);
         //conexion = DriverManager.getConnection(sgbd, ip, servicio_bd, usuario, password);
         conexion = DriverManager.getConnection(ip_conexion, usuario, password);
         

@@ -1,11 +1,13 @@
 package Controlador;
 
 import Modelo.Conexion;
+import Controlador.Controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import Vista.VistaLogin;
 import Vista.VistaMensajes;
+import Vista.VistaPrincipal;
 
 /**
  *
@@ -13,8 +15,10 @@ import Vista.VistaMensajes;
  */
 public class ControladorLogin implements ActionListener{
     
-    private Conexion conexion = new Conexion();
-    private VistaLogin vLogin = null;
+    private Controlador control     = null;
+    private Conexion conexion       = null;
+    private VistaLogin vLogin       = null;
+    private VistaPrincipal vPrinc   = null;
     
     //private VistaMensajes vMens = new VistaMensajes();
 
@@ -23,7 +27,7 @@ public class ControladorLogin implements ActionListener{
     private boolean conexOK = false;
     
     //Constructor
-    public ControladorLogin() throws SQLException{
+    public ControladorLogin(){
         /*
         System.out.println("Voy a conectar con la BD\n");
         conexion.getConexion();
@@ -57,7 +61,7 @@ public class ControladorLogin implements ActionListener{
                     System.out.println("Conexion Correcta\n");
                     VistaMensajes.ConexCorrect();
                     vLogin.dispose();
-                    //Instanciar un objeto de tipo Controlador (apartado 4)
+                    control = new Controlador(conexionOK);
                 }
                 else{
                     VistaMensajes.ConexError(sqlError);
@@ -72,13 +76,14 @@ public class ControladorLogin implements ActionListener{
 
     
     public Conexion conectar(){
+        
         //Tengo que guardar todo lo que introduzco en la Vista en Strings que voy creando
             //para luego hacer una conexion con el constructor
         try{
             String server = (String) (vLogin.jComboBox_Server.getSelectedItem());
             String ip = vLogin.jTextField_IP.getText();
-            String service_bd = vLogin.jLabel_Service.getText();
-            String u = vLogin.jLabel_Usuario.getText();
+            String service_bd = vLogin.jTextField_Service.getText();
+            String u = vLogin.jTextField_Usuario.getText();
             String p = new String (vLogin.jPasswordField1.getPassword());
 
             if (server == "MySQL") server = "mysql";
