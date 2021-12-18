@@ -94,23 +94,23 @@ public class VistaSocios extends javax.swing.JPanel {
         add(jTextField_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 350, 200, -1));
 
         jButton_Insertar.setText("Insertar");
-        jButton_Insertar.setActionCommand("InsertarMonitor");
+        jButton_Insertar.setActionCommand("InsertarSocio");
         add(jButton_Insertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 610, 110, -1));
 
         jButton_Actualizar.setText("Actualizar");
-        jButton_Actualizar.setActionCommand("ActualizarMonitor");
+        jButton_Actualizar.setActionCommand("ActualizarSocio");
         add(jButton_Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 610, 110, -1));
 
         jButton_Eliminar.setText("Eliminar");
-        jButton_Eliminar.setActionCommand("EliminarMonitor");
+        jButton_Eliminar.setActionCommand("EliminarSocio");
         add(jButton_Eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 610, 110, -1));
 
         jButton_VaciarTabla.setText("Vaciar Tabla");
-        jButton_VaciarTabla.setActionCommand("VaciarTablaMonitor");
+        jButton_VaciarTabla.setActionCommand("VaciarTablaSocio");
         add(jButton_VaciarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(605, 610, 120, -1));
 
         jButton_ListarSocios.setText("Listar Socios");
-        jButton_ListarSocios.setActionCommand("ListarMonitores");
+        jButton_ListarSocios.setActionCommand("ListarSocios");
         add(jButton_ListarSocios, new org.netbeans.lib.awtextra.AbsoluteConstraints(755, 610, 150, -1));
 
         jLabel_Categoria.setText("Categoría");

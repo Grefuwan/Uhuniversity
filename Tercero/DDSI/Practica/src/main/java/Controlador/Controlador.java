@@ -9,6 +9,8 @@ import javax.swing.*;
 import Modelo.Conexion;
 import Modelo.Monitor;
 import Modelo.MonitorDAO;
+import Modelo.Socio;
+import Modelo.SocioDAO;
 import Modelo.utilTablas;
 import Vista.PanelVacio;
 import Vista.VistaMensajes;
@@ -21,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -34,28 +37,36 @@ import java.util.Date;
  */
 public class Controlador implements ActionListener{
     
-    private Conexion        conexion    = null;
-    private VistaPrincipal  vPrinc      = null;
-    private VistaMensajes   vMensaje    = null;
-    private VistaMonitores  vMon        = null;
-    private VistaSocios     vSoc        = null;
-    private PanelVacio      vVac        = null;
-    private MonitorDAO      monDao      = null;
-    private utilTablas      utTab       = null;
+    private Conexion            conexion        = null;
+    private VistaPrincipal      vPrinc          = null;
+    private VistaMensajes       vMensaje        = null;
+    private VistaMonitores      vMon            = null;
+    private VistaSocios         vSoc            = null;
+    private PanelVacio          vVac            = null;
+    private MonitorDAO          monDao          = null;
+    private SocioDAO            socDao          = null;
+    private Monitor             mon             = null;
+    private Socio               soc             = null;
+    private utilTablas          utTab           = null;
+    private SimpleDateFormat    formatoFecha    = null;
+    
     
     public Controlador(Conexion conectP)  {
         this.conexion = conectP;
         
         //Instanciar todo lo creado arriba
-        vPrinc      = new VistaPrincipal();
-        vMensaje    = new VistaMensajes();
-        vMon        = new VistaMonitores();
-        vSoc        = new VistaSocios();
-        vVac        = new PanelVacio();
-        monDao      = new MonitorDAO(conectP);
-        utTab       = new utilTablas();
+        vPrinc       = new VistaPrincipal();
+        vMensaje     = new VistaMensajes();
+        vMon         = new VistaMonitores();
+        mon          = new Monitor();
+        soc          = new Socio();
+        vSoc         = new VistaSocios();
+        vVac         = new PanelVacio();
+        monDao       = new MonitorDAO(conectP);
+        socDao       = new SocioDAO(conectP);
+        utTab        = new utilTablas();
+        formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         //Gestionar el cierre de VistaPrincipal
         addListeners();
         
@@ -90,7 +101,11 @@ public class Controlador implements ActionListener{
             //Click raton--------------
             vMon.jTable_TablaMonitores.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent evt){
-                    vMonjTable_TablaMonitoresMouseClicked(evt); //Definido mas abajo
+                    try {
+                        vMonjTable_TablaMonitoresMouseClicked(evt); //Definido mas abajo
+                    } catch (ParseException ex) {
+                        Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             });
             
@@ -104,7 +119,11 @@ public class Controlador implements ActionListener{
             //Click raton--------------
             vSoc.jTable_TablaSocios.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent evt){
-                    vMonjTable_TablaMonitoresMouseClicked(evt); //Definido mas abajo
+                    try {
+                        vSocTable_TablaSociosMouseClicked(evt); //Definido mas abajo
+                    } catch (ParseException ex) {
+                        Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             });
     }
@@ -128,19 +147,19 @@ public class Controlador implements ActionListener{
                     vMon.setVisible(false);
                     vSoc.setVisible(true);
                 break;
-                
+
+//---------------------Monitores---------------------
             case "InsertarMonitor":
-            {
-                try {
-                    insertarTablaMonitores();
-                    pideMonitores();
-                } catch (SQLException ex) {
-                    Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                {
+                    try {
+                        insertarTablaMonitores();
+                        pideMonitores();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }
                 break;
 
-                
             case "ActualizarMonitor":
                 {
                     try {
@@ -150,10 +169,8 @@ public class Controlador implements ActionListener{
                         Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-
                 break;
 
-                
             case "EliminarMonitor":
                 {
                     try {
@@ -166,7 +183,6 @@ public class Controlador implements ActionListener{
                 
                 break;
 
-            
             case "VaciarTablaMonitor":
                     utTab.vaciarTablaMonitores();
                 break;
@@ -179,17 +195,71 @@ public class Controlador implements ActionListener{
                         //vMensaje.Mensaje("error", "Error en la peticion\n" + ex.getMessage() );
                     }
                 break;
-            
+                
+//---------------------Socios---------------------
+            case "InsertarSocio":
+                {
+                    try {
+                        insertarTablaSocios();
+                        pideSocios();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
+
+            case "ActualizarSocio":
+                {
+                    try {
+                        actualizSocio();
+                        pideSocios();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
+
+            case "EliminarSocio":
+                {
+                    try {
+                        borrarSocio();
+                        pideSocios();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
+
+            case "VaciarTablaSocios":
+                    utTab.vaciarTablaSocios();
+                break;
+                
+            case "ListarSocios":
+                {
+                    try {
+                        utTab.dibujarTablaSocios(vSoc);
+                        pideSocios();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
+
         }
     }
     
+    
+    
+    
+    
+    //----------------------------------------------------Monitores----------------------------------------------------
     private void pideMonitores() throws SQLException{
         ArrayList<Monitor> lMonitores = monDao.listaMonitores();
         utTab.vaciarTablaMonitores();
         utTab.rellenarTablaMonitores(lMonitores);
     }
 
-    private void vMonjTable_TablaMonitoresMouseClicked(MouseEvent evt){
+    private void vMonjTable_TablaMonitoresMouseClicked(MouseEvent evt) throws ParseException{
         int fila = vMon.jTable_TablaMonitores.getSelectedRow();
         //TODO - Rellenar todos los textfields con los valores de las columnas
         //       de la fila que esté señalada en la tabla cuando se haga un click de ratón
@@ -212,7 +282,6 @@ public class Controlador implements ActionListener{
         vMon.jDateChooser_Monitor.setDate(fechaChooser);
         
         vMon.jTextField_Nick.setText(nick);
-        
     }
 
     private void insertarTablaMonitores() throws SQLException{
@@ -221,7 +290,15 @@ public class Controlador implements ActionListener{
         String dni = vMon.jTextField_DNI.getText();
         String tlf = vMon.jTextField_Telefono.getText();
         String cor = vMon.jTextField_Correo.getText();
-        String fec = vMon.jTextField_FechaEntrada.getText();
+        
+        String fec = "dd/MM/yyyy";
+        Date fechaChooser = vMon.jDateChooser_Monitor.getDate();
+        if (fechaChooser != null){
+            fec = formatoFecha.format(fechaChooser);
+            mon.setFechaEntrada(fec);
+        }
+        //String fec = vMon.jTextField_FechaEntrada.getText();
+        
         String nic = vMon.jTextField_Nick.getText();
         
         monDao.insertarMonitor(cod, nom, dni, tlf, cor, fec, nic);
@@ -238,9 +315,108 @@ public class Controlador implements ActionListener{
         String dni = vMon.jTextField_DNI.getText();
         String tlf = vMon.jTextField_Telefono.getText();
         String cor = vMon.jTextField_Correo.getText();
-        String fec = vMon.jTextField_FechaEntrada.getText();
+        
+        String fec = null;
+        Date fechaChooser = vMon.jDateChooser_Monitor.getDate();
+        if (fechaChooser != null){
+            fec = formatoFecha.format(fechaChooser);
+        }
+        //String fec = vMon.jTextField_FechaEntrada.getText();
+        
         String nic = vMon.jTextField_Nick.getText();
         
         monDao.actualizarMonitor(cod, nom, dni, tlf, cor, fec, nic);
+    }
+    
+    
+    //----------------------------------------------------Socios----------------------------------------------------
+    private void pideSocios() throws SQLException{
+        ArrayList<Socio> lSocios = socDao.listaSocios();
+        utTab.vaciarTablaSocios();
+        utTab.rellenarTablaSocios(lSocios);
+    }
+    
+    private void vSocTable_TablaSociosMouseClicked(MouseEvent evt) throws ParseException{
+        int fila = vSoc.jTable_TablaSocios.getSelectedRow();
+        //TODO - Rellenar todos los textfields con los valores de las columnas
+        //       de la fila que esté señalada en la tabla cuando se haga un click de ratón
+        String numSoc   = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 0);
+        String nombre   = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 1);
+        String dni      = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 2);
+        String tlf      = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 3);
+        String correo   = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 4);
+        String fechEnt  = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 5);
+        String fechNac  = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 6);
+        String categ    = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 7);
+        
+        vSoc.jTextField_NumSocio.setText(numSoc);
+        vSoc.jTextField_Nombre.setText(nombre);
+        vSoc.jTextField_DNI.setText(dni);
+        vSoc.jTextField_Telefono.setText(tlf);
+        vSoc.jTextField_Correo.setText(correo);
+        
+        Date fechEntrada = formatoFecha.parse(fechEnt);
+        vSoc.jDateChooser_FEntradaSocios.setDate(fechEntrada);
+        
+        Date fechNacim = formatoFecha.parse(fechNac);
+        vSoc.jDateChooser_FNac_Socios.setDate(fechNacim);
+        
+        vSoc.jTextField_Categoria.setText(categ);
+    }
+    
+    private void insertarTablaSocios() throws SQLException{
+        String numSoc = vSoc.jTextField_NumSocio.getText();
+        String nombre = vSoc.jTextField_Nombre.getText();
+        String dni      = vSoc.jTextField_DNI.getText();
+        String tlf      = vSoc.jTextField_Telefono.getText();
+        String correo   = vSoc.jTextField_Correo.getText();
+        String categ    = vSoc.jTextField_Categoria.getText();
+        
+        String fecEnt = "dd/MM/yyyy";
+        Date fechUno = vSoc.jDateChooser_FEntradaSocios.getDate();
+        if (fechUno != null){
+            fecEnt = formatoFecha.format(fechUno);
+            soc.setFechaEntrada(fecEnt);
+        }
+        
+        String fecNac = "dd/MM/yyyy";
+        Date fechDos = vSoc.jDateChooser_FNac_Socios.getDate();
+        if (fechDos != null){
+            fecNac = formatoFecha.format(fechDos);
+            soc.setFechaNacimiento(fecNac);
+        }
+        
+        socDao.insertarSocio(numSoc, nombre, dni, tlf, correo, fecEnt, fecNac, categ);
+    }
+
+    private void borrarSocio() throws SQLException{
+        String numSoc = vSoc.jTextField_NumSocio.getText();
+        socDao.borrarSocio(numSoc);
+    }
+    
+    private void actualizSocio() throws SQLException{
+        String numSoc   = vSoc.jTextField_NumSocio.getText();
+        String nombre   = vSoc.jTextField_Nombre.getText();
+        String dni      = vSoc.jTextField_DNI.getText();
+        String tlf      = vSoc.jTextField_Telefono.getText();
+        String correo   = vSoc.jTextField_Correo.getText();
+        String categ    = vSoc.jTextField_Categoria.getText();
+        
+        String fecEnt = "dd/MM/yyyy";
+        Date fechUno = vSoc.jDateChooser_FEntradaSocios.getDate();
+        if (fechUno != null){
+            fecEnt = formatoFecha.format(fechUno);
+            soc.setFechaEntrada(fecEnt);
+        }
+        
+        String fecNac = "dd/MM/yyyy";
+        Date fechDos = vSoc.jDateChooser_FNac_Socios.getDate();
+        if (fechDos != null){
+            fecNac = formatoFecha.format(fechDos);
+            soc.setFechaNacimiento(fecNac);
+        }
+        
+        socDao.actualizarSocio(numSoc, nombre, dni, tlf, correo, fecEnt, fecNac, categ);
+        
     }
 }

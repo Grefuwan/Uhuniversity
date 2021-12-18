@@ -5,6 +5,7 @@
 package Modelo;
 
 import Vista.VistaMonitores;
+import Vista.VistaSocios;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -15,56 +16,107 @@ import javax.swing.table.DefaultTableModel;
  */
 public class utilTablas {
     
-    public DefaultTableModel modeloTablaMonitores = new DefaultTableModel(){
+    //----------------------------------------------------Monitor----------------------------------------------------
+    public DefaultTableModel modeloTablaMonitor = new DefaultTableModel(){
         @Override
         public boolean isCellEditable(int row, int column){
             return false;
         }
     };
     
-    
     public void dibujarTablaMonitores(VistaMonitores vMonitor){
-        vMonitor.jTable_TablaMonitores.setModel(modeloTablaMonitores);
+        vMonitor.jTable_TablaMonitores.setModel(modeloTablaMonitor);
         
         String[] columntasTabla = {"Código", "Nombre", "DNI", "Teléfono", "Correo", "Fecha Incorporación", "Nick"};
-        modeloTablaMonitores.setColumnIdentifiers(columntasTabla);
+        modeloTablaMonitor.setColumnIdentifiers(columntasTabla);
         
         //Para no permitir el redimensionamiento de las columnas con el ratón
         vMonitor.jTable_TablaMonitores.getTableHeader().setResizingAllowed(false);
         vMonitor.jTable_TablaMonitores.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         
         //Para fijar el ancho de las columnas
-        vMonitor.jTable_TablaMonitores.getColumnModel().getColumn(0).setPreferredWidth(40);
-        vMonitor.jTable_TablaMonitores.getColumnModel().getColumn(1).setPreferredWidth(240);
-        vMonitor.jTable_TablaMonitores.getColumnModel().getColumn(2).setPreferredWidth(70);
-        vMonitor.jTable_TablaMonitores.getColumnModel().getColumn(3).setPreferredWidth(70);
-        vMonitor.jTable_TablaMonitores.getColumnModel().getColumn(4).setPreferredWidth(200);
-        vMonitor.jTable_TablaMonitores.getColumnModel().getColumn(5).setPreferredWidth(150);
-        vMonitor.jTable_TablaMonitores.getColumnModel().getColumn(6).setPreferredWidth(60);
+        vMonitor.jTable_TablaMonitores.getColumnModel().getColumn(0).setPreferredWidth(40);     //Codigo
+        vMonitor.jTable_TablaMonitores.getColumnModel().getColumn(1).setPreferredWidth(240);    //Nombre
+        vMonitor.jTable_TablaMonitores.getColumnModel().getColumn(2).setPreferredWidth(70);     //DNI
+        vMonitor.jTable_TablaMonitores.getColumnModel().getColumn(3).setPreferredWidth(70);     //Telefono
+        vMonitor.jTable_TablaMonitores.getColumnModel().getColumn(4).setPreferredWidth(200);    //Correo
+        vMonitor.jTable_TablaMonitores.getColumnModel().getColumn(5).setPreferredWidth(150);    //Fecha Incorporacion
+        vMonitor.jTable_TablaMonitores.getColumnModel().getColumn(6).setPreferredWidth(60);     //Nick
     }
-    
+   
     //Mostrar los datos de la tabla MONITOR
     public void rellenarTablaMonitores(ArrayList<Monitor> monitores){
         Object[] fila = new Object[7];
         int numRegistros = monitores.size();
         for (int i = 0; i < numRegistros; i++){
-            fila[0] = monitores.get(i).getCodMonitor();
-            fila[1] = monitores.get(i).getNombre();
-            fila[2] = monitores.get(i).getDni();
-            fila[3] = monitores.get(i).getTelefono();
-            fila[4] = monitores.get(i).getCorreo();
-            fila[5] = monitores.get(i).getFechaEntrada();
-            fila[6] = monitores.get(i).getNick();
-            modeloTablaMonitores.addRow(fila);
+            fila[0] = monitores.get(i).getCodMonitor();     //Cod Monitor
+            fila[1] = monitores.get(i).getNombre();         //Nombre
+            fila[2] = monitores.get(i).getDni();            //DNI
+            fila[3] = monitores.get(i).getTelefono();       //Telefono
+            fila[4] = monitores.get(i).getCorreo();         //Correo
+            fila[5] = monitores.get(i).getFechaEntrada();   //Fecha Entrada
+            fila[6] = monitores.get(i).getNick();           //Nick
+            modeloTablaMonitor.addRow(fila);
         }
     }
     
     //Vaciar el contenido de la tabla MONITOR
     public void vaciarTablaMonitores(){
-        while (modeloTablaMonitores.getRowCount() > 0)
-            modeloTablaMonitores.removeRow(0);
+        while ( modeloTablaMonitor.getRowCount() > 0)
+            modeloTablaMonitor.removeRow(0);
     }
     
     
-    //Repetir esos 3 metodos para Socio y para Actividad----------------------------------------------------
+    //----------------------------------------------------Socios----------------------------------------------------
+    public DefaultTableModel modeloTablaSocios = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int row, int column){
+            return false;
+        }
+    };
+    
+    public void dibujarTablaSocios (VistaSocios vSoc){
+        vSoc.jTable_TablaSocios.setModel(modeloTablaSocios);
+        
+        String[] columnasTabla = {"Núm. Socio", "Nombre", "DNI", "Fecha Nacimiento", "Telefono", "Correo", "Fecha Entrada" , "Categoria"};
+        modeloTablaSocios.setColumnIdentifiers(columnasTabla);
+        
+        //Para no permitir el redimensionamiento de las columnas con el ratón
+        vSoc.jTable_TablaSocios.getTableHeader().setResizingAllowed(true);  //--------------------------Cambiar a FALSE
+        vSoc.jTable_TablaSocios.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+        
+        //Para fijar el ancho de las columnas
+        vSoc.jTable_TablaSocios.getColumnModel().getColumn(0).setPreferredWidth(60);    //Num Socio
+        vSoc.jTable_TablaSocios.getColumnModel().getColumn(1).setPreferredWidth(240);   //Nombre
+        vSoc.jTable_TablaSocios.getColumnModel().getColumn(2).setPreferredWidth(70);    //DNI
+        vSoc.jTable_TablaSocios.getColumnModel().getColumn(3).setPreferredWidth(70);    //Fecha Nacimiento
+        vSoc.jTable_TablaSocios.getColumnModel().getColumn(4).setPreferredWidth(200);   //Telefono
+        vSoc.jTable_TablaSocios.getColumnModel().getColumn(5).setPreferredWidth(150);   //Correo
+        vSoc.jTable_TablaSocios.getColumnModel().getColumn(6).setPreferredWidth(60);    //Fecha Entrada
+        vSoc.jTable_TablaSocios.getColumnModel().getColumn(7).setPreferredWidth(70);    //Categoria
+    }
+    
+    public void rellenarTablaSocios(ArrayList<Socio> socios){
+        Object[] fila = new Object[8];
+        int numRegistros = socios.size();
+        for (int i = 0; i < numRegistros; i++){
+            fila[0] = socios.get(i).getNumSocio();          //Num Socio
+            fila[1] = socios.get(i).getNombre();            //Nombre
+            fila[2] = socios.get(i).getDni();               //DNI
+            fila[3] = socios.get(i).getFechaNacimiento();   //Fecha Nacimiento
+            fila[4] = socios.get(i).getTelefono();          //Telefono
+            fila[5] = socios.get(i).getCorreo();            //Correo
+            fila[6] = socios.get(i).getFechaEntrada();      //Fecha Entrada
+            fila[7] = socios.get(i).getCategoria();         //Categoria
+            modeloTablaSocios.addRow(fila);
+        }
+    }
+    
+    public void vaciarTablaSocios(){
+        while (modeloTablaSocios.getRowCount() > 0)
+            modeloTablaSocios.removeRow(0);
+    }
+
+
+    //--------------------------------------------------Actividad---------------------------------------------------
 }

@@ -191,7 +191,7 @@
     <Component class="javax.swing.JButton" name="jButton_Insertar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Insertar"/>
-        <Property name="actionCommand" type="java.lang.String" value="InsertarMonitor"/>
+        <Property name="actionCommand" type="java.lang.String" value="InsertarSocio"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -205,7 +205,7 @@
     <Component class="javax.swing.JButton" name="jButton_Actualizar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Actualizar"/>
-        <Property name="actionCommand" type="java.lang.String" value="ActualizarMonitor"/>
+        <Property name="actionCommand" type="java.lang.String" value="ActualizarSocio"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -219,7 +219,7 @@
     <Component class="javax.swing.JButton" name="jButton_Eliminar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
-        <Property name="actionCommand" type="java.lang.String" value="EliminarMonitor"/>
+        <Property name="actionCommand" type="java.lang.String" value="EliminarSocio"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -233,7 +233,7 @@
     <Component class="javax.swing.JButton" name="jButton_VaciarTabla">
       <Properties>
         <Property name="text" type="java.lang.String" value="Vaciar Tabla"/>
-        <Property name="actionCommand" type="java.lang.String" value="VaciarTablaMonitor"/>
+        <Property name="actionCommand" type="java.lang.String" value="VaciarTablaSocio"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -247,7 +247,7 @@
     <Component class="javax.swing.JButton" name="jButton_ListarSocios">
       <Properties>
         <Property name="text" type="java.lang.String" value="Listar Socios"/>
-        <Property name="actionCommand" type="java.lang.String" value="ListarMonitores"/>
+        <Property name="actionCommand" type="java.lang.String" value="ListarSocios"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

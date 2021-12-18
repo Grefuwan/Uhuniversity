@@ -29,7 +29,7 @@ public class Socio {
         categoria       = null;
     }
     
-    public Socio (String numSocio, String nombre, String dni, String telefono, String correo, String fechaEntrada, String fechaNacimiento, String categoria){
+    public Socio (String numSocio, String nombre, String dni, String fechaNacimiento, String telefono, String correo, String fechaEntrada, String categoria){
         this.numSocio           = numSocio;
         this.nombre             = nombre;
         this.dni                = dni;

@@ -56,15 +56,15 @@ public class SocioDAO {
         return listaSocios;
     }
     
-    public void insertarSocio(String numSocio, String nombre, String dni, String telefono, String correo, String fechaEntrada, String fechaNacimiento, String categoria) throws SQLException{
+    public void insertarSocio(String numSocio, String nombre, String dni, String fechaNacimiento, String telefono, String correo, String fechaEntrada, String categoria) throws SQLException{
         
         String consulta = "INSERT INTO SOCIO VALUES (   ?,"     //NumSocio
                                                     +   "?,"    //Nombre
                                                     +   "?,"    //DNI
-                                                    +   "?,"    //Num Telefono
+                                                    +   "?,"    //Fecha Nacimiento
+                                                    +   "?,"    //Telefono
                                                     +   "?,"    //Correo
                                                     +   "?,"    //Fecha Entrada
-                                                    +   "?,"    //Fecha Nacimiento
                                                     +   "?)";   //Codigo
     
         PreparedStatement stmt = conexion.getConexion().prepareStatement(consulta);
@@ -72,10 +72,10 @@ public class SocioDAO {
         stmt.setString(1, numSocio);
         stmt.setString(2, nombre);
         stmt.setString(3, dni);
-        stmt.setString(4, telefono);
-        stmt.setString(5, correo);
-        stmt.setString(6, fechaEntrada);
-        stmt.setString(7, fechaNacimiento);
+        stmt.setString(4, fechaNacimiento);
+        stmt.setString(5, telefono);
+        stmt.setString(6, correo);
+        stmt.setString(7, fechaEntrada);
         stmt.setString(8, categoria);
         
         stmt.executeUpdate();
@@ -91,26 +91,26 @@ public class SocioDAO {
         stmt.executeUpdate();
     }
     
-    public void actualizarSocioString (String numSocio, String nombre, String dni, String telefono, String correo, String fechaEntrada, String fechaNacimiento, String categoria) throws SQLException{
+    public void actualizarSocio(String numSocio, String nombre, String dni, String fechaNacimiento, String telefono, String correo, String fechaEntrada, String categoria) throws SQLException{
             String consulta = "UPDATE MONITOR SET   (   ?,"     //Nombre
                                                     +   "?,"    //DNI
-                                                    +   "?,"    //Num Telefono
+                                                    +   "?,"    //Fecha Nacimiento
+                                                    +   "?,"    //Telefono
                                                     +   "?,"    //Correo
                                                     +   "?,"    //Fecha Entrada
-                                                    +   "?,"    //Fecha Nacimiento
-                                                    +   "?)"    //Codigo
+                                                    +   "?)"   //Codigo
                     + "WHERE NUMEROSOCIO = ?";   
     
         PreparedStatement stmt = conexion.getConexion().prepareStatement(consulta);
 
-        stmt.setString(1, nombre);
-        stmt.setString(2, dni);
-        stmt.setString(3, telefono);
-        stmt.setString(4, correo);
-        stmt.setString(5, fechaEntrada);
-        stmt.setString(6, fechaNacimiento);
-        stmt.setString(7, categoria);
-        stmt.setString(8, numSocio);
+        stmt.setString(1, numSocio);
+        stmt.setString(2, nombre);
+        stmt.setString(3, dni);
+        stmt.setString(4, fechaNacimiento);
+        stmt.setString(5, telefono);
+        stmt.setString(6, correo);
+        stmt.setString(7, fechaEntrada);
+        stmt.setString(8, categoria);
 
         stmt.executeUpdate();
     }
