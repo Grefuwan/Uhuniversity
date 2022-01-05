@@ -33,6 +33,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenuItem_GestionMonitores = new javax.swing.JMenuItem();
         jMenu_Socios = new javax.swing.JMenu();
         jMenu_GestionSocios = new javax.swing.JMenuItem();
+        jMenu_Actividad = new javax.swing.JMenu();
+        jMenu_SociosPorActividad = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,6 +72,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenuBar_VistaPrincipal.add(jMenu_Socios);
 
+        jMenu_Actividad.setText("Actividad");
+
+        jMenu_SociosPorActividad.setText("Socios por Actividad");
+        jMenu_SociosPorActividad.setActionCommand("GestionSociosActividad");
+        jMenu_Actividad.add(jMenu_SociosPorActividad);
+
+        jMenuBar_VistaPrincipal.add(jMenu_Actividad);
+
         setJMenuBar(jMenuBar_VistaPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -103,9 +113,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar_VistaPrincipal;
     public javax.swing.JMenuItem jMenuItem_GestionMonitores;
     public javax.swing.JMenuItem jMenuItem_SalirAplicacion;
+    public javax.swing.JMenu jMenu_Actividad;
     public javax.swing.JMenuItem jMenu_GestionSocios;
     public javax.swing.JMenu jMenu_Monitores;
     public javax.swing.JMenu jMenu_Salir;
     public javax.swing.JMenu jMenu_Socios;
+    public javax.swing.JMenuItem jMenu_SociosPorActividad;
     // End of variables declaration//GEN-END:variables
 }

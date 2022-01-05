@@ -78,21 +78,21 @@ public class utilTablas {
     public void dibujarTablaSocios (VistaSocios vSoc){
         vSoc.jTable_TablaSocios.setModel(modeloTablaSocios);
         
-        String[] columnasTabla = {"Núm. Socio", "Nombre", "DNI", "Fecha Nacimiento", "Telefono", "Correo", "Fecha Entrada" , "Categoria"};
+        String[] columnasTabla = {"Nº. Soc", "Nombre", "DNI", "Fecha Nacimiento", "Telefono", "Correo", "Fecha Entrada" , "Categoria"};
         modeloTablaSocios.setColumnIdentifiers(columnasTabla);
         
         //Para no permitir el redimensionamiento de las columnas con el ratón
-        vSoc.jTable_TablaSocios.getTableHeader().setResizingAllowed(true);  //--------------------------Cambiar a FALSE
+        vSoc.jTable_TablaSocios.getTableHeader().setResizingAllowed(false);  //--------------------------Cambiar a FALSE
         vSoc.jTable_TablaSocios.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         
         //Para fijar el ancho de las columnas
         vSoc.jTable_TablaSocios.getColumnModel().getColumn(0).setPreferredWidth(60);    //Num Socio
-        vSoc.jTable_TablaSocios.getColumnModel().getColumn(1).setPreferredWidth(240);   //Nombre
-        vSoc.jTable_TablaSocios.getColumnModel().getColumn(2).setPreferredWidth(70);    //DNI
-        vSoc.jTable_TablaSocios.getColumnModel().getColumn(3).setPreferredWidth(70);    //Fecha Nacimiento
-        vSoc.jTable_TablaSocios.getColumnModel().getColumn(4).setPreferredWidth(200);   //Telefono
-        vSoc.jTable_TablaSocios.getColumnModel().getColumn(5).setPreferredWidth(150);   //Correo
-        vSoc.jTable_TablaSocios.getColumnModel().getColumn(6).setPreferredWidth(60);    //Fecha Entrada
+        vSoc.jTable_TablaSocios.getColumnModel().getColumn(1).setPreferredWidth(200);   //Nombre
+        vSoc.jTable_TablaSocios.getColumnModel().getColumn(2).setPreferredWidth(90);    //DNI
+        vSoc.jTable_TablaSocios.getColumnModel().getColumn(3).setPreferredWidth(90);    //Fecha Nacimiento
+        vSoc.jTable_TablaSocios.getColumnModel().getColumn(4).setPreferredWidth(115);   //Telefono
+        vSoc.jTable_TablaSocios.getColumnModel().getColumn(5).setPreferredWidth(170);   //Correo
+        vSoc.jTable_TablaSocios.getColumnModel().getColumn(6).setPreferredWidth(90);    //Fecha Entrada
         vSoc.jTable_TablaSocios.getColumnModel().getColumn(7).setPreferredWidth(70);    //Categoria
     }
     

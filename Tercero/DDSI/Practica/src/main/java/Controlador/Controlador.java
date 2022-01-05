@@ -4,19 +4,9 @@
  */
 package Controlador;
 
-import javax.swing.*;
+import Modelo.*;
+import Vista.*;
 
-import Modelo.Conexion;
-import Modelo.Monitor;
-import Modelo.MonitorDAO;
-import Modelo.Socio;
-import Modelo.SocioDAO;
-import Modelo.utilTablas;
-import Vista.PanelVacio;
-import Vista.VistaMensajes;
-import Vista.VistaMonitores;
-import Vista.VistaPrincipal;
-import Vista.VistaSocios;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
 import java.util.Date;
 
 /**
@@ -38,34 +27,46 @@ import java.util.Date;
 public class Controlador implements ActionListener{
     
     private Conexion            conexion        = null;
-    private VistaPrincipal      vPrinc          = null;
-    private VistaMensajes       vMensaje        = null;
-    private VistaMonitores      vMon            = null;
-    private VistaSocios         vSoc            = null;
-    private PanelVacio          vVac            = null;
-    private MonitorDAO          monDao          = null;
-    private SocioDAO            socDao          = null;
-    private Monitor             mon             = null;
-    private Socio               soc             = null;
     private utilTablas          utTab           = null;
     private SimpleDateFormat    formatoFecha    = null;
+
+    private VistaPrincipal      vPrinc          = null;
+    private PanelVacio          vVac            = null;
+    private VistaMensajes       vMensaje        = null;
+    
+    private VistaMonitores      vMon            = null;
+    private MonitorDAO          monDao          = null;
+    private Monitor             mon             = null;
+
+    private VistaSocios         vSoc            = null;
+    private SocioDAO            socDao          = null;
+    private Socio               soc             = null;
+
+    private VistaActividad      vAct            = null;
+    private ActividadDAO        actDAO          = null;
+    private Actividad           act             = null;
     
     
-    public Controlador(Conexion conectP)  {
+    public Controlador(Conexion conectP)  { //Instanciar todo lo creado arriba
         this.conexion = conectP;
-        
-        //Instanciar todo lo creado arriba
-        vPrinc       = new VistaPrincipal();
-        vMensaje     = new VistaMensajes();
-        vMon         = new VistaMonitores();
-        mon          = new Monitor();
-        soc          = new Socio();
-        vSoc         = new VistaSocios();
-        vVac         = new PanelVacio();
-        monDao       = new MonitorDAO(conectP);
-        socDao       = new SocioDAO(conectP);
         utTab        = new utilTablas();
         formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+       
+        vPrinc       = new VistaPrincipal();
+        vVac         = new PanelVacio();
+        vMensaje     = new VistaMensajes();
+
+        vMon         = new VistaMonitores();
+        monDao       = new MonitorDAO(conectP);
+        mon          = new Monitor();
+        
+        vSoc         = new VistaSocios();
+        socDao       = new SocioDAO(conectP);
+        soc          = new Socio();
+        
+        vAct         = new VistaActividad();
+        actDAO       = new ActividadDAO();
+        act          = new Actividad();
         
         //Gestionar el cierre de VistaPrincipal
         addListeners();
@@ -78,8 +79,10 @@ public class Controlador implements ActionListener{
         vPrinc.add(vVac);
         vPrinc.add(vMon);
         vPrinc.add(vSoc);
+        vPrinc.add(vAct);
         vMon.setVisible(false);
         vSoc.setVisible(false);
+        vAct.setVisible(false);
         vVac.setVisible(true);  //Panel vacio para mostrar
         
 
@@ -90,6 +93,7 @@ public class Controlador implements ActionListener{
             vPrinc.jMenuItem_SalirAplicacion.addActionListener(this);
             vPrinc.jMenuItem_GestionMonitores.addActionListener(this);
             vPrinc.jMenu_GestionSocios.addActionListener(this);
+            vPrinc.jMenu_SociosPorActividad.addActionListener(this);
             
         //Vista Monitor
             //Botones------------------
@@ -126,6 +130,10 @@ public class Controlador implements ActionListener{
                     }
                 }
             });
+            
+        //Vista Actividades
+            //Botones------------------
+            vAct.jButton_Exit.addActionListener(this);
     }
 
     @Override
@@ -140,12 +148,28 @@ public class Controlador implements ActionListener{
                     vVac.setVisible(false);
                     vMon.setVisible(true);
                     vSoc.setVisible(false);
+                    vAct.setVisible(false);
                 break;
                 
             case "GestionSocios":
                     vVac.setVisible(false);
                     vMon.setVisible(false);
                     vSoc.setVisible(true);
+                    vAct.setVisible(false);
+                break;
+            
+            case "GestionSociosActividad":
+                    vVac.setVisible(false);
+                    vMon.setVisible(false);
+                    vSoc.setVisible(false);
+                    vAct.setVisible(true);
+                break;
+            
+            default:
+                    vVac.setVisible(true);
+                    vMon.setVisible(false);
+                    vSoc.setVisible(false);
+                    vAct.setVisible(false);
                 break;
 
 //---------------------Monitores---------------------
@@ -245,6 +269,15 @@ public class Controlador implements ActionListener{
                 }
                 break;
 
+                
+//---------------------Actividades---------------------
+            case "SalirActividad":
+                    vVac.setVisible(true);
+                    vMon.setVisible(false);
+                    vSoc.setVisible(false);
+                    vAct.setVisible(false);
+                break;
+                
         }
     }
     
@@ -304,7 +337,7 @@ public class Controlador implements ActionListener{
         monDao.insertarMonitor(cod, nom, dni, tlf, cor, fec, nic);
     }
     
-    private void borrarMonitor () throws SQLException{
+    private void borrarMonitor () throws SQLException{  //Condicion Practica 4
         String codMonit = vMon.jTextField_Codigo.getText();
         monDao.borrarMonitor(codMonit);
     }
@@ -343,10 +376,10 @@ public class Controlador implements ActionListener{
         String numSoc   = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 0);
         String nombre   = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 1);
         String dni      = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 2);
-        String tlf      = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 3);
-        String correo   = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 4);
-        String fechEnt  = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 5);
-        String fechNac  = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 6);
+        String fechNac  = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 3);
+        String tlf      = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 4);
+        String correo   = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 5);
+        String fechEnt  = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 6);
         String categ    = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 7);
         
         vSoc.jTextField_NumSocio.setText(numSoc);
@@ -365,8 +398,8 @@ public class Controlador implements ActionListener{
     }
     
     private void insertarTablaSocios() throws SQLException{
-        String numSoc = vSoc.jTextField_NumSocio.getText();
-        String nombre = vSoc.jTextField_Nombre.getText();
+        String numSoc   = vSoc.jTextField_NumSocio.getText();
+        String nombre   = vSoc.jTextField_Nombre.getText();
         String dni      = vSoc.jTextField_DNI.getText();
         String tlf      = vSoc.jTextField_Telefono.getText();
         String correo   = vSoc.jTextField_Correo.getText();
@@ -386,7 +419,7 @@ public class Controlador implements ActionListener{
             soc.setFechaNacimiento(fecNac);
         }
         
-        socDao.insertarSocio(numSoc, nombre, dni, tlf, correo, fecEnt, fecNac, categ);
+        socDao.insertarSocio(numSoc, nombre, dni, fecNac, tlf, correo, fecEnt, categ);
     }
 
     private void borrarSocio() throws SQLException{
@@ -416,7 +449,7 @@ public class Controlador implements ActionListener{
             soc.setFechaNacimiento(fecNac);
         }
         
-        socDao.actualizarSocio(numSoc, nombre, dni, tlf, correo, fecEnt, fecNac, categ);
+        socDao.actualizarSocio(numSoc, nombre, dni, fecNac, tlf, correo, fecEnt, categ);
         
     }
 }

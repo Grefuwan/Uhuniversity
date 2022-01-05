@@ -77,21 +77,21 @@ public class VistaSocios extends javax.swing.JPanel {
         add(jLabel_DNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, -1, -1));
 
         jLabel_telefono.setText("Teléfono");
-        add(jLabel_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, -1));
+        add(jLabel_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 350, -1, -1));
 
         jLabel_Correo.setText("Correo");
-        add(jLabel_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 350, -1, 29));
+        add(jLabel_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, -1, -1));
 
         jLabel_FechaEntrada.setText("Fecha de Entrada");
-        add(jLabel_FechaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, -1, 29));
+        add(jLabel_FechaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 450, -1, -1));
 
         jLabel_fechaNacimiento.setText("Fecha de Nacimiento");
-        add(jLabel_fechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 450, -1, 18));
-        add(jTextField_NumSocio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 200, -1));
-        add(jTextField_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 200, -1));
-        add(jTextField_DNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 200, -1));
-        add(jTextField_Telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 500, 200, -1));
-        add(jTextField_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 350, 200, -1));
+        add(jLabel_fechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, 18));
+        add(jTextField_NumSocio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 200, -1));
+        add(jTextField_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 200, -1));
+        add(jTextField_DNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, 200, -1));
+        add(jTextField_Telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 350, 200, -1));
+        add(jTextField_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 400, 200, -1));
 
         jButton_Insertar.setText("Insertar");
         jButton_Insertar.setActionCommand("InsertarSocio");
@@ -114,10 +114,10 @@ public class VistaSocios extends javax.swing.JPanel {
         add(jButton_ListarSocios, new org.netbeans.lib.awtextra.AbsoluteConstraints(755, 610, 150, -1));
 
         jLabel_Categoria.setText("Categoría");
-        add(jLabel_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 500, -1, 18));
+        add(jLabel_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 500, -1, -1));
         add(jTextField_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 500, 200, -1));
-        add(jDateChooser_FEntradaSocios, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 400, 200, -1));
-        add(jDateChooser_FNac_Socios, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 450, 200, -1));
+        add(jDateChooser_FEntradaSocios, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 450, 200, -1));
+        add(jDateChooser_FNac_Socios, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 500, 200, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
