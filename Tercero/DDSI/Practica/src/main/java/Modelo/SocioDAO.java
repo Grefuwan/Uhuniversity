@@ -4,114 +4,91 @@
  */
 package Modelo;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 /**
  *
  * @author Grefuwan
  */
 public class SocioDAO {
-    Conexion conexion = null;
-    PreparedStatement ps = null;
+    Conexion conexion       = null;
+    Session sesion          = null;
+    Socio soci              = null;
     
-    public SocioDAO(Conexion c){
-        this.conexion = c;
+    public SocioDAO(Session c){
+        this.sesion = c;
     }
     
-    public ArrayList<Socio> listaSocios() throws SQLException{
-        ArrayList listaSocios = new ArrayList();
+    public ArrayList<Socio> listaSocios() throws Exception {
+        Transaction transaction = sesion.beginTransaction();
         
-        String consulta = "SELECT * FROM SOCIO";
-         ps = conexion.getConexion().prepareStatement(consulta);
-        ResultSet rs = ps.executeQuery();
+        Query consulta = sesion.createNativeQuery ("SELECT * FROM Socio S", Socio.class);
+        ArrayList<Socio> socios = (ArrayList<Socio>) consulta.list();
         
-        while (rs.next()){
-            Socio socio = new Socio (rs.getString(1), rs.getString(2),
-                                    rs.getString(3), rs.getString(4), rs.getString(5), 
-                                    rs.getString(6), rs.getString(7), rs.getString(8));
-            listaSocios.add(socio);
-        }
+        transaction.commit();
+        return socios;
+    }
+
+    public ArrayList<Object[]> listaNombreDNISocios() throws Exception {    //Consulta que devuelve 2 campos de la tabla Socios
+        Transaction transaction = sesion.beginTransaction();
+        Query consulta = sesion.createNativeQuery("SELECT nombre, dni FROM Socio S");
+        ArrayList<Object[]> socios = (ArrayList<Object[]>) consulta.list();
         
-        return listaSocios;
+        transaction.commit();
+        return socios;
     }
     
-    public ArrayList<Socio> listaSocioPorLetra(String letra)throws SQLException{
-        ArrayList listaSocios = new ArrayList();
+    public ArrayList<String> listaNombreSocios() throws Exception {         //Consulta que devuelve un unico campo de la tabla Socios
+        Transaction transaction = sesion.beginTransaction();
+        Query consulta = sesion.createNativeQuery("SELECT nombre FROM Socio S");
+        ArrayList<String> socios = (ArrayList<String>) consulta.list();
         
-        String consulta = "SELECT * FROM SOCIO WHERE nombre LIKE ?";
-        ps = conexion.getConexion().prepareStatement(consulta);
+        transaction.commit();
+        return socios;
+    }
+    
+    public ArrayList<Socio> listaSocioPorLetra(String letra) throws Exception {
+        Transaction transaction = sesion.beginTransaction();
         letra = letra + "%";
-        ps.setString(1, letra);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()){
-            Socio socio = new Socio (rs.getString(1), rs.getString(2),
-                                    rs.getString(3), rs.getString(4), rs.getString(5), 
-                                    rs.getString(6), rs.getString(7), rs.getString(8));
-            listaSocios.add(socio);
-        }
+        Query consulta = sesion.createNativeQuery("SELECT * FROM SOCIO S "
+            + "WHERE nombre LIKE :letra", Socio.class).setParameter("letra", letra);
+        ArrayList<Socio> socios = (ArrayList<Socio>) consulta.list();
         
-        return listaSocios;
+        transaction.commit();
+        return socios;
+    }
+   
+    public void insertaSocio(Socio socio) throws Exception {
+        Transaction transaction = sesion.beginTransaction();
+        sesion.save(socio);
+        transaction.commit();
+    }  
+    
+    public void eliminaSocio(String codSocio) throws Exception {
+        Transaction transaction = sesion.beginTransaction();
+        Socio socio = sesion.get(Socio.class, codSocio);
+        sesion.delete(socio);
+        transaction.commit();
     }
     
-    public void insertarSocio(String numSocio, String nombre, String dni, String fechaNacimiento, String telefono, String correo, String fechaEntrada, String categoria) throws SQLException{
+    public void actualizaSocio(String numSocio, String nombre, String dni, String fechaNacimiento, String telefono, String correo, String fechaEntrada, String categoria) throws Exception {
+        Transaction transaction = sesion.beginTransaction();
         
-        String consulta = "INSERT INTO SOCIO VALUES (   ?,"     //NumSocio
-                                                    +   "?,"    //Nombre
-                                                    +   "?,"    //DNI
-                                                    +   "?,"    //Fecha Nacimiento
-                                                    +   "?,"    //Telefono
-                                                    +   "?,"    //Correo
-                                                    +   "?,"    //Fecha Entrada
-                                                    +   "?)";   //Codigo
-    
-        PreparedStatement stmt = conexion.getConexion().prepareStatement(consulta);
-
-        stmt.setString(1, numSocio);
-        stmt.setString(2, nombre);
-        stmt.setString(3, dni);
-        stmt.setString(4, fechaNacimiento);
-        stmt.setString(5, telefono);
-        stmt.setString(6, correo);
-        stmt.setString(7, fechaEntrada);
-        stmt.setString(8, categoria);
+        soci = sesion.get(Socio.class, numSocio);
         
-        stmt.executeUpdate();
-    }
-    
-    public void borrarSocio (String codSocio) throws SQLException{
-        String borrado = "DELETE FROM SOCIO WHERE NUMEROSOCIO=?";
+        soci.setNumerosocio(numSocio);
+        soci.setNombre(nombre);
+        soci.setDni(dni);
+        soci.setFechanacimiento(fechaNacimiento);
+        soci.setFechaentrada(fechaEntrada);
+        soci.setTelefono(telefono);
+        soci.setCorreo(correo);
+        soci.setCategoria(categoria);
         
-        PreparedStatement stmt = conexion.getConexion().prepareStatement(borrado);
-        
-        stmt.setString(1, codSocio);
-        
-        stmt.executeUpdate();
-    }
-    
-    public void actualizarSocio(String numSocio, String nombre, String dni, String fechaNacimiento, String telefono, String correo, String fechaEntrada, String categoria) throws SQLException{
-            String consulta = "UPDATE MONITOR SET   (   ?,"     //Nombre
-                                                    +   "?,"    //DNI
-                                                    +   "?,"    //Fecha Nacimiento
-                                                    +   "?,"    //Telefono
-                                                    +   "?,"    //Correo
-                                                    +   "?,"    //Fecha Entrada
-                                                    +   "?)"   //Codigo
-                    + "WHERE NUMEROSOCIO = ?";   
-    
-        PreparedStatement stmt = conexion.getConexion().prepareStatement(consulta);
-
-        stmt.setString(1, numSocio);
-        stmt.setString(2, nombre);
-        stmt.setString(3, dni);
-        stmt.setString(4, fechaNacimiento);
-        stmt.setString(5, telefono);
-        stmt.setString(6, correo);
-        stmt.setString(7, fechaEntrada);
-        stmt.setString(8, categoria);
-
-        stmt.executeUpdate();
+        sesion.update(soci);
+        transaction.commit();
     }
 }

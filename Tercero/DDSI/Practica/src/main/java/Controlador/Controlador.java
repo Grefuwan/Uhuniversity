@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date;
+import org.hibernate.Session;
 
 /**
  *
@@ -27,6 +28,7 @@ import java.util.Date;
 public class Controlador implements ActionListener{
     
     private Conexion            conexion        = null;
+    private Session             sesion          = null;
     private utilTablas          utTab           = null;
     private SimpleDateFormat    formatoFecha    = null;
 
@@ -47,8 +49,8 @@ public class Controlador implements ActionListener{
     private Actividad           act             = null;
     
     
-    public Controlador(Conexion conectP)  { //Instanciar todo lo creado arriba
-        this.conexion = conectP;
+    public Controlador(Session conectP)  { //Instanciar todo lo creado arriba
+        this.sesion = conectP;
         utTab        = new utilTablas();
         formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
        
@@ -79,10 +81,10 @@ public class Controlador implements ActionListener{
         vPrinc.add(vVac);
         vPrinc.add(vMon);
         vPrinc.add(vSoc);
-        vPrinc.add(vAct);
+        //vPrinc.add(vAct);
         vMon.setVisible(false);
         vSoc.setVisible(false);
-        vAct.setVisible(false);
+        //vAct.setVisible(false);
         vVac.setVisible(true);  //Panel vacio para mostrar
         
 
@@ -159,9 +161,9 @@ public class Controlador implements ActionListener{
                 break;
             
             case "GestionSociosActividad":
-                    vVac.setVisible(false);
-                    vMon.setVisible(false);
-                    vSoc.setVisible(false);
+                    //vVac.setVisible(false);
+                    //vMon.setVisible(false);
+                    //vSoc.setVisible(false);
                     vAct.setVisible(true);
                 break;
             
@@ -178,7 +180,7 @@ public class Controlador implements ActionListener{
                     try {
                         insertarTablaMonitores();
                         pideMonitores();
-                    } catch (SQLException ex) {
+                    }catch (Exception ex) {
                         Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -189,7 +191,7 @@ public class Controlador implements ActionListener{
                     try {
                         actualizMonitor();
                         pideMonitores();
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -200,7 +202,7 @@ public class Controlador implements ActionListener{
                     try {
                         borrarMonitor();
                         pideMonitores();
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -226,7 +228,7 @@ public class Controlador implements ActionListener{
                     try {
                         insertarTablaSocios();
                         pideSocios();
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -237,7 +239,7 @@ public class Controlador implements ActionListener{
                     try {
                         actualizSocio();
                         pideSocios();
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -248,7 +250,7 @@ public class Controlador implements ActionListener{
                     try {
                         borrarSocio();
                         pideSocios();
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -263,7 +265,7 @@ public class Controlador implements ActionListener{
                     try {
                         utTab.dibujarTablaSocios(vSoc);
                         pideSocios();
-                    } catch (SQLException ex) {
+                    } catch (Exception ex) {
                         Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -272,9 +274,6 @@ public class Controlador implements ActionListener{
                 
 //---------------------Actividades---------------------
             case "SalirActividad":
-                    vVac.setVisible(true);
-                    vMon.setVisible(false);
-                    vSoc.setVisible(false);
                     vAct.setVisible(false);
                 break;
                 
@@ -317,7 +316,7 @@ public class Controlador implements ActionListener{
         vMon.jTextField_Nick.setText(nick);
     }
 
-    private void insertarTablaMonitores() throws SQLException{
+    private void insertarTablaMonitores() throws Exception{
         String cod = vMon.jTextField_Codigo.getText();
         String nom = vMon.jTextField_Nombre.getText();
         String dni = vMon.jTextField_DNI.getText();
@@ -328,21 +327,22 @@ public class Controlador implements ActionListener{
         Date fechaChooser = vMon.jDateChooser_Monitor.getDate();
         if (fechaChooser != null){
             fec = formatoFecha.format(fechaChooser);
-            mon.setFechaEntrada(fec);
+            mon.setFechaentrada(fec);
         }
         //String fec = vMon.jTextField_FechaEntrada.getText();
         
         String nic = vMon.jTextField_Nick.getText();
         
-        monDao.insertarMonitor(cod, nom, dni, tlf, cor, fec, nic);
+        Monitor monitor = new Monitor(cod, nom, dni, tlf, cor, fec, nic);
+        monDao.insertarMonitor(monitor);
     }
     
-    private void borrarMonitor () throws SQLException{  //Condicion Practica 4
+    private void borrarMonitor () throws SQLException, Exception{
         String codMonit = vMon.jTextField_Codigo.getText();
         monDao.borrarMonitor(codMonit);
     }
     
-    private void actualizMonitor() throws SQLException{
+    private void actualizMonitor() throws Exception{
         String cod = vMon.jTextField_Codigo.getText();
         String nom = vMon.jTextField_Nombre.getText();
         String dni = vMon.jTextField_DNI.getText();
@@ -363,7 +363,7 @@ public class Controlador implements ActionListener{
     
     
     //----------------------------------------------------Socios----------------------------------------------------
-    private void pideSocios() throws SQLException{
+    private void pideSocios() throws Exception{
         ArrayList<Socio> lSocios = socDao.listaSocios();
         utTab.vaciarTablaSocios();
         utTab.rellenarTablaSocios(lSocios);
@@ -397,7 +397,7 @@ public class Controlador implements ActionListener{
         vSoc.jTextField_Categoria.setText(categ);
     }
     
-    private void insertarTablaSocios() throws SQLException{
+    private void insertarTablaSocios() throws Exception{
         String numSoc   = vSoc.jTextField_NumSocio.getText();
         String nombre   = vSoc.jTextField_Nombre.getText();
         String dni      = vSoc.jTextField_DNI.getText();
@@ -409,25 +409,26 @@ public class Controlador implements ActionListener{
         Date fechUno = vSoc.jDateChooser_FEntradaSocios.getDate();
         if (fechUno != null){
             fecEnt = formatoFecha.format(fechUno);
-            soc.setFechaEntrada(fecEnt);
+            soc.setFechaentrada(fecEnt);
         }
         
         String fecNac = "dd/MM/yyyy";
         Date fechDos = vSoc.jDateChooser_FNac_Socios.getDate();
         if (fechDos != null){
             fecNac = formatoFecha.format(fechDos);
-            soc.setFechaNacimiento(fecNac);
+            soc.setFechanacimiento(fecNac);
         }
-        
-        socDao.insertarSocio(numSoc, nombre, dni, fecNac, tlf, correo, fecEnt, categ);
+        Socio socio;
+        socio = new Socio(numSoc, nombre, dni, tlf, correo, categ, fecEnt, fecNac);
+        socDao.insertaSocio(socio);
     }
 
-    private void borrarSocio() throws SQLException{
+    private void borrarSocio() throws Exception{
         String numSoc = vSoc.jTextField_NumSocio.getText();
-        socDao.borrarSocio(numSoc);
+        socDao.eliminaSocio(numSoc);
     }
     
-    private void actualizSocio() throws SQLException{
+    private void actualizSocio() throws Exception{
         String numSoc   = vSoc.jTextField_NumSocio.getText();
         String nombre   = vSoc.jTextField_Nombre.getText();
         String dni      = vSoc.jTextField_DNI.getText();
@@ -439,17 +440,17 @@ public class Controlador implements ActionListener{
         Date fechUno = vSoc.jDateChooser_FEntradaSocios.getDate();
         if (fechUno != null){
             fecEnt = formatoFecha.format(fechUno);
-            soc.setFechaEntrada(fecEnt);
+            soc.setFechaentrada(fecEnt);
         }
         
         String fecNac = "dd/MM/yyyy";
         Date fechDos = vSoc.jDateChooser_FNac_Socios.getDate();
         if (fechDos != null){
             fecNac = formatoFecha.format(fechDos);
-            soc.setFechaNacimiento(fecNac);
+            soc.setFechanacimiento(fecNac);
         }
         
-        socDao.actualizarSocio(numSoc, nombre, dni, fecNac, tlf, correo, fecEnt, categ);
+        socDao.actualizaSocio(numSoc, nombre, dni, tlf, correo, categ, fecEnt, fecNac);
         
     }
 }

@@ -1,5 +1,5 @@
 %Sesión 1
-
+%-----------Introducción-----------
 %Realiza las siguientes operaciones usando MATLAB
 
 %	a) 
@@ -19,6 +19,7 @@ ans =
 
 
 %	c)
+%Primero creo la variable "e" y le asigno su valor
 e = exp(1)
 
 ( log(9) / log(3) ) + log(e) + ( log(0.1) / log(10) )
@@ -46,16 +47,25 @@ ans =
     0.7464
 
 
-%-----------Límites-----------
+
+%-----------Límites, continuidad, asíntotas y gráficas-----------
+%Para calcular límites:
+%   limit(/funcion/ , /variable/ , /tiende a/)
+    limit (sin(x)/x     , x , 0)            %Limite de sin(x)/x cuando X tiende a 0
+    limit (x/exp(x^2)   , x , Inf)          %Limite de x/e² cuando X tiende a Infinito
+    limit (sin(x)/x^2   , x , 0 ,′ right′)  %Limite de sin(x)/x² cuando X tiende a 0 por la derecha
+
 % 1. Estudia los siguientes límites
 
+%a)
+>> limit (((x^3)-1)/((x-1)^2), x, 1)
+ 
+ans =
+ 
+NaN
 %b)
 >> f = 6 / (4 + exp ( -1/x) )
-Unrecognized function or variable 'x'.
 
->>syms x
-
-> f = 6 / (4 + exp ( -1/x) )
 
 >> pretty f
 
