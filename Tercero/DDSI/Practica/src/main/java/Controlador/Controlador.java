@@ -19,9 +19,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date;
-import javax.swing.JComboBox;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  *
@@ -287,6 +285,7 @@ public class Controlador implements ActionListener{
             case "RellenarTablaActividad":
                 try {
                     utTab.dibujarTablaActividad(vAct);
+                    //insertarTablaActividad();
                     pideActividad();
                 } catch (Exception ex) {
                     Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -500,9 +499,7 @@ public class Controlador implements ActionListener{
     //----------------------------------------------------Actividad----------------------------------------------------
     
     private void pideActividad() throws Exception{
-        llenaComboBox(vAct.jComboBox_IDActivity);
         String idActiv = (String) vAct.jComboBox_IDActivity.getSelectedItem();
-
         ArrayList<Actividad> lActiv = actDAO.listaActividad(idActiv);
         utTab.vaciarTablaActividad();
         utTab.rellenarTablaActividad(lActiv);
@@ -518,15 +515,6 @@ public class Controlador implements ActionListener{
         //utTab.rellenarTablaActividad(lActiv);
     }
 
-    private void llenaComboBox(JComboBox combBox){
-        ActividadDAO actDAO = new ActividadDAO(sesion);
-        Transaction trans = sesion.beginTransaction();
-        
-        String activs = "SELECT A.NOMBRE FROM ACTIVIDAD A ORDER BY A.NOMBRE ASC";
-        
-        vAct.jComboBox_IDActivity.addItem(activs);
-        
-    }
     
     //----------------------------------------------------Inscripción----------------------------------------------------
     
