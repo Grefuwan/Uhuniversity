@@ -4,9 +4,11 @@
  */
 package Controlador;
 
+import Modelo.Actividad;
 import Modelo.Socio;
-import Controlador.*;
 import Modelo.Monitor;
+import Vista.VistaActividad;
+import Vista.VistaInscripcionesSocioActividad;
 import Vista.VistaMonitores;
 import Vista.VistaSocios;
 import java.util.ArrayList;
@@ -103,7 +105,7 @@ public class utilTablas {
         Object[] fila = new Object[8];
         int numRegistros = socios.size();
         for (int i = 0; i < numRegistros; i++){
-            fila[0] = socios.get(i).getNumerosocio();          //Num Socio
+            fila[0] = socios.get(i).getNumerosocio();       //Num Socio
             fila[1] = socios.get(i).getNombre();            //Nombre
             fila[2] = socios.get(i).getDni();               //DNI
             fila[3] = socios.get(i).getFechanacimiento();   //Fecha Nacimiento
@@ -122,4 +124,61 @@ public class utilTablas {
 
 
     //--------------------------------------------------Actividad---------------------------------------------------
+    public DefaultTableModel modeloTablaActividad = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int row, int column){
+            return false;
+        }
+    };
+    
+    public void dibujarTablaActividad(VistaActividad vAct){
+        vAct.jTable_Actividad.setModel(modeloTablaActividad);
+        
+        String[] columnasTabla = {"ID Actividad", "Nombre", "Descripcion", "Precio Base Mes", "Monitor Responsable"};
+        modeloTablaActividad.setColumnIdentifiers(columnasTabla);
+        
+        //Para no permitir el redimensionamiento de las columnas con el ratón
+        vAct.jTable_Actividad.getTableHeader().setResizingAllowed(false);
+        vAct.jTable_Actividad.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+        
+        //Para fijar el ancho de las columnas
+        vAct.jTable_Actividad.getColumnModel().getColumn(0).setPreferredWidth(60);    //ID Actividad
+        vAct.jTable_Actividad.getColumnModel().getColumn(1).setPreferredWidth(200);   //Nombre
+        vAct.jTable_Actividad.getColumnModel().getColumn(2).setPreferredWidth(200);   //Descripcion
+        vAct.jTable_Actividad.getColumnModel().getColumn(3).setPreferredWidth(90);    //Precio Base Mes
+        vAct.jTable_Actividad.getColumnModel().getColumn(4).setPreferredWidth(115);   //Monitor Responsable
+        
+    }
+    
+    public void rellenarTablaActividad(ArrayList<Actividad> actividades){
+        Object[] fila = new Object[5];
+        int numRegistros = actividades.size();
+        for (int i = 0; i < numRegistros; i++){
+            fila[0] = actividades.get(i).getIdactividad();          //ID Actividad
+            fila[1] = actividades.get(i).getNombre();               //Nombre
+            fila[2] = actividades.get(i).getDescripcion();          //Descripcion
+            fila[3] = actividades.get(i).getPreciobasemes();        //Precio Base Mes
+            fila[4] = actividades.get(i).getMonitorresponsable();   //Monitor Responsable
+            modeloTablaActividad.addRow(fila);
+        }
+    }
+    
+    public void vaciarTablaActividad(){
+        while (modeloTablaActividad.getRowCount() > 0)
+            modeloTablaActividad.removeRow(0);
+    }
+    //-------------------------------------------------Inscripción--------------------------------------------------
+    public void dibujarTablaInscripcion(VistaInscripcionesSocioActividad vInsc){
+        
+        
+    }
+    
+    public void rellenarTablaInscripcion(){
+        
+    }
+    
+    public void vaciarTablaInscripcion(){
+        
+    }
+    
 }

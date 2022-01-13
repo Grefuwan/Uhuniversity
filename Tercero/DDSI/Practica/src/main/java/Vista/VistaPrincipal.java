@@ -35,8 +35,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu_GestionSocios = new javax.swing.JMenuItem();
         jMenu_Actividad = new javax.swing.JMenu();
         jMenu_SociosPorActividad = new javax.swing.JMenuItem();
+        jMenu_SociosInscritos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1100, 750));
 
         jMenu_Salir.setText("Salir");
 
@@ -78,6 +80,10 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu_SociosPorActividad.setActionCommand("GestionSociosActividad");
         jMenu_Actividad.add(jMenu_SociosPorActividad);
 
+        jMenu_SociosInscritos.setText("Socios Inscritos");
+        jMenu_SociosInscritos.setActionCommand("GestionSociosActividad");
+        jMenu_Actividad.add(jMenu_SociosInscritos);
+
         jMenuBar_VistaPrincipal.add(jMenu_Actividad);
 
         setJMenuBar(jMenuBar_VistaPrincipal);
@@ -118,6 +124,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     public javax.swing.JMenu jMenu_Monitores;
     public javax.swing.JMenu jMenu_Salir;
     public javax.swing.JMenu jMenu_Socios;
+    public javax.swing.JMenuItem jMenu_SociosInscritos;
     public javax.swing.JMenuItem jMenu_SociosPorActividad;
     // End of variables declaration//GEN-END:variables
 }

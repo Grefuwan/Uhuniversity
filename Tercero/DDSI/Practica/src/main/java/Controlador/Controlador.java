@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date;
+import javax.swing.JComboBox;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -67,7 +69,7 @@ public class Controlador implements ActionListener{
         soc          = new Socio();
         
         vAct         = new VistaActividad();
-        actDAO       = new ActividadDAO();
+        actDAO       = new ActividadDAO(conectP);
         act          = new Actividad();
         
         //Gestionar el cierre de VistaPrincipal
@@ -106,6 +108,7 @@ public class Controlador implements ActionListener{
             vMon.jButton_ListarMonitores.addActionListener(this);
             //Click raton--------------
             vMon.jTable_TablaMonitores.addMouseListener(new MouseAdapter() {
+                @Override
                 public void mouseClicked(MouseEvent evt){
                     try {
                         vMonjTable_TablaMonitoresMouseClicked(evt); //Definido mas abajo
@@ -124,6 +127,7 @@ public class Controlador implements ActionListener{
             vSoc.jButton_ListarSocios.addActionListener(this);
             //Click raton--------------
             vSoc.jTable_TablaSocios.addMouseListener(new MouseAdapter() {
+                @Override
                 public void mouseClicked(MouseEvent evt){
                     try {
                         vSocTable_TablaSociosMouseClicked(evt); //Definido mas abajo
@@ -136,6 +140,9 @@ public class Controlador implements ActionListener{
         //Vista Actividades
             //Botones------------------
             vAct.jButton_Exit.addActionListener(this);
+            vAct.jButton_LlenarTablaActiv.addActionListener(this);
+            vAct.jButton_ThrowProced.addActionListener(this);
+            vAct.jButton_VaciarTabla.addActionListener(this);
     }
 
     @Override
@@ -218,7 +225,7 @@ public class Controlador implements ActionListener{
                         utTab.dibujarTablaMonitores(vMon);
                         pideMonitores();
                     } catch(SQLException ex){
-                        //vMensaje.Mensaje("error", "Error en la peticion\n" + ex.getMessage() );
+                        vMensaje.MensajeError("error", "Error en la peticion\n" + ex.getMessage() );
                     }
                 break;
                 
@@ -277,6 +284,44 @@ public class Controlador implements ActionListener{
                     vAct.setVisible(false);
                 break;
                 
+            case "RellenarTablaActividad":
+                try {
+                    utTab.dibujarTablaActividad(vAct);
+                    pideActividad();
+                } catch (Exception ex) {
+                    Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+                break;
+
+                
+            case "VaciarTablaActividad":
+                    utTab.vaciarTablaActividad();
+                break;
+                
+            case "LanzarProcedimiento":
+                    procedActiv();
+                break;
+                
+                
+//--------------------Inscripciones----------------------
+                
+            case "AltaInscripcion":
+                break;
+                
+                
+            case "BajaInscripcion":
+                break;
+                
+                
+            case "SalirInscripcion":
+                break;
+                
+        
+        
+        
+        
+        
         }
     }
     
@@ -293,8 +338,7 @@ public class Controlador implements ActionListener{
 
     private void vMonjTable_TablaMonitoresMouseClicked(MouseEvent evt) throws ParseException{
         int fila = vMon.jTable_TablaMonitores.getSelectedRow();
-        //TODO - Rellenar todos los textfields con los valores de las columnas
-        //       de la fila que esté señalada en la tabla cuando se haga un click de ratón
+        
         String codigo   = (String) vMon.jTable_TablaMonitores.getValueAt(fila, 0);
         String nombre   = (String) vMon.jTable_TablaMonitores.getValueAt(fila, 1);
         String dni      = (String) vMon.jTable_TablaMonitores.getValueAt(fila, 2);
@@ -371,8 +415,7 @@ public class Controlador implements ActionListener{
     
     private void vSocTable_TablaSociosMouseClicked(MouseEvent evt) throws ParseException{
         int fila = vSoc.jTable_TablaSocios.getSelectedRow();
-        //TODO - Rellenar todos los textfields con los valores de las columnas
-        //       de la fila que esté señalada en la tabla cuando se haga un click de ratón
+        
         String numSoc   = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 0);
         String nombre   = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 1);
         String dni      = (String) vSoc.jTable_TablaSocios.getValueAt(fila, 2);
@@ -453,4 +496,39 @@ public class Controlador implements ActionListener{
         socDao.actualizaSocio(numSoc, nombre, dni, tlf, correo, categ, fecEnt, fecNac);
         
     }
+    
+    //----------------------------------------------------Actividad----------------------------------------------------
+    
+    private void pideActividad() throws Exception{
+        llenaComboBox(vAct.jComboBox_IDActivity);
+        String idActiv = (String) vAct.jComboBox_IDActivity.getSelectedItem();
+
+        ArrayList<Actividad> lActiv = actDAO.listaActividad(idActiv);
+        utTab.vaciarTablaActividad();
+        utTab.rellenarTablaActividad(lActiv);
+    }
+    
+    private void procedActiv(){
+        String idActiv = (String) vAct.jComboBox_IDActivity.getSelectedItem();
+        
+        actDAO = new ActividadDAO(sesion);
+        actDAO.devolverSocios(idActiv, utTab.modeloTablaActividad);
+        
+        //utTab.vaciarTablaActividad();
+        //utTab.rellenarTablaActividad(lActiv);
+    }
+
+    private void llenaComboBox(JComboBox combBox){
+        ActividadDAO actDAO = new ActividadDAO(sesion);
+        Transaction trans = sesion.beginTransaction();
+        
+        String activs = "SELECT A.NOMBRE FROM ACTIVIDAD A ORDER BY A.NOMBRE ASC";
+        
+        vAct.jComboBox_IDActivity.addItem(activs);
+        
+    }
+    
+    //----------------------------------------------------Inscripción----------------------------------------------------
+    
+
 }

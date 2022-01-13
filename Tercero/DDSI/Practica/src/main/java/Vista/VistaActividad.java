@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.ControladorActividades;
+
 /**
  *
  * @author Grefuwan
@@ -32,6 +34,8 @@ public class VistaActividad extends javax.swing.JFrame {
         jButton_Exit = new javax.swing.JButton();
         jComboBox_IDActivity = new javax.swing.JComboBox<>();
         jTextField_IDActivity = new javax.swing.JTextField();
+        jButton_VaciarTabla = new javax.swing.JButton();
+        jButton_LlenarTablaActiv = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -52,11 +56,12 @@ public class VistaActividad extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 900, 250));
 
         jButton_ThrowProced.setText("Lanzar Procedimiento");
-        getContentPane().add(jButton_ThrowProced, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 430, -1, -1));
+        jButton_ThrowProced.setActionCommand("LanzarProcedimiento");
+        getContentPane().add(jButton_ThrowProced, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, -1, -1));
 
         jButton_Exit.setText("Salir");
         jButton_Exit.setActionCommand("SalirActividad");
-        getContentPane().add(jButton_Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 430, -1, -1));
+        getContentPane().add(jButton_Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 480, 140, -1));
 
         jComboBox_IDActivity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox_IDActivity.addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -78,6 +83,14 @@ public class VistaActividad extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTextField_IDActivity, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 330, 180, -1));
+
+        jButton_VaciarTabla.setText("Vaciar Tabla");
+        jButton_VaciarTabla.setActionCommand("VaciarTablaActividad");
+        getContentPane().add(jButton_VaciarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 420, 140, -1));
+
+        jButton_LlenarTablaActiv.setText("Rellenar Tabla");
+        jButton_LlenarTablaActiv.setActionCommand("RellenarTablaActividad");
+        getContentPane().add(jButton_LlenarTablaActiv, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 480, 180, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -131,7 +144,9 @@ public class VistaActividad extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButton_Exit;
+    public javax.swing.JButton jButton_LlenarTablaActiv;
     public javax.swing.JButton jButton_ThrowProced;
+    public javax.swing.JButton jButton_VaciarTabla;
     public javax.swing.JComboBox<String> jComboBox_IDActivity;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable_Actividad;

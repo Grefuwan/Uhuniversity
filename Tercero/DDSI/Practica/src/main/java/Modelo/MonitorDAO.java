@@ -23,7 +23,7 @@ public class MonitorDAO {
         this.sesion = c;
     }
     
-    public ArrayList<Monitor> listaMonitores() throws SQLException{
+    public ArrayList<Monitor> listaMonitores(){
         Transaction transaction = sesion.beginTransaction();
         
         Query consulta = sesion.createNativeQuery ("SELECT * FROM MONITOR M", Monitor.class);
