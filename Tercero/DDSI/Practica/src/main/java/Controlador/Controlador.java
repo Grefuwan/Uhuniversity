@@ -19,7 +19,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date;
+import javax.swing.JComboBox;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -285,7 +288,6 @@ public class Controlador implements ActionListener{
             case "RellenarTablaActividad":
                 try {
                     utTab.dibujarTablaActividad(vAct);
-                    //insertarTablaActividad();
                     pideActividad();
                 } catch (Exception ex) {
                     Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -299,8 +301,15 @@ public class Controlador implements ActionListener{
                 break;
                 
             case "LanzarProcedimiento":
+                try {
+                    utTab.dibujarTablaSociosxActiv(vAct);
                     procedActiv();
+                } catch (Exception ex) {
+                    Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
                 break;
+
                 
                 
 //--------------------Inscripciones----------------------
@@ -497,22 +506,24 @@ public class Controlador implements ActionListener{
     }
     
     //----------------------------------------------------Actividad----------------------------------------------------
-    
     private void pideActividad() throws Exception{
-        String idActiv = (String) vAct.jComboBox_IDActivity.getSelectedItem();
-        ArrayList<Actividad> lActiv = actDAO.listaActividad(idActiv);
+        actDAO.ActividadComboBox(vAct.jComboBox_IDActivity);            //Rellena el ComboBox
+        
+        ArrayList<Actividad> lActiv = actDAO.listaActividad();           
+
         utTab.vaciarTablaActividad();
         utTab.rellenarTablaActividad(lActiv);
     }
     
-    private void procedActiv(){
-        String idActiv = (String) vAct.jComboBox_IDActivity.getSelectedItem();
+    private void procedActiv() throws Exception{
+        String nomActiv = vAct.jComboBox_IDActivity.getSelectedItem().toString();
         
-        actDAO = new ActividadDAO(sesion);
-        actDAO.devolverSocios(idActiv, utTab.modeloTablaActividad);
+        String idActiv = actDAO.getIdActividad(nomActiv);
         
-        //utTab.vaciarTablaActividad();
-        //utTab.rellenarTablaActividad(lActiv);
+        ArrayList<Object[]> arSoc = actDAO.devolverSocios(idActiv);    //Devuelve los socios de esa actividad
+                
+        utTab.vaciarTablaActividad();
+        utTab.rellenarTablaSociosxActiv(arSoc);
     }
 
     

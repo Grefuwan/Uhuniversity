@@ -55,7 +55,7 @@ public class VistaInscripcionesSocioActividad extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 810, 286));
 
         jLabel1.setText("Socio:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, -1, -1));
         getContentPane().add(jTextField_SocioSeleccionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, 295, -1));
 
         jToggleButton_Alta.setText("Alta");

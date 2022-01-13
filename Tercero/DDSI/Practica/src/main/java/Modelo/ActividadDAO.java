@@ -25,7 +25,7 @@ public class ActividadDAO {
         this.sesion = c;
     }
     
-    public ArrayList<Actividad> listaActividad(String idActiv){
+    public ArrayList<Actividad> listaActividad(){
         String consult = "SELECT * FROM ACTIVIDAD";
         
         Transaction transaction = sesion.beginTransaction();
@@ -38,7 +38,7 @@ public class ActividadDAO {
         return actividades;
     }
     
-    public ArrayList<String> listaNombreActividad() throws Exception {         //Consulta que devuelve un unico campo de la tabla Socios
+    public ArrayList<String> listaNombreActividad() throws Exception {
         Transaction transaction = sesion.beginTransaction();
         Query consulta = sesion.createNativeQuery("SELECT nombre FROM ACTIVIDAD A");
         ArrayList<String> actividades = (ArrayList<String>) consulta.list();
@@ -59,18 +59,15 @@ public class ActividadDAO {
     }
     
     
-    public void devolverSocios(String idActividad, DefaultTableModel Tabla) {
+    public ArrayList<Object[]> devolverSocios(String idActividad) {
         Transaction transaction = sesion.beginTransaction();
         Query consulta = sesion.createNativeQuery("SELECT S.NOMBRE, S.CORREO "
                 + "FROM SOCIO S INNER JOIN REALIZA R ON S.NUMEROSOCIO = R.NUMEROSOCIO "
-                + "WHERE R.IDACTIVIDAD = :idA").setParameter("idA", idActividad);
+                + "WHERE R.IDACTIVIDAD =:idA").setParameter("idA", idActividad);
         ArrayList<Object[]> socios = (ArrayList<Object[]>) consulta.list();
         transaction.commit();
         
-        for (int i = 0; i < socios.size(); i++) {
-            this.pintaTabla(Tabla, (String) socios.get(i)[0], (String) socios.get(i)[1]);
-        }
-        
+        return socios;
     }
     
     
@@ -112,4 +109,6 @@ public class ActividadDAO {
         Tabla.addRow(fila);
 
     }
+    
+     
 }

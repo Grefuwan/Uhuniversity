@@ -33,7 +33,6 @@ public class VistaActividad extends javax.swing.JFrame {
         jButton_ThrowProced = new javax.swing.JButton();
         jButton_Exit = new javax.swing.JButton();
         jComboBox_IDActivity = new javax.swing.JComboBox<>();
-        jTextField_IDActivity = new javax.swing.JTextField();
         jButton_VaciarTabla = new javax.swing.JButton();
         jButton_LlenarTablaActiv = new javax.swing.JButton();
 
@@ -57,11 +56,11 @@ public class VistaActividad extends javax.swing.JFrame {
 
         jButton_ThrowProced.setText("Lanzar Procedimiento");
         jButton_ThrowProced.setActionCommand("LanzarProcedimiento");
-        getContentPane().add(jButton_ThrowProced, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, -1, -1));
+        getContentPane().add(jButton_ThrowProced, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, 220, -1));
 
         jButton_Exit.setText("Salir");
         jButton_Exit.setActionCommand("SalirActividad");
-        getContentPane().add(jButton_Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 480, 140, -1));
+        getContentPane().add(jButton_Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 480, 190, -1));
 
         jComboBox_IDActivity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox_IDActivity.addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -74,23 +73,15 @@ public class VistaActividad extends javax.swing.JFrame {
                 jComboBox_IDActivityActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox_IDActivity, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, -1, -1));
-
-        jTextField_IDActivity.setText("ID Actividad");
-        jTextField_IDActivity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_IDActivityActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField_IDActivity, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 330, 180, -1));
+        getContentPane().add(jComboBox_IDActivity, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 120, -1));
 
         jButton_VaciarTabla.setText("Vaciar Tabla");
         jButton_VaciarTabla.setActionCommand("VaciarTablaActividad");
-        getContentPane().add(jButton_VaciarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 420, 140, -1));
+        getContentPane().add(jButton_VaciarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 420, 190, -1));
 
-        jButton_LlenarTablaActiv.setText("Rellenar Tabla");
+        jButton_LlenarTablaActiv.setText("Rellenar Tabla Actividades");
         jButton_LlenarTablaActiv.setActionCommand("RellenarTablaActividad");
-        getContentPane().add(jButton_LlenarTablaActiv, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 480, 180, -1));
+        getContentPane().add(jButton_LlenarTablaActiv, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 480, 220, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -102,10 +93,6 @@ public class VistaActividad extends javax.swing.JFrame {
     private void jComboBox_IDActivityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_IDActivityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_IDActivityActionPerformed
-
-    private void jTextField_IDActivityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_IDActivityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_IDActivityActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,6 +137,5 @@ public class VistaActividad extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> jComboBox_IDActivity;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable_Actividad;
-    public javax.swing.JTextField jTextField_IDActivity;
     // End of variables declaration//GEN-END:variables
 }

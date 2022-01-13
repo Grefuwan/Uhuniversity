@@ -49,6 +49,7 @@ public class VistaSocios extends javax.swing.JPanel {
         jTextField_Categoria = new javax.swing.JTextField();
         jDateChooser_FEntradaSocios = new com.toedter.calendar.JDateChooser();
         jDateChooser_FNac_Socios = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -65,33 +66,33 @@ public class VistaSocios extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable_TablaSocios);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 860, 280));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 860, 280));
 
         jLabel_NumSocio.setText("Número de Socio");
-        add(jLabel_NumSocio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, -1, -1));
+        add(jLabel_NumSocio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, -1, -1));
 
         jLabel_Nombre.setText("Nombre");
-        add(jLabel_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, -1, -1));
+        add(jLabel_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, -1, -1));
 
         jLabel_DNI.setText("DNI");
-        add(jLabel_DNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, -1, -1));
+        add(jLabel_DNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, -1));
 
         jLabel_telefono.setText("Teléfono");
-        add(jLabel_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 350, -1, -1));
+        add(jLabel_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, -1, -1));
 
         jLabel_Correo.setText("Correo");
-        add(jLabel_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, -1, -1));
+        add(jLabel_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 450, -1, -1));
 
         jLabel_FechaEntrada.setText("Fecha de Entrada");
-        add(jLabel_FechaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 450, -1, -1));
+        add(jLabel_FechaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 500, -1, -1));
 
         jLabel_fechaNacimiento.setText("Fecha de Nacimiento");
-        add(jLabel_fechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, 18));
-        add(jTextField_NumSocio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 200, -1));
-        add(jTextField_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 200, -1));
-        add(jTextField_DNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, 200, -1));
-        add(jTextField_Telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 350, 200, -1));
-        add(jTextField_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 400, 200, -1));
+        add(jLabel_fechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 550, -1, 18));
+        add(jTextField_NumSocio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 200, -1));
+        add(jTextField_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, 200, -1));
+        add(jTextField_DNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 500, 200, -1));
+        add(jTextField_Telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 400, 200, -1));
+        add(jTextField_Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 450, 200, -1));
 
         jButton_Insertar.setText("Insertar");
         jButton_Insertar.setActionCommand("InsertarSocio");
@@ -114,10 +115,15 @@ public class VistaSocios extends javax.swing.JPanel {
         add(jButton_ListarSocios, new org.netbeans.lib.awtextra.AbsoluteConstraints(755, 610, 150, -1));
 
         jLabel_Categoria.setText("Categoría");
-        add(jLabel_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 500, -1, -1));
-        add(jTextField_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 500, 200, -1));
-        add(jDateChooser_FEntradaSocios, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 450, 200, -1));
-        add(jDateChooser_FNac_Socios, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 500, 200, -1));
+        add(jLabel_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 550, -1, -1));
+        add(jTextField_Categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 550, 200, -1));
+        add(jDateChooser_FEntradaSocios, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 500, 200, -1));
+        add(jDateChooser_FNac_Socios, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 550, 200, -1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel1.setText("Gestión de Socios");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -129,6 +135,7 @@ public class VistaSocios extends javax.swing.JPanel {
     public javax.swing.JButton jButton_VaciarTabla;
     public com.toedter.calendar.JDateChooser jDateChooser_FEntradaSocios;
     public com.toedter.calendar.JDateChooser jDateChooser_FNac_Socios;
+    private javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel_Categoria;
     public javax.swing.JLabel jLabel_Correo;
     public javax.swing.JLabel jLabel_DNI;

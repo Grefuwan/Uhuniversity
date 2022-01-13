@@ -4,16 +4,19 @@
  */
 package Modelo;
 
+import Vista.VistaMensajes;
 import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+
 
 /**
  *
  * @author Grefuwan
  */
 public class SocioDAO {
+    VistaMensajes vMens     = new VistaMensajes();
     Conexion conexion       = null;
     Session sesion          = null;
     Socio soci              = null;
@@ -25,7 +28,7 @@ public class SocioDAO {
     public ArrayList<Socio> listaSocios() throws Exception {
         Transaction transaction = sesion.beginTransaction();
         
-        Query consulta = sesion.createNativeQuery ("SELECT * FROM Socio S", Socio.class);
+        Query consulta = sesion.createNativeQuery ("SELECT * FROM Socio S ORDER BY NUMEROSOCIO", Socio.class);
         ArrayList<Socio> socios = (ArrayList<Socio>) consulta.list();
         
         transaction.commit();
@@ -63,7 +66,13 @@ public class SocioDAO {
    
     public void insertaSocio(Socio socio) throws Exception {
         Transaction transaction = sesion.beginTransaction();
-        sesion.save(socio);
+        try{
+            sesion.save(socio);
+        }
+        catch (Exception e){
+            vMens.MensajeError("Error", "Error al insertar socio");
+            transaction.rollback();
+        }
         transaction.commit();
     }  
     

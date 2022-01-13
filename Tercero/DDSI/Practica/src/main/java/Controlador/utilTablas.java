@@ -147,9 +147,9 @@ public class utilTablas {
         vAct.jTable_Actividad.getColumnModel().getColumn(2).setPreferredWidth(200);   //Descripcion
         vAct.jTable_Actividad.getColumnModel().getColumn(3).setPreferredWidth(90);    //Precio Base Mes
         vAct.jTable_Actividad.getColumnModel().getColumn(4).setPreferredWidth(115);   //Monitor Responsable
-        
     }
     
+   
     public void rellenarTablaActividad(ArrayList<Actividad> actividades){
         Object[] fila = new Object[5];
         int numRegistros = actividades.size();
@@ -163,10 +163,37 @@ public class utilTablas {
         }
     }
     
+    public void dibujarTablaSociosxActiv(VistaActividad vAct){
+        vAct.jTable_Actividad.setModel(modeloTablaActividad);
+        
+        String[] columnasTabla = {/*"Nombre Actividad",*/ "Nombre Socio", "Correo"};
+        modeloTablaActividad.setColumnIdentifiers(columnasTabla);
+        
+        //Para no permitir el redimensionamiento de las columnas con el ratón
+        vAct.jTable_Actividad.getTableHeader().setResizingAllowed(false);
+        vAct.jTable_Actividad.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+        
+        //Para fijar el ancho de las columnas
+        vAct.jTable_Actividad.getColumnModel().getColumn(0).setPreferredWidth(150);   //
+        vAct.jTable_Actividad.getColumnModel().getColumn(1).setPreferredWidth(150);   //
+    }
+    
+    public void rellenarTablaSociosxActiv(ArrayList<Object[]> socios){
+        Object[] fila = new Object[2];
+        int numRegistros = socios.size();
+        for (int i = 0; i < numRegistros; i++){
+            fila[0] = socios.get(i)[0];
+            fila[1] = socios.get(i)[1];
+            modeloTablaActividad.addRow(fila);
+        }
+    }
+    
     public void vaciarTablaActividad(){
         while (modeloTablaActividad.getRowCount() > 0)
             modeloTablaActividad.removeRow(0);
     }
+    
+    
     //-------------------------------------------------Inscripción--------------------------------------------------
     public void dibujarTablaInscripcion(VistaInscripcionesSocioActividad vInsc){
         

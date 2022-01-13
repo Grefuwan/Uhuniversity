@@ -4,6 +4,7 @@
  */
 package Modelo;
 
+import Vista.VistaMensajes;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import org.hibernate.Session;
@@ -15,6 +16,7 @@ import org.hibernate.query.Query;
  * @author Grefuwan
  */
 public class MonitorDAO {
+    VistaMensajes vMens = new VistaMensajes();
     Conexion conexion   = null;
     Session sesion      = null;
     Monitor monit       = null;
@@ -26,7 +28,7 @@ public class MonitorDAO {
     public ArrayList<Monitor> listaMonitores(){
         Transaction transaction = sesion.beginTransaction();
         
-        Query consulta = sesion.createNativeQuery ("SELECT * FROM MONITOR M", Monitor.class);
+        Query consulta = sesion.createNativeQuery ("SELECT * FROM MONITOR M WHERE CODMONITOR !='M999' ORDER BY CODMONITOR", Monitor.class);
         ArrayList<Monitor> monitores = (ArrayList<Monitor>) consulta.list();
         
         transaction.commit();
@@ -55,8 +57,13 @@ public class MonitorDAO {
     
     public void insertarMonitor(Monitor monit) throws Exception {
         Transaction transaction = sesion.beginTransaction();
-        sesion.save(monit);
-        transaction.commit();
+        try{
+            sesion.save(monit);
+        }
+        catch (Exception e){
+            vMens.MensajeError("Error", "Error al insertar monitor");
+            transaction.rollback();
+        }        transaction.commit();
     }  
     
     
