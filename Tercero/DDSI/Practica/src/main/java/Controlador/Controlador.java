@@ -175,12 +175,12 @@ public class Controlador implements ActionListener{
                     vAct.setVisible(true);
                 break;
             
-            default:
+            /*default:
                     vVac.setVisible(true);
                     vMon.setVisible(false);
                     vSoc.setVisible(false);
                     vAct.setVisible(false);
-                break;
+                break;*/
 
 //---------------------Monitores---------------------
             case "InsertarMonitor":
@@ -264,7 +264,7 @@ public class Controlador implements ActionListener{
                 }
                 break;
 
-            case "VaciarTablaSocios":
+            case "VaciarTablaSocio":
                     utTab.vaciarTablaSocios();
                 break;
                 

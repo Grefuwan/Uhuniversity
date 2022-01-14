@@ -4,8 +4,6 @@
  */
 package Vista;
 
-import Controlador.ControladorActividades;
-
 /**
  *
  * @author Grefuwan
