@@ -8,12 +8,15 @@ import Modelo.Actividad;
 import Modelo.Socio;
 import Modelo.Monitor;
 import Vista.VistaActividad;
-import Vista.VistaInscripcionesSocioActividad;
+import Vista.VistaInscripciones;
 import Vista.VistaMonitores;
 import Vista.VistaSocios;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import org.hibernate.Session;
 
 /**
  *
@@ -28,6 +31,7 @@ public class utilTablas {
             return false;
         }
     };
+    private Object sesion;
     
     public void dibujarTablaMonitores(VistaMonitores vMonitor){
         vMonitor.jTable_TablaMonitores.setModel(modeloTablaMonitor);
@@ -149,7 +153,6 @@ public class utilTablas {
         vAct.jTable_Actividad.getColumnModel().getColumn(4).setPreferredWidth(115);   //Monitor Responsable
     }
     
-   
     public void rellenarTablaActividad(ArrayList<Actividad> actividades){
         Object[] fila = new Object[5];
         int numRegistros = actividades.size();
@@ -166,7 +169,7 @@ public class utilTablas {
     public void dibujarTablaSociosxActiv(VistaActividad vAct){
         vAct.jTable_Actividad.setModel(modeloTablaActividad);
         
-        String[] columnasTabla = {/*"Nombre Actividad",*/ "Nombre Socio", "Correo"};
+        String[] columnasTabla = {"Nombre Socio", "Correo"};
         modeloTablaActividad.setColumnIdentifiers(columnasTabla);
         
         //Para no permitir el redimensionamiento de las columnas con el ratón
@@ -174,8 +177,8 @@ public class utilTablas {
         vAct.jTable_Actividad.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         
         //Para fijar el ancho de las columnas
-        vAct.jTable_Actividad.getColumnModel().getColumn(0).setPreferredWidth(150);   //
-        vAct.jTable_Actividad.getColumnModel().getColumn(1).setPreferredWidth(150);   //
+        vAct.jTable_Actividad.getColumnModel().getColumn(0).setPreferredWidth(75);   //
+        vAct.jTable_Actividad.getColumnModel().getColumn(1).setPreferredWidth(75);   //
     }
     
     public void rellenarTablaSociosxActiv(ArrayList<Object[]> socios){
@@ -195,17 +198,5 @@ public class utilTablas {
     
     
     //-------------------------------------------------Inscripción--------------------------------------------------
-    public void dibujarTablaInscripcion(VistaInscripcionesSocioActividad vInsc){
-        
-        
-    }
-    
-    public void rellenarTablaInscripcion(){
-        
-    }
-    
-    public void vaciarTablaInscripcion(){
-        
-    }
-    
+   
 }

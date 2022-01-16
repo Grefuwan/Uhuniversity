@@ -17,7 +17,6 @@ import org.hibernate.query.Query;
  */
 public class SocioDAO {
     VistaMensajes vMens     = new VistaMensajes();
-    Conexion conexion       = null;
     Session sesion          = null;
     Socio soci              = null;
     
@@ -35,6 +34,16 @@ public class SocioDAO {
         return socios;
     }
 
+    public ArrayList<Object[]> listaSociosNombreNumSoc() throws Exception {
+        Transaction transaction = sesion.beginTransaction();
+        
+        Query consulta = sesion.createNativeQuery ("SELECT S.NOMBRE, S.NUMEROSOCIO FROM Socio S ORDER BY NUMEROSOCIO", Socio.class);
+        ArrayList<Object[]> socios = (ArrayList<Object[]>) consulta.list();
+        
+        transaction.commit();
+        return socios;
+    }
+    
     public ArrayList<Object[]> listaNombreDNISocios() throws Exception {    //Consulta que devuelve 2 campos de la tabla Socios
         Transaction transaction = sesion.beginTransaction();
         Query consulta = sesion.createNativeQuery("SELECT nombre, dni FROM Socio S");
@@ -70,7 +79,7 @@ public class SocioDAO {
             sesion.save(socio);
         }
         catch (Exception e){
-            vMens.MensajeError("Error", "Error al insertar socio");
+            vMens.MensajeError("Error al insertar socio", e.getMessage() );
             transaction.rollback();
         }
         transaction.commit();

@@ -24,6 +24,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+
 /**
  *
  * @author Grefuwan
@@ -51,6 +52,8 @@ public class Controlador implements ActionListener{
     private ActividadDAO        actDAO          = null;
     private Actividad           act             = null;
     
+    private VistaInscripciones          vInsc   = null;
+    private ControladorInscripciones    cInsc   = null;
     
     public Controlador(Session conectP)  { //Instanciar todo lo creado arriba
         this.sesion = conectP;
@@ -73,6 +76,9 @@ public class Controlador implements ActionListener{
         actDAO       = new ActividadDAO(conectP);
         act          = new Actividad();
         
+        vInsc        = new VistaInscripciones();
+        cInsc        = new ControladorInscripciones(conectP);
+        
         //Gestionar el cierre de VistaPrincipal
         addListeners();
         
@@ -84,10 +90,8 @@ public class Controlador implements ActionListener{
         vPrinc.add(vVac);
         vPrinc.add(vMon);
         vPrinc.add(vSoc);
-        //vPrinc.add(vAct);
         vMon.setVisible(false);
         vSoc.setVisible(false);
-        //vAct.setVisible(false);
         vVac.setVisible(true);  //Panel vacio para mostrar
         
 
@@ -99,51 +103,69 @@ public class Controlador implements ActionListener{
             vPrinc.jMenuItem_GestionMonitores.addActionListener(this);
             vPrinc.jMenu_GestionSocios.addActionListener(this);
             vPrinc.jMenu_SociosPorActividad.addActionListener(this);
+            vPrinc.jMenu_SociosInscritos.addActionListener(this);
             
         //Vista Monitor
             //Botones------------------
-            vMon.jButton_Insertar.addActionListener(this);
-            vMon.jButton_Actualizar.addActionListener(this);
-            vMon.jButton_Eliminar.addActionListener(this);
-            vMon.jButton_VaciarTabla.addActionListener(this);
-            vMon.jButton_ListarMonitores.addActionListener(this);
+                vMon.jButton_Insertar.addActionListener(this);
+                vMon.jButton_Actualizar.addActionListener(this);
+                vMon.jButton_Eliminar.addActionListener(this);
+                vMon.jButton_VaciarTabla.addActionListener(this);
+                vMon.jButton_ListarMonitores.addActionListener(this);
             //Click raton--------------
-            vMon.jTable_TablaMonitores.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent evt){
-                    try {
-                        vMonjTable_TablaMonitoresMouseClicked(evt); //Definido mas abajo
-                    } catch (ParseException ex) {
-                        Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                vMon.jTable_TablaMonitores.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent evt){
+                        try {
+                            vMonjTable_TablaMonitoresMouseClicked(evt); //Definido mas abajo
+                        } catch (ParseException ex) {
+                            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
-                }
-            });
+                });
             
         //Vista Socios
             //Botones------------------
-            vSoc.jButton_Insertar.addActionListener(this);
-            vSoc.jButton_Actualizar.addActionListener(this);
-            vSoc.jButton_Eliminar.addActionListener(this);
-            vSoc.jButton_VaciarTabla.addActionListener(this);
-            vSoc.jButton_ListarSocios.addActionListener(this);
+                vSoc.jButton_Insertar.addActionListener(this);
+                vSoc.jButton_Actualizar.addActionListener(this);
+                vSoc.jButton_Eliminar.addActionListener(this);
+                vSoc.jButton_VaciarTabla.addActionListener(this);
+                vSoc.jButton_ListarSocios.addActionListener(this);
             //Click raton--------------
-            vSoc.jTable_TablaSocios.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent evt){
-                    try {
-                        vSocTable_TablaSociosMouseClicked(evt); //Definido mas abajo
-                    } catch (ParseException ex) {
-                        Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                vSoc.jTable_TablaSocios.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent evt){
+                        try {
+                            vSocTable_TablaSociosMouseClicked(evt); //Definido mas abajo
+                        } catch (ParseException ex) {
+                            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
-                }
-            });
+                });
             
         //Vista Actividades
             //Botones------------------
-            vAct.jButton_Exit.addActionListener(this);
-            vAct.jButton_LlenarTablaActiv.addActionListener(this);
-            vAct.jButton_ThrowProced.addActionListener(this);
-            vAct.jButton_VaciarTabla.addActionListener(this);
+                vAct.jButton_Exit.addActionListener(this);
+                vAct.jButton_LlenarTablaActiv.addActionListener(this);
+                vAct.jButton_ThrowProced.addActionListener(this);
+                vAct.jButton_VaciarTabla.addActionListener(this);
+            
+        //Vista Inscripciones
+            //Botones------------------
+                vInsc.jButton_SalirInscripcion.addActionListener(this);
+                vInsc.jButton_DarBajaInscripcion.addActionListener(this);
+                vInsc.jButton_DarAltaInscripcion.addActionListener(this);
+            //Click raton--------------
+                vInsc.jTable_Inscripciones.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent evt){
+                        try {
+                            vInscTable_TablaInscripcionMouseClicked(evt); //Definido mas abajo
+                        } catch (ParseException ex) {
+                            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
     }
 
     @Override
@@ -173,14 +195,20 @@ public class Controlador implements ActionListener{
                     //vMon.setVisible(false);
                     //vSoc.setVisible(false);
                     vAct.setVisible(true);
+                    actDAO.ActividadComboBox(vAct.jComboBox_IDActivity);    //Rellena el ComboBox
                 break;
+            case "GestionInscritos":
+                    vInsc.setVisible(true);
+                    try {
+                        pideInscripcion();
+                        cInsc.ActividadComboBox(vInsc.jComboBox_Alta);
+                        cInsc.ActividadComboBox(vInsc.jComboBox_Baja);
+                    } catch (Exception ex) {
+                        Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
             
-            /*default:
-                    vVac.setVisible(true);
-                    vMon.setVisible(false);
-                    vSoc.setVisible(false);
-                    vAct.setVisible(false);
-                break;*/
+                break;
+
 
 //---------------------Monitores---------------------
             case "InsertarMonitor":
@@ -313,23 +341,10 @@ public class Controlador implements ActionListener{
                 
                 
 //--------------------Inscripciones----------------------
-                
-            case "AltaInscripcion":
+
+            case "Salir_Inscripcion":
+                vInsc.setVisible(false);
                 break;
-                
-                
-            case "BajaInscripcion":
-                break;
-                
-                
-            case "SalirInscripcion":
-                break;
-                
-        
-        
-        
-        
-        
         }
     }
     
@@ -391,7 +406,8 @@ public class Controlador implements ActionListener{
     
     private void borrarMonitor () throws SQLException, Exception{
         String codMonit = vMon.jTextField_Codigo.getText();
-        monDao.borrarMonitor(codMonit);
+        //monDao.borrarMonitor(codMonit);
+        monDao.borrarMonitorComprobado(codMonit);
     }
     
     private void actualizMonitor() throws Exception{
@@ -505,9 +521,9 @@ public class Controlador implements ActionListener{
         
     }
     
+    
     //----------------------------------------------------Actividad----------------------------------------------------
     private void pideActividad() throws Exception{
-        actDAO.ActividadComboBox(vAct.jComboBox_IDActivity);            //Rellena el ComboBox
         
         ArrayList<Actividad> lActiv = actDAO.listaActividad();           
 
@@ -528,6 +544,17 @@ public class Controlador implements ActionListener{
 
     
     //----------------------------------------------------Inscripción----------------------------------------------------
-    
+    private void pideInscripcion() throws Exception{
+        cInsc.dibujarTablaInscripcion(vInsc);
+        cInsc.rellenarTablaInscritosNoParam();
+    }
 
+    private void vInscTable_TablaInscripcionMouseClicked(MouseEvent evt) throws ParseException{
+        
+        int fila = vInsc.jTable_Inscripciones.getSelectedRow();
+        String nombre = (String) vInsc.jTable_Inscripciones.getValueAt(fila, 1);
+
+        vInsc.jTextField_SocioSeleccionado.setText(nombre);
+
+    }
 }

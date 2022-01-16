@@ -1,4 +1,5 @@
 Modelo\ActividadDAO.class
+Controlador\utilTablas$3.class
 Vista\VistaActividad$1.class
 Vista\VistaActividad$3.class
 Vista\VistaPrincipal$2.class
@@ -11,8 +12,8 @@ Modelo\HibernateUtil.class
 Vista\VistaLogin$2.class
 Modelo\Conexion.class
 Vista\VistaPrincipal$1.class
-Vista\VistaActividad$4.class
 Vista\VistaSocios.class
+Vista\VistaInscripciones$1.class
 Controlador\ControladorLogin.class
 Vista\VistaMensajes.class
 Vista\VistaMonitores.class
@@ -23,14 +24,18 @@ Vista\VistaLogin$6.class
 Modelo\Actividad.class
 Vista\PanelVacio.class
 Vista\VistaLogin$1.class
+Controlador\ControladorInscripciones$1.class
 Controlador\utilTablas$2.class
 Vista\VistaActividad$2.class
 Vista\VistaLogin.class
 Controlador\Controlador$1.class
+Vista\VistaInscripciones.class
 Vista\VistaPrincipal.class
 ddsi\pr1\App.class
+Controlador\ControladorInscripciones.class
 Controlador\Controlador.class
 Modelo\MonitorDAO.class
 Controlador\utilTablas.class
 Modelo\Monitor.class
+Controlador\Controlador$3.class
 Vista\VistaLogin$3.class

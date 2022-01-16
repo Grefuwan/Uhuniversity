@@ -30,11 +30,11 @@ public class VistaInscripcionesSocioActividad extends javax.swing.JFrame {
         jTable_Inscripciones = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextField_SocioSeleccionado = new javax.swing.JTextField();
-        jToggleButton_Alta = new javax.swing.JToggleButton();
-        jToggleButton_Baja = new javax.swing.JToggleButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jToggleButton_Salir = new javax.swing.JToggleButton();
+        jComboBox_Alta = new javax.swing.JComboBox<>();
+        jComboBox_Baja = new javax.swing.JComboBox<>();
+        jButton_DarAltaInscripcion = new javax.swing.JButton();
+        jButton_DarBajaInscripcion = new javax.swing.JButton();
+        jButton_SalirInscripcion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -58,23 +58,23 @@ public class VistaInscripcionesSocioActividad extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, -1, -1));
         getContentPane().add(jTextField_SocioSeleccionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, 295, -1));
 
-        jToggleButton_Alta.setText("Alta");
-        jToggleButton_Alta.setActionCommand("AltaInscripcion");
-        getContentPane().add(jToggleButton_Alta, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 350, -1, -1));
+        jComboBox_Alta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jComboBox_Alta, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 350, 124, -1));
 
-        jToggleButton_Baja.setText("Baja");
-        jToggleButton_Baja.setActionCommand("BajaInscripcion");
-        getContentPane().add(jToggleButton_Baja, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 440, -1, -1));
+        jComboBox_Baja.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jComboBox_Baja, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 440, 124, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 350, 124, -1));
+        jButton_DarAltaInscripcion.setText("Dar de alta");
+        jButton_DarAltaInscripcion.setActionCommand("DarAlta");
+        getContentPane().add(jButton_DarAltaInscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 350, -1, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 440, 124, -1));
+        jButton_DarBajaInscripcion.setText("Dar de baja");
+        jButton_DarBajaInscripcion.setActionCommand("DarBaja");
+        getContentPane().add(jButton_DarBajaInscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 440, -1, -1));
 
-        jToggleButton_Salir.setText("Salir");
-        jToggleButton_Salir.setActionCommand("SalirInscripcion");
-        getContentPane().add(jToggleButton_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 520, 137, -1));
+        jButton_SalirInscripcion.setText("Salir");
+        jButton_SalirInscripcion.setActionCommand("Salir_Inscripcion");
+        getContentPane().add(jButton_SalirInscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 510, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -115,14 +115,14 @@ public class VistaInscripcionesSocioActividad extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    public javax.swing.JButton jButton_DarAltaInscripcion;
+    public javax.swing.JButton jButton_DarBajaInscripcion;
+    public javax.swing.JButton jButton_SalirInscripcion;
+    public javax.swing.JComboBox<String> jComboBox_Alta;
+    public javax.swing.JComboBox<String> jComboBox_Baja;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable_Inscripciones;
     public javax.swing.JTextField jTextField_SocioSeleccionado;
-    public javax.swing.JToggleButton jToggleButton_Alta;
-    public javax.swing.JToggleButton jToggleButton_Baja;
-    public javax.swing.JToggleButton jToggleButton_Salir;
     // End of variables declaration//GEN-END:variables
 }
