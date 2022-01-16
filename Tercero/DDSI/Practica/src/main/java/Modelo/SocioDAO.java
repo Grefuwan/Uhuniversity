@@ -44,7 +44,7 @@ public class SocioDAO {
         return socios;
     }
     
-    public ArrayList<Object[]> listaNombreDNISocios() throws Exception {    //Consulta que devuelve 2 campos de la tabla Socios
+    public ArrayList<Object[]> listaNombreDNISocios() throws Exception {
         Transaction transaction = sesion.beginTransaction();
         Query consulta = sesion.createNativeQuery("SELECT nombre, dni FROM Socio S");
         ArrayList<Object[]> socios = (ArrayList<Object[]>) consulta.list();
@@ -53,7 +53,7 @@ public class SocioDAO {
         return socios;
     }
     
-    public ArrayList<String> listaNombreSocios() throws Exception {         //Consulta que devuelve un unico campo de la tabla Socios
+    public ArrayList<String> listaNombreSocios() throws Exception {
         Transaction transaction = sesion.beginTransaction();
         Query consulta = sesion.createNativeQuery("SELECT nombre FROM Socio S");
         ArrayList<String> socios = (ArrayList<String>) consulta.list();

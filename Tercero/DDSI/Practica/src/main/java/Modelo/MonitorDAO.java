@@ -37,7 +37,7 @@ public class MonitorDAO {
         return monitores;
     }
     
-    public ArrayList<String> listaNombreMonitores() throws Exception {         //Consulta que devuelve un unico campo de la tabla Socios
+    public ArrayList<String> listaNombreMonitores() throws Exception {
         Transaction transaction = sesion.beginTransaction();
         Query consulta = sesion.createNativeQuery("SELECT nombre FROM MONITOR M");
         ArrayList<String> monitores = (ArrayList<String>) consulta.list();
@@ -79,7 +79,6 @@ public class MonitorDAO {
     }
     
     public void borrarMonitorComprobado (String codMonitor) throws Exception {
-        //Comprueba que el Monitor a borrar no sea monitor de una actividad etc [Practica 4]
         Transaction transaction = null;
         
         try{
@@ -119,7 +118,6 @@ public class MonitorDAO {
         
         catch(Exception e){
             transaction.rollback();
-            //Logger.getLogger(MonitorDAO.class.getName()).log(Level.SEVERE, null, e);
             vMens.MensajeError("ERROR", e.getMessage());
         }
     }

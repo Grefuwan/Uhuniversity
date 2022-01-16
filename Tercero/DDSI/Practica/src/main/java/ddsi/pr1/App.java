@@ -5,7 +5,6 @@
 package ddsi.pr1;
 
 import Controlador.ControladorLogin;
-import java.sql.SQLException;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
@@ -30,7 +29,5 @@ public class App {
         }
        
         ControladorLogin cLogin = new ControladorLogin();
-       
     }
-    
 }

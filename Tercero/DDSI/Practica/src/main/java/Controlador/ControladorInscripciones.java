@@ -9,8 +9,6 @@ import Modelo.ActividadDAO;
 import Modelo.Socio;
 import Vista.VistaInscripciones;
 import Vista.VistaMensajes;
-import java.awt.event.MouseEvent;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
@@ -26,19 +24,18 @@ import org.hibernate.query.Query;
  * @author Grefuwan
  */
 public class ControladorInscripciones {
-    //Constructor
     
     //---------------------------------InscripcionDAO---------------------------------
     private Session sesion = null;
-    private VistaInscripciones vInsc = new VistaInscripciones();
     private VistaMensajes vMens = new VistaMensajes();
+    
     
     public ControladorInscripciones(Session sesion){
         this.sesion = sesion;
     }
     
+    
     public ArrayList<Socio> SociosInscritosActividad(){
-        //Socio con Realiza con Actividad
         Transaction transaction = sesion.beginTransaction();
         Socio soc;
         Query consulta = sesion.createNativeQuery ("SELECT * FROM Socio S ORDER BY NUMEROSOCIO", Socio.class);
@@ -52,10 +49,10 @@ public class ControladorInscripciones {
                 System.out.println(actividad.getNombre());
             }
         }
-        
         transaction.commit();
         return socios;
     }
+    
     
     public void ActividadComboBox (JComboBox combBox){
         String consult = "SELECT NOMBRE FROM ACTIVIDAD";
@@ -68,9 +65,11 @@ public class ControladorInscripciones {
         for (int i = 0; i < nombreActividades.size(); i++) {
             combBox.addItem(nombreActividades.get(i));
         }
-        
         transaction.commit();
     }
+    
+    
+    
     //----------------------------------Util Tablas-----------------------------------
     public DefaultTableModel modeloTablaInscripcion = new DefaultTableModel(){
         @Override
@@ -79,22 +78,22 @@ public class ControladorInscripciones {
         }
     };
     
+    
     public void dibujarTablaInscripcion(VistaInscripciones vInsc){
         vInsc.jTable_Inscripciones.setModel(modeloTablaInscripcion);
         
         String[] columnasTabla = {"ID Socio", "Nombre Socio", "ID Actividad", "Nombre Actividad"};
         modeloTablaInscripcion.setColumnIdentifiers(columnasTabla);
         
-        //Para no permitir el redimensionamiento de las columnas con el ratón
         vInsc.jTable_Inscripciones.getTableHeader().setResizingAllowed(false);
         vInsc.jTable_Inscripciones.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         
-        //Para fijar el ancho de las columnas
         vInsc.jTable_Inscripciones.getColumnModel().getColumn(0).setPreferredWidth(60);     //ID Socio
         vInsc.jTable_Inscripciones.getColumnModel().getColumn(1).setPreferredWidth(200);    //Nombre Socio
         vInsc.jTable_Inscripciones.getColumnModel().getColumn(2).setPreferredWidth(60);     //ID Actividad
         vInsc.jTable_Inscripciones.getColumnModel().getColumn(3).setPreferredWidth(200);    //Nombre Actividad
     }
+    
     
     public void rellenarTablaInscritosNoParam(){
         Object[] fila = new Object[4];
@@ -128,22 +127,19 @@ public class ControladorInscripciones {
         transaction.commit();
     }
     
+    
     public void vaciarTablaInscripcion(){
         while (modeloTablaInscripcion.getRowCount() > 0)
             modeloTablaInscripcion.removeRow(0);
     }
     
+    
     public void darAltaParam(int filaSelected, String numSocSelec, String activSelec){
         Transaction transaction = sesion.beginTransaction();
-        
-        System.out.println("Fila: " + filaSelected);
-        System.out.println("CodSocSelec: " + numSocSelec);
-        
-        try{
-            System.out.println("activSelected: " + activSelec);
 
+        try{
             ActividadDAO actD = new ActividadDAO(sesion);                           //Creo una ActividadDAO
-            String idActivSelected = actD.getIdActividad(activSelec);            //Obtengo la ID de la Actividad
+            String idActivSelected = actD.getIdActividad(activSelec);               //Obtengo la ID de la Actividad
             
             Socio socio = sesion.get(Socio.class, numSocSelec);                     //Obtengo el Socio
             Actividad actividad = sesion.get(Actividad.class, idActivSelected );    //Obtengo la Actividad
@@ -165,7 +161,6 @@ public class ControladorInscripciones {
         Transaction transaction = sesion.beginTransaction();
 
         try{
-
             ActividadDAO actD = new ActividadDAO(sesion);                           //Creo una ActividadDAO
             String idActivSelected = actD.getIdActividad(activSelec);               //Obtengo la ID de la Actividad
             

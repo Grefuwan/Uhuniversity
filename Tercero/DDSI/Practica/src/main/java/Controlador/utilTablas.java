@@ -4,19 +4,14 @@
  */
 package Controlador;
 
-import Modelo.Actividad;
 import Modelo.Socio;
 import Modelo.Monitor;
 import Vista.VistaActividad;
-import Vista.VistaInscripciones;
 import Vista.VistaMonitores;
 import Vista.VistaSocios;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Set;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import org.hibernate.Session;
 
 /**
  *
@@ -31,7 +26,6 @@ public class utilTablas {
             return false;
         }
     };
-    private Object sesion;
     
     public void dibujarTablaMonitores(VistaMonitores vMonitor){
         vMonitor.jTable_TablaMonitores.setModel(modeloTablaMonitor);
@@ -91,7 +85,7 @@ public class utilTablas {
         modeloTablaSocios.setColumnIdentifiers(columnasTabla);
         
         //Para no permitir el redimensionamiento de las columnas con el ratón
-        vSoc.jTable_TablaSocios.getTableHeader().setResizingAllowed(false);  //--------------------------Cambiar a FALSE
+        vSoc.jTable_TablaSocios.getTableHeader().setResizingAllowed(false);
         vSoc.jTable_TablaSocios.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         
         //Para fijar el ancho de las columnas
@@ -146,8 +140,8 @@ public class utilTablas {
         vAct.jTable_Actividad.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         
         //Para fijar el ancho de las columnas
-        vAct.jTable_Actividad.getColumnModel().getColumn(0).setPreferredWidth(75);   //
-        vAct.jTable_Actividad.getColumnModel().getColumn(1).setPreferredWidth(75);   //
+        vAct.jTable_Actividad.getColumnModel().getColumn(0).setPreferredWidth(75);
+        vAct.jTable_Actividad.getColumnModel().getColumn(1).setPreferredWidth(75);
     }
     
     public void rellenarTablaSociosxActiv(ArrayList<Object[]> socios){
@@ -164,8 +158,4 @@ public class utilTablas {
         while (modeloTablaActividad.getRowCount() > 0)
             modeloTablaActividad.removeRow(0);
     }
-    
-    
-    //-------------------------------------------------Inscripción--------------------------------------------------
-   
 }

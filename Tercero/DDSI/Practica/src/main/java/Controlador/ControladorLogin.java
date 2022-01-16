@@ -1,13 +1,10 @@
 package Controlador;
 
-import Modelo.Conexion;
 import Modelo.HibernateUtil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import Vista.VistaLogin;
 import Vista.VistaMensajes;
-import Vista.VistaPrincipal;
 import org.hibernate.Session;
 
 /**
@@ -17,22 +14,11 @@ import org.hibernate.Session;
 public class ControladorLogin implements ActionListener{
     
     private Controlador control     = null;
-    private Conexion conexion       = null;
     private VistaLogin vLogin       = null;
     private Session sesion          = null;
     private VistaMensajes vMens     = null;
-    
-    private boolean conexOK = false;
-    
-    //Constructor
-    public ControladorLogin(){
-        /*
-        System.out.println("Voy a conectar con la BD\n");
-        conexion.getConexion();
         
-        System.out.println("Voy a desconectar de la BD\n");
-        conexion.desconexion();
-        */
+    public ControladorLogin(){
         vLogin = new VistaLogin();
         vMens = new VistaMensajes();
         
