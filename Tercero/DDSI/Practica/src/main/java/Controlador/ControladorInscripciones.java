@@ -5,8 +5,10 @@
 package Controlador;
 
 import Modelo.Actividad;
+import Modelo.ActividadDAO;
 import Modelo.Socio;
 import Vista.VistaInscripciones;
+import Vista.VistaMensajes;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -28,7 +30,8 @@ public class ControladorInscripciones {
     
     //---------------------------------InscripcionDAO---------------------------------
     private Session sesion = null;
-    private VistaInscripciones vInsc = null;
+    private VistaInscripciones vInsc = new VistaInscripciones();
+    private VistaMensajes vMens = new VistaMensajes();
     
     public ControladorInscripciones(Session sesion){
         this.sesion = sesion;
@@ -87,12 +90,11 @@ public class ControladorInscripciones {
         vInsc.jTable_Inscripciones.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         
         //Para fijar el ancho de las columnas
-        vInsc.jTable_Inscripciones.getColumnModel().getColumn(0).setPreferredWidth(60);    //ID Actividad
-        vInsc.jTable_Inscripciones.getColumnModel().getColumn(1).setPreferredWidth(200);   //Nombre
-        vInsc.jTable_Inscripciones.getColumnModel().getColumn(2).setPreferredWidth(200);   //Descripcion
-        vInsc.jTable_Inscripciones.getColumnModel().getColumn(3).setPreferredWidth(90);    //Precio Base Mes
+        vInsc.jTable_Inscripciones.getColumnModel().getColumn(0).setPreferredWidth(60);     //ID Socio
+        vInsc.jTable_Inscripciones.getColumnModel().getColumn(1).setPreferredWidth(200);    //Nombre Socio
+        vInsc.jTable_Inscripciones.getColumnModel().getColumn(2).setPreferredWidth(60);     //ID Actividad
+        vInsc.jTable_Inscripciones.getColumnModel().getColumn(3).setPreferredWidth(200);    //Nombre Actividad
     }
-    
     
     public void rellenarTablaInscritosNoParam(){
         Object[] fila = new Object[4];
@@ -131,12 +133,56 @@ public class ControladorInscripciones {
             modeloTablaInscripcion.removeRow(0);
     }
     
-    public void darAlta(){
+    public void darAltaParam(int filaSelected, String numSocSelec, String activSelec){
+        Transaction transaction = sesion.beginTransaction();
         
+        System.out.println("Fila: " + filaSelected);
+        System.out.println("CodSocSelec: " + numSocSelec);
+        
+        try{
+            System.out.println("activSelected: " + activSelec);
+
+            ActividadDAO actD = new ActividadDAO(sesion);                           //Creo una ActividadDAO
+            String idActivSelected = actD.getIdActividad(activSelec);            //Obtengo la ID de la Actividad
+            
+            Socio socio = sesion.get(Socio.class, numSocSelec);                     //Obtengo el Socio
+            Actividad actividad = sesion.get(Actividad.class, idActivSelected );    //Obtengo la Actividad
+
+            actividad.addSocio(socio);          //Añado el Socio a la Actividad
+            sesion.save(actividad);
+            transaction.commit();
+
+            vaciarTablaInscripcion();           //Actualizo la Tabla
+            rellenarTablaInscritosNoParam();
+        }
+        catch(Exception e){
+            vMens.MensajeError("Error al dar de alta un socio", e.getMessage());
+            transaction.rollback();
+        }
     }
     
-    public void darBaja(){
-        
+    public void darBajaParam(int filaSelected, String numSocSelec, String activSelec){
+        Transaction transaction = sesion.beginTransaction();
+
+        try{
+
+            ActividadDAO actD = new ActividadDAO(sesion);                           //Creo una ActividadDAO
+            String idActivSelected = actD.getIdActividad(activSelec);               //Obtengo la ID de la Actividad
+            
+            Socio socio = sesion.get(Socio.class, numSocSelec);                     //Obtengo el Socio
+            Actividad actividad = sesion.get(Actividad.class, idActivSelected );    //Obtengo la Actividad
+
+            actividad.eliminaSocio(socio);      //Elimino el Socio a la Actividad
+            sesion.save(actividad);
+            transaction.commit();
+
+            vaciarTablaInscripcion();           //Actualizo la Tabla
+            rellenarTablaInscritosNoParam();
+        }
+        catch(Exception e){
+            vMens.MensajeError("Error al dar de alta un socio", e.getMessage());
+            transaction.rollback();
+        }
     }
 
 }

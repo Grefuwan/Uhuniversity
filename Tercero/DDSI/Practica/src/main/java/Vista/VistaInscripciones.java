@@ -35,6 +35,8 @@ public class VistaInscripciones extends javax.swing.JFrame {
         jButton_DarAltaInscripcion = new javax.swing.JButton();
         jButton_DarBajaInscripcion = new javax.swing.JButton();
         jButton_SalirInscripcion = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField_NumSocSeleccionado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -55,8 +57,8 @@ public class VistaInscripciones extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 810, 286));
 
         jLabel1.setText("Socio:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, -1, -1));
-        getContentPane().add(jTextField_SocioSeleccionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, 295, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, -1, -1));
+        getContentPane().add(jTextField_SocioSeleccionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, 295, -1));
 
         jComboBox_Alta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jComboBox_Alta, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 350, 124, -1));
@@ -65,16 +67,20 @@ public class VistaInscripciones extends javax.swing.JFrame {
         getContentPane().add(jComboBox_Baja, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 440, 124, -1));
 
         jButton_DarAltaInscripcion.setText("Dar de alta");
-        jButton_DarAltaInscripcion.setActionCommand("DarAlta");
+        jButton_DarAltaInscripcion.setActionCommand("DarAltaInscripcion");
         getContentPane().add(jButton_DarAltaInscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 350, -1, -1));
 
         jButton_DarBajaInscripcion.setText("Dar de baja");
-        jButton_DarBajaInscripcion.setActionCommand("DarBaja");
+        jButton_DarBajaInscripcion.setActionCommand("DarBajaInscripcion");
         getContentPane().add(jButton_DarBajaInscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 440, -1, -1));
 
         jButton_SalirInscripcion.setText("Salir");
         jButton_SalirInscripcion.setActionCommand("Salir_Inscripcion");
         getContentPane().add(jButton_SalirInscripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 510, -1, -1));
+
+        jLabel2.setText("Núm. Socio");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, -1));
+        getContentPane().add(jTextField_NumSocSeleccionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 420, 295, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -122,8 +128,10 @@ public class VistaInscripciones extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> jComboBox_Alta;
     public javax.swing.JComboBox<String> jComboBox_Baja;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jTable_Inscripciones;
+    public javax.swing.JTextField jTextField_NumSocSeleccionado;
     public javax.swing.JTextField jTextField_SocioSeleccionado;
     // End of variables declaration//GEN-END:variables
 }

@@ -32,9 +32,9 @@ public class VistaActividad extends javax.swing.JFrame {
         jButton_Exit = new javax.swing.JButton();
         jComboBox_IDActivity = new javax.swing.JComboBox<>();
         jButton_VaciarTabla = new javax.swing.JButton();
-        jButton_LlenarTablaActiv = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(700, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTable_Actividad.setModel(new javax.swing.table.DefaultTableModel(
@@ -50,15 +50,16 @@ public class VistaActividad extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable_Actividad);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 900, 250));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 580, 250));
 
         jButton_ThrowProced.setText("Lanzar Procedimiento");
         jButton_ThrowProced.setActionCommand("LanzarProcedimiento");
-        getContentPane().add(jButton_ThrowProced, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, 220, -1));
+        jButton_ThrowProced.setPreferredSize(new java.awt.Dimension(180, 29));
+        getContentPane().add(jButton_ThrowProced, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 220, -1));
 
         jButton_Exit.setText("Salir");
         jButton_Exit.setActionCommand("SalirActividad");
-        getContentPane().add(jButton_Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 480, 190, -1));
+        getContentPane().add(jButton_Exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 220, -1));
 
         jComboBox_IDActivity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox_IDActivity.addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -71,15 +72,12 @@ public class VistaActividad extends javax.swing.JFrame {
                 jComboBox_IDActivityActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox_IDActivity, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 120, -1));
+        getContentPane().add(jComboBox_IDActivity, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 220, -1));
 
         jButton_VaciarTabla.setText("Vaciar Tabla");
         jButton_VaciarTabla.setActionCommand("VaciarTablaActividad");
-        getContentPane().add(jButton_VaciarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 420, 190, -1));
-
-        jButton_LlenarTablaActiv.setText("Rellenar Tabla Actividades");
-        jButton_LlenarTablaActiv.setActionCommand("RellenarTablaActividad");
-        getContentPane().add(jButton_LlenarTablaActiv, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 480, 220, -1));
+        jButton_VaciarTabla.setPreferredSize(new java.awt.Dimension(180, 29));
+        getContentPane().add(jButton_VaciarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 220, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -129,7 +127,6 @@ public class VistaActividad extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButton_Exit;
-    public javax.swing.JButton jButton_LlenarTablaActiv;
     public javax.swing.JButton jButton_ThrowProced;
     public javax.swing.JButton jButton_VaciarTabla;
     public javax.swing.JComboBox<String> jComboBox_IDActivity;

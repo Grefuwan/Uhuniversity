@@ -19,7 +19,6 @@ public class ControladorLogin implements ActionListener{
     private Controlador control     = null;
     private Conexion conexion       = null;
     private VistaLogin vLogin       = null;
-    //private VistaPrincipal vPrinc   = null;
     private Session sesion          = null;
     private VistaMensajes vMens     = null;
     
@@ -58,12 +57,11 @@ public class ControladorLogin implements ActionListener{
             case "Conectar":
                 sesion = conectar();
                 if (sesion != null) {
-                    //vMens.Mensaje("info", "Conexión correcta con Hibernate");
+                    vMens.MensajeInfo( "Conexión correcta con Hibernate");
                     vLogin.dispose();
                     control = new Controlador(sesion);
-                    //public Controlador(Conexion conectP) 
                 }
-                //else vMens.Mensaje("error", "Error en la conexión con Hibernate. Revise los valores de conexión");
+                else vMens.MensajeError("error", "Error en la conexión con Hibernate. Revise los valores de conexión");
                 break;
                 
             case "SalirDialogoConexion":
@@ -72,35 +70,6 @@ public class ControladorLogin implements ActionListener{
                 break;
         }   
     }
-
-//------------------------------------Conectar JDBC------------------------------------
-    /*public Conexion conectar(){
-        
-        //Tengo que guardar todo lo que introduzco en la Vista en Strings que voy creando
-            //para luego hacer una conexion con el constructor
-        try{
-            String server = (String) (vLogin.jComboBox_Server.getSelectedItem());
-            String ip = vLogin.jTextField_IP.getText();
-            String service_bd = vLogin.jTextField_Service.getText();
-            String u = vLogin.jTextField_Usuario.getText();
-            String p = new String (vLogin.jPasswordField1.getPassword());
-
-            if (server == "MySQL") server = "mysql";
-            else if (server == "Oracle") server = "oracle";
-            
-            conexion = new Conexion (server, ip, service_bd, u, p);
-            
-            conexOK = true;
-            
-        }catch (SQLException sqle){
-            sqlError = sqle;
-            String mensaje = (  "Codigo: "  + sqle.getErrorCode()   + 
-                                "\nSQL: "   + sqle.getSQLState()    +
-                                "\nTexto: " + sqle.getMessage()     );
-            System.out.println("\nSe ha producido un error con " + mensaje);
-        }
-        return (conexion);
-    }*/
 
 //------------------------------------Conectar Hibernate------------------------------------
     public Session conectar(){

@@ -146,15 +146,16 @@ public class Controlador implements ActionListener{
         //Vista Actividades
             //Botones------------------
                 vAct.jButton_Exit.addActionListener(this);
-                vAct.jButton_LlenarTablaActiv.addActionListener(this);
                 vAct.jButton_ThrowProced.addActionListener(this);
                 vAct.jButton_VaciarTabla.addActionListener(this);
+                vAct.setTitle("Socios por Actividad");
             
         //Vista Inscripciones
             //Botones------------------
                 vInsc.jButton_SalirInscripcion.addActionListener(this);
                 vInsc.jButton_DarBajaInscripcion.addActionListener(this);
                 vInsc.jButton_DarAltaInscripcion.addActionListener(this);
+                vInsc.setTitle("Inscripciones");
             //Click raton--------------
                 vInsc.jTable_Inscripciones.addMouseListener(new MouseAdapter() {
                     @Override
@@ -181,6 +182,7 @@ public class Controlador implements ActionListener{
                     vMon.setVisible(true);
                     vSoc.setVisible(false);
                     vAct.setVisible(false);
+                    vPrinc.setTitle("Gestión de Monitores");
                 break;
                 
             case "GestionSocios":
@@ -188,12 +190,10 @@ public class Controlador implements ActionListener{
                     vMon.setVisible(false);
                     vSoc.setVisible(true);
                     vAct.setVisible(false);
+                    vPrinc.setTitle("Gestión de Socios");
                 break;
             
             case "GestionSociosActividad":
-                    //vVac.setVisible(false);
-                    //vMon.setVisible(false);
-                    //vSoc.setVisible(false);
                     vAct.setVisible(true);
                     actDAO.ActividadComboBox(vAct.jComboBox_IDActivity);    //Rellena el ComboBox
                 break;
@@ -312,30 +312,18 @@ public class Controlador implements ActionListener{
             case "SalirActividad":
                     vAct.setVisible(false);
                 break;
-                
-            case "RellenarTablaActividad":
-                try {
-                    utTab.dibujarTablaActividad(vAct);
-                    pideActividad();
-                } catch (Exception ex) {
-                    Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            
-                break;
-
-                
+                  
             case "VaciarTablaActividad":
                     utTab.vaciarTablaActividad();
                 break;
                 
             case "LanzarProcedimiento":
-                try {
-                    utTab.dibujarTablaSociosxActiv(vAct);
-                    procedActiv();
-                } catch (Exception ex) {
-                    Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
+                    try {
+                        utTab.dibujarTablaSociosxActiv(vAct);
+                        procedActiv();
+                    } catch (Exception ex) {
+                        Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 break;
 
                 
@@ -344,6 +332,14 @@ public class Controlador implements ActionListener{
 
             case "Salir_Inscripcion":
                 vInsc.setVisible(false);
+                break;
+                
+            case "DarAltaInscripcion":
+                darAltaInsc();
+                break;
+                
+            case "DarBajaInscripcion":
+                darBajaInsc();
                 break;
         }
     }
@@ -396,7 +392,6 @@ public class Controlador implements ActionListener{
             fec = formatoFecha.format(fechaChooser);
             mon.setFechaentrada(fec);
         }
-        //String fec = vMon.jTextField_FechaEntrada.getText();
         
         String nic = vMon.jTextField_Nick.getText();
         
@@ -406,7 +401,6 @@ public class Controlador implements ActionListener{
     
     private void borrarMonitor () throws SQLException, Exception{
         String codMonit = vMon.jTextField_Codigo.getText();
-        //monDao.borrarMonitor(codMonit);
         monDao.borrarMonitorComprobado(codMonit);
     }
     
@@ -422,7 +416,6 @@ public class Controlador implements ActionListener{
         if (fechaChooser != null){
             fec = formatoFecha.format(fechaChooser);
         }
-        //String fec = vMon.jTextField_FechaEntrada.getText();
         
         String nic = vMon.jTextField_Nick.getText();
         
@@ -523,14 +516,6 @@ public class Controlador implements ActionListener{
     
     
     //----------------------------------------------------Actividad----------------------------------------------------
-    private void pideActividad() throws Exception{
-        
-        ArrayList<Actividad> lActiv = actDAO.listaActividad();           
-
-        utTab.vaciarTablaActividad();
-        utTab.rellenarTablaActividad(lActiv);
-    }
-    
     private void procedActiv() throws Exception{
         String nomActiv = vAct.jComboBox_IDActivity.getSelectedItem().toString();
         
@@ -552,9 +537,35 @@ public class Controlador implements ActionListener{
     private void vInscTable_TablaInscripcionMouseClicked(MouseEvent evt) throws ParseException{
         
         int fila = vInsc.jTable_Inscripciones.getSelectedRow();
+        String numSoc = (String) vInsc.jTable_Inscripciones.getValueAt(fila, 0);
         String nombre = (String) vInsc.jTable_Inscripciones.getValueAt(fila, 1);
+       
 
         vInsc.jTextField_SocioSeleccionado.setText(nombre);
+        vInsc.jTextField_NumSocSeleccionado.setText(numSoc);
 
     }
+    
+    private void darAltaInsc(){
+        int filSel = vInsc.jTable_Inscripciones.getSelectedRow();
+        
+        String numSoc = vInsc.jTextField_NumSocSeleccionado.getText();
+        
+        String activSelected = (String) vInsc.jComboBox_Alta.getSelectedItem(); 
+        
+        cInsc.darAltaParam(filSel, numSoc, activSelected);
+              
+    }
+    
+    private void darBajaInsc(){
+        int filSel = vInsc.jTable_Inscripciones.getSelectedRow();
+        
+        String numSoc = vInsc.jTextField_NumSocSeleccionado.getText();
+        
+        String activSelected = (String) vInsc.jComboBox_Alta.getSelectedItem(); 
+        
+        cInsc.darBajaParam(filSel, numSoc, activSelected);
+    }
+    
+    
 }
