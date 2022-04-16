@@ -47,7 +47,7 @@ public class Actividad implements Serializable {
     @Column(name = "DESCRIPCION")
     private String descripcion;
     @Column(name = "PRECIOBASEMES")
-    private BigInteger preciobasemes;
+    private int preciobasemes;
     @JoinTable(name = "REALIZA", joinColumns = {
         @JoinColumn(name = "IDACTIVIDAD", referencedColumnName = "IDACTIVIDAD")}, inverseJoinColumns = {
         @JoinColumn(name = "NUMEROSOCIO", referencedColumnName = "NUMEROSOCIO")})
@@ -93,11 +93,11 @@ public class Actividad implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public BigInteger getPreciobasemes() {
+    public int getPreciobasemes() {
         return preciobasemes;
     }
 
-    public void setPreciobasemes(BigInteger preciobasemes) {
+    public void setPreciobasemes(int preciobasemes) {
         this.preciobasemes = preciobasemes;
     }
 

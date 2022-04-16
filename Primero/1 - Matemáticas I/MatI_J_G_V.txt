@@ -1,0 +1,15 @@
+%   Juan García Villagrán
+%   49045273G
+
+%Ejercicio 1
+>> syms x
+>> f = 3 + cos(2*sqrt(x+3))
+f =
+ 
+cos(2*(x + 3)^(1/2)) + 3
+%Como nos pide h=0,25 en el intervalo entre 2 y 4, tenemos que M=8.
+>> trap(f, 2, 4, 8)
+El valor aproximado de la integral es  
+s =
+ 
+6.349486992

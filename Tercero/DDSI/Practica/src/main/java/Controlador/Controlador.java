@@ -55,6 +55,12 @@ public class Controlador implements ActionListener{
     private VistaInscripciones          vInsc   = null;
     private ControladorInscripciones    cInsc   = null;
     
+    private VistaActualizacionPrecios vActPrec  = null;
+    private ControladorActPrecios cActPrec      = null;
+    
+    private VistaCuotas vCuot                   = null;
+    private ControladorCuotas cCuot             = null;
+    
     public Controlador(Session conectP)  { //Instanciar todo lo creado arriba
         this.sesion = conectP;
         utTab        = new utilTablas();
@@ -79,6 +85,12 @@ public class Controlador implements ActionListener{
         vInsc        = new VistaInscripciones();
         cInsc        = new ControladorInscripciones(conectP);
         
+        vActPrec    = new VistaActualizacionPrecios();
+        cActPrec    = new ControladorActPrecios(conectP);
+        
+        vCuot       = new VistaCuotas();
+        cCuot       = new ControladorCuotas(conectP);
+        
         //Gestionar el cierre de VistaPrincipal
         addListeners();
         
@@ -100,10 +112,16 @@ public class Controlador implements ActionListener{
     private void addListeners() {   //A cada botón pulsable, añadirlo aquí
         //Vista Principal
             vPrinc.jMenuItem_SalirAplicacion.addActionListener(this);
+            
             vPrinc.jMenuItem_GestionMonitores.addActionListener(this);
+            
             vPrinc.jMenu_GestionSocios.addActionListener(this);
+            
             vPrinc.jMenu_SociosPorActividad.addActionListener(this);
             vPrinc.jMenu_SociosInscritos.addActionListener(this);
+            
+            vPrinc.jMenu_ActualizacionPrecios.addActionListener(this);
+            vPrinc.jMenu_CuotaSocios.addActionListener(this);
             
         //Vista Monitor
             //Botones------------------
@@ -167,6 +185,13 @@ public class Controlador implements ActionListener{
                         }
                     }
                 });
+                
+        //Vista Actualizacion Precios
+            //Botones--------------
+                vActPrec.jButton_ActualizaPrecios.addActionListener(this);
+                vActPrec.jTextField_PrecioAumentar.addActionListener(this);
+        //Vista Cuotas
+                vCuot.jButton_VerCuota.addActionListener(this);
     }
 
     @Override
@@ -182,6 +207,7 @@ public class Controlador implements ActionListener{
                     vMon.setVisible(true);
                     vSoc.setVisible(false);
                     vAct.setVisible(false);
+                    vActPrec.setVisible(false);
                     vPrinc.setTitle("Gestión de Monitores");
                 break;
                 
@@ -190,6 +216,8 @@ public class Controlador implements ActionListener{
                     vMon.setVisible(false);
                     vSoc.setVisible(true);
                     vAct.setVisible(false);
+                    vActPrec.setVisible(false);
+
                     vPrinc.setTitle("Gestión de Socios");
                 break;
             
@@ -197,6 +225,7 @@ public class Controlador implements ActionListener{
                     vAct.setVisible(true);
                     actDAO.ActividadComboBox(vAct.jComboBox_IDActivity);    //Rellena el ComboBox
                 break;
+                
             case "GestionInscritos":
                     vInsc.setVisible(true);
                     try {
@@ -206,9 +235,19 @@ public class Controlador implements ActionListener{
                     } catch (Exception ex) {
                         Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
                     }
-            
                 break;
 
+            case "ActualizaPrecios":
+                    vActPrec.setVisible(true);
+                    pideActualizPrecio();
+                    vActPrec.setTitle("Actualiza Precios");
+                    break;
+                    
+            case "CuotaSocios":
+                    vCuot.setVisible(true);
+                    vCuot.setTitle("Ver Cuotas");
+                break;
+                
 
 //---------------------Monitores---------------------
             case "InsertarMonitor":
@@ -341,6 +380,19 @@ public class Controlador implements ActionListener{
             case "DarBajaInscripcion":
                 darBajaInsc();
                 break;
+                
+                
+//--------------------Actualizar Precio----------------------
+            case "ActualizarPrecios":
+                actualizaPrecios();
+                break;
+                
+                
+//--------------------Cuotas----------------------
+            case "VerCuota":
+                verCuotasSocio();
+                break;
+ 
         }
     }
     
@@ -567,5 +619,22 @@ public class Controlador implements ActionListener{
         cInsc.darBajaParam(filSel, numSoc, activSelected);
     }
     
+    //-------Actualizaciones-------
     
+    private void pideActualizPrecio(){
+        cActPrec.dibujarTablaActualizacionPrecio(vActPrec);
+        cActPrec.rellenarTablaActualizPrecio();
+    }
+    
+    private void actualizaPrecios(){
+        int variacion = Integer.parseInt(vActPrec.jTextField_PrecioAumentar.getText() );
+        cActPrec.modifPrecio(variacion);
+    }
+    
+    //--------Cuotas---------
+    private void verCuotasSocio(){
+        String codSoci = vCuot.jTextField_NumSocio.getText();
+        System.out.println("Codigo Socio: " + codSoci);
+        cCuot.verCuota(codSoci);
+    }
 }

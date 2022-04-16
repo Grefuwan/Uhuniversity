@@ -36,9 +36,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenu_Actividad = new javax.swing.JMenu();
         jMenu_SociosPorActividad = new javax.swing.JMenuItem();
         jMenu_SociosInscritos = new javax.swing.JMenuItem();
+        jMenu_Ampliacion = new javax.swing.JMenu();
+        jMenu_ActualizacionPrecios = new javax.swing.JMenuItem();
+        jMenu_CuotaSocios = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1100, 750));
 
         jMenu_Salir.setText("Salir");
 
@@ -86,6 +88,18 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         jMenuBar_VistaPrincipal.add(jMenu_Actividad);
 
+        jMenu_Ampliacion.setText("Ampliación");
+
+        jMenu_ActualizacionPrecios.setText("Actualización de Precios");
+        jMenu_ActualizacionPrecios.setActionCommand("ActualizaPrecios");
+        jMenu_Ampliacion.add(jMenu_ActualizacionPrecios);
+
+        jMenu_CuotaSocios.setText("Cuota de Socios");
+        jMenu_CuotaSocios.setActionCommand("CuotaSocios");
+        jMenu_Ampliacion.add(jMenu_CuotaSocios);
+
+        jMenuBar_VistaPrincipal.add(jMenu_Ampliacion);
+
         setJMenuBar(jMenuBar_VistaPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -120,6 +134,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
     public javax.swing.JMenuItem jMenuItem_GestionMonitores;
     public javax.swing.JMenuItem jMenuItem_SalirAplicacion;
     public javax.swing.JMenu jMenu_Actividad;
+    public javax.swing.JMenuItem jMenu_ActualizacionPrecios;
+    public javax.swing.JMenu jMenu_Ampliacion;
+    public javax.swing.JMenuItem jMenu_CuotaSocios;
     public javax.swing.JMenuItem jMenu_GestionSocios;
     public javax.swing.JMenu jMenu_Monitores;
     public javax.swing.JMenu jMenu_Salir;
