@@ -1,4 +1,4 @@
-package PCD_Practica1;
+package PCD_Practica2;
 
 public interface ICola {
 

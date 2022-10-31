@@ -1,14 +1,28 @@
 package AMC_Practica_1;
 
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
-public class AMC_Practica_1 {
+/**
+ *
+ * @author Grefuwan
+ */
+public class MiCanvas extends Canvas {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+    public MiCanvas() {
+        super();
+        this.setSize(390, 390);
+    }
 
+    @Override
+    public void paint(Graphics g) {
+
+        super.paint(g);
+        this.setBackground(Color.WHITE);
+        
+        g.setColor(Color.BLACK);
         Punto pA = new Punto(16.47, 36.10);
         Punto pB = new Punto(16.47, 54.44);
         Punto pC = new Punto(20.09, 92.54);
@@ -37,21 +51,12 @@ public class AMC_Practica_1 {
         arrPuntos.add(pJ);
         arrPuntos.add(pK);
         arrPuntos.add(pM);
-        //Añado esos arrPuntos
 
-        //Muestro arrPuntos iniciales
-        for (int p = 0; p < arrPuntos.size(); p++) {
-            System.out.println("Punto: " + arrPuntos.get(p).toString() + "\n");
+        for (int i = 0; i < arrPuntos.size(); i++) {
+            g.drawOval((int) arrPuntos.get(i).getPuntoX(), (int) arrPuntos.get(i).getPuntoY(), 3, 3);
         }
 
-        ArrayList<Punto> solucion = Algoritmos.minDistanTresarrPuntos(arrPuntos);
-
-        //Muestro solucion
-        System.out.println("\n");
-
-        for (int p = 0; p < solucion.size(); p++) {
-            System.out.println("Solucion:" + solucion.get(p).toString());
-        }
     }
-
+    
+    
 }

@@ -48,8 +48,11 @@ public class Triangulo {
     public double perimetro() {
         return Algoritmos.distancia2(a, b) + Algoritmos.distancia2(a, c) + Algoritmos.distancia2(b, c);
     }
-    
-    public double area(){
-        Math.sqrt((this.perimetro()/2 * ))
+
+    public double area() {
+        return Math.sqrt((this.perimetro() / 2) * (((this.perimetro() / 2) - Algoritmos.distancia2(a, b))
+                * ((this.perimetro() / 2) - Algoritmos.distancia2(a, c))
+                * ((this.perimetro() / 2) - Algoritmos.distancia2(b, c))));
+
     }
 }

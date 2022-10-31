@@ -9,7 +9,7 @@ public class EjemploHilos {
         HiloB r3 = new HiloB(3);
         Thread h3 = new Thread(r3); //A un hilo vacío se le puede pasar un hilo runnable como parámetro
         Thread h4 = new Thread(r3);
-        
+
         //Para que se ejecute de forma concurrente debo lanzar el metodo run, pero normal sería de forma secuencial
         //Para hacerlo de forma concurrente es:
         System.out.println("Comienzan los hilos");
@@ -31,7 +31,7 @@ public class EjemploHilos {
         //h2.join();
         h3.join();
         h4.join();
-        
+
         System.out.println("Finalizan los hilos");
 
         //Si lo hubieramos hecho con el run, primero habria salido todo el h1, luego todo el h2 y por ultimo el "Finalizan los hilos"

@@ -1,6 +1,6 @@
-package PCD_Practica1;
+package PCD_Practica2;
 
-public class Cola implements ICola {
+public class ColaLenta implements ICola {
 
     private int head;
     private int tail;
@@ -8,7 +8,7 @@ public class Cola implements ICola {
     private int numElementos;   //Numero de Elementos que hay
     private Object[] datos;
 
-    public Cola(int capacidad) {    //Constructor
+    public ColaLenta(int capacidad) {    //Constructor
         this.head = 0;
         this.tail = 0;
         this.capacidad = capacidad;
@@ -30,7 +30,7 @@ public class Cola implements ICola {
     }
 
     /**
-     * Comprueba si la Cola no está llena.Si no lo está, añade elemento
+     * Comprueba si la ColaLenta no está llena.Si no lo está, añade elemento
      *
      * @param elemento que encola
      * @throws java.lang.Exception Si la cola está llena
@@ -43,6 +43,7 @@ public class Cola implements ICola {
         datos[tail] = elemento;
         numElementos++;
         tail = ++tail % capacidad;
+        Thread.sleep(100);
 
     }
 
@@ -61,7 +62,7 @@ public class Cola implements ICola {
         datos[head] = 0;
         numElementos--;
         head = ++head % capacidad;
-
+        Thread.sleep(100);
         return obj;
     }
 
