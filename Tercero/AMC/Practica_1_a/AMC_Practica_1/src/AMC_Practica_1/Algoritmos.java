@@ -6,7 +6,7 @@ public class Algoritmos {
 
     //Distancia entre 2 arrPuntos
     public static double distancia2(Punto p1, Punto p2) {
-        return Math.sqrt(Math.pow(p2.getPuntoX() - p1.getPuntoX(), 2) + Math.pow(p2.getPuntoY() - p1.getPuntoY(), 2));
+        return Math.sqrt(Math.pow(p2.getX() - p1.getX(), 2) + Math.pow(p2.getY() - p1.getY(), 2));
     }
 
     //Distancia entre 3 arrPuntos
@@ -21,8 +21,7 @@ public class Algoritmos {
         result.add(arrPuntos.get(1));
         result.add(arrPuntos.get(2));
 
-        double minima = 0;
-        minima = distancia3(arrPuntos.get(0), arrPuntos.get(1), arrPuntos.get(2));
+        double minima = distancia3(arrPuntos.get(0), arrPuntos.get(1), arrPuntos.get(2));
 
         double distancia = 0;
 
@@ -66,7 +65,8 @@ public class Algoritmos {
 
         if (arrPuntos.size() < 3) {
 
-        } else {
+        }
+        else {
             Integer mitad = arrPuntos.size() / 2;
             minDistanTresarrPuntosDyV(arrPuntos);
         }
@@ -76,3 +76,4 @@ public class Algoritmos {
     }
 
 }
+

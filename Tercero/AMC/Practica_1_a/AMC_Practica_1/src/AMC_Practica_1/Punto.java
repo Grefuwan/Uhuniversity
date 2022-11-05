@@ -10,24 +10,26 @@ public class Punto {
         this.y = cordY;
     }
 
-    double getPuntoX() {
-        return this.x;
+    public double getX() {
+        return x;
     }
 
-    double getPuntoY() {
-        return this.y;
+    public double getY() {
+        return y;
     }
 
-    void setPuntoX(double coordX) {
-        this.x = coordX;
+    public void setX(double x) {
+        this.x = x;
     }
 
-    void setPuntoY(double coordY) {
-        this.y = coordY;
+    public void setY(double y) {
+        this.y = y;
     }
+
+   
 
     @Override
     public String toString() {
-        return " [" + getPuntoX() + "," + getPuntoY() + "]";
+        return " [" + getX() + "," + getY() + "]";
     }
 }

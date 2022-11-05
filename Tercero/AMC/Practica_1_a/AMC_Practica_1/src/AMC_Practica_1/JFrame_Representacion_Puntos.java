@@ -4,7 +4,8 @@
  */
 package AMC_Practica_1;
 
-import java.awt.Graphics;
+import java.awt.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,6 +18,7 @@ public class JFrame_Representacion_Puntos extends javax.swing.JFrame {
      */
     public JFrame_Representacion_Puntos() {
         initComponents();
+
     }
 
     /**
@@ -28,26 +30,35 @@ public class JFrame_Representacion_Puntos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel_Lienzo = new javax.swing.JPanel();
+        jButton_Dibujar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(java.awt.Color.darkGray);
         setMinimumSize(new java.awt.Dimension(600, 300));
 
-        jPanel1.setBackground(new java.awt.Color(255, 102, 153));
+        jPanel_Lienzo.setBackground(new java.awt.Color(204, 204, 204));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel_LienzoLayout = new javax.swing.GroupLayout(jPanel_Lienzo);
+        jPanel_Lienzo.setLayout(jPanel_LienzoLayout);
+        jPanel_LienzoLayout.setHorizontalGroup(
+            jPanel_LienzoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 391, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        jPanel_LienzoLayout.setVerticalGroup(
+            jPanel_LienzoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 391, Short.MAX_VALUE)
         );
+
+        jButton_Dibujar.setText("Dibujar");
+        jButton_Dibujar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_DibujarActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -61,21 +72,70 @@ public class JFrame_Representacion_Puntos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(518, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel_Lienzo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addComponent(jButton_Dibujar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel_Lienzo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(148, 148, 148)
+                .addComponent(jButton_Dibujar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_DibujarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_DibujarActionPerformed
+        // TODO add your handling code here:
+        Graphics dibujaLienzo = jPanel_Lienzo.getGraphics();
+
+        Punto pA = new Punto(16.47, 36.10);
+        Punto pB = new Punto(16.47, 280.44);
+        Punto pC = new Punto(115.09, 92.54);
+        Punto pD = new Punto(364.39, 197.37);
+//        Punto pE = new Punto(25.23, 97.24);
+//        Punto pF = new Punto(22.00, 36.05);
+//        Punto pG = new Punto(19.41, 37.12);
+//        Punto pH = new Punto(20.47, 97.02);
+//        Punto pI = new Punto(17.20, 96.29);
+//        Punto pM = new Punto(04.15, 16.32);
+//        Punto pJ = new Punto(16.30, 97.22);
+//        Punto pK = new Punto(390 / 2, 98.12);
+        //Varios arrPuntos inventados
+
+        ArrayList<Punto> arrPuntos = new ArrayList<>();
+
+        arrPuntos.add(pA);
+        arrPuntos.add(pB);
+        arrPuntos.add(pC);
+        arrPuntos.add(pD);
+//        arrPuntos.add(pE);
+//        arrPuntos.add(pF);
+//        arrPuntos.add(pG);
+//        arrPuntos.add(pH);
+//        arrPuntos.add(pI);
+//        arrPuntos.add(pJ);
+//        arrPuntos.add(pK);
+//        arrPuntos.add(pM);
+
+        for (int i = 0; i < arrPuntos.size(); i++) {
+            for (int j = i + 1; j < arrPuntos.size(); j++) {
+                for (int k = j + 1; k < arrPuntos.size(); k++) {
+                    Triangulo t = new Triangulo(arrPuntos.get(i), arrPuntos.get(j), arrPuntos.get(k));
+                    t.dibujaLados(dibujaLienzo, arrPuntos.get(i), arrPuntos.get(j), arrPuntos.get(k));
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton_DibujarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -84,9 +144,7 @@ public class JFrame_Representacion_Puntos extends javax.swing.JFrame {
         int ancho = 800, alto = 500;
 
         JFrame_Representacion_Puntos frame = new JFrame_Representacion_Puntos();
-        MiCanvas cv = new MiCanvas();
 
-        frame.add(cv);
         frame.setVisible(true);
         frame.setSize(ancho, alto);
         frame.setLocation(200, 100);
@@ -96,9 +154,11 @@ public class JFrame_Representacion_Puntos extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton jButton_Dibujar;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
+    public javax.swing.JPanel jPanel_Lienzo;
     // End of variables declaration//GEN-END:variables
 }
+
