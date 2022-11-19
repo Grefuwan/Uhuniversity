@@ -11,12 +11,10 @@ public class Productor extends Thread {
     int id;
     float numRandom;
     ColaLenta lacola;
-    
 
     public Productor(int id, ColaLenta lacola) {
         this.id = id;
         this.lacola = lacola;
-        setPriority(id);
     }
 
     /**
@@ -30,14 +28,16 @@ public class Productor extends Thread {
         r.setSeed(System.nanoTime());
         try {
             for (int i = 0; i < 10; i++) {
-                numRandom = r.nextFloat(25);
+                numRandom = r.nextInt(25);
                 System.out.println("Soy el hilo Productor " + this.id + " y voy a añadir el numero " + numRandom);
                 lacola.Acola(numRandom);
                 sleep(500);
             }
             System.out.println("\n\n");
         } catch (Exception ex) {
-
+            System.out.println("Error: Productor");
         }
     }
+
 }
+

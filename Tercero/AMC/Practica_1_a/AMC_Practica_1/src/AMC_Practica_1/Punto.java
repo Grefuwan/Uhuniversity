@@ -1,5 +1,8 @@
 package AMC_Practica_1;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class Punto {
 
     double x;
@@ -26,10 +29,15 @@ public class Punto {
         this.y = y;
     }
 
-   
+    public void dibujaPuntos(Graphics g, Punto p1) {
+        g.setColor(Color.black);
+        g.fillOval((int) p1.getX(), (int) p1.getY(), 3, 3);
+    }
 
     @Override
     public String toString() {
         return " [" + getX() + "," + getY() + "]";
     }
+
 }
+

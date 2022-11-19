@@ -7,13 +7,16 @@ public class ColaLenta implements ICola {
     private int capacidad;  //Capacidad del vector
     private int numElementos;   //Numero de Elementos que hay
     private Object[] datos;
+    private CanvasCola cv;
 
-    public ColaLenta(int capacidad) {    //Constructor
+    public ColaLenta(int capacidad, CanvasCola elcanvas) {    //Constructor
         this.head = 0;
         this.tail = 0;
         this.capacidad = capacidad;
         this.numElementos = 0;
         this.datos = new Object[capacidad];
+        this.cv = elcanvas;
+
         for (int i = 0; i < capacidad; i++) {
             this.datos[i] = 0;
         }
@@ -33,17 +36,20 @@ public class ColaLenta implements ICola {
      * Comprueba si la ColaLenta no está llena.Si no lo está, añade elemento
      *
      * @param elemento que encola
+     *
      * @throws java.lang.Exception Si la cola está llena
      */
     @Override
-    public void Acola(Object elemento) throws Exception {
+    public synchronized void Acola(Object elemento) throws Exception {
         if (colallena()) {
-            throw new Exception("Error Acola: Cola Llena");
+            cv.avisa("Acola: Cola Llena");
+            throw new Exception("Acola: Cola Llena");
         }
         datos[tail] = elemento;
         numElementos++;
         tail = ++tail % capacidad;
-        Thread.sleep(100);
+        
+        cv.representa(datos, head, tail, numElementos);
 
     }
 
@@ -51,18 +57,22 @@ public class ColaLenta implements ICola {
      * Comprueba que existan elementos, busca el primero y lo extrae
      *
      * @return Elemento que desacola
+     *
      * @throws java.lang.Exception Si la cola está vacía
      */
     @Override
-    public Object Desacola() throws Exception {
+    public synchronized Object Desacola() throws Exception {
         if (colavacia()) {
-            throw new Exception("Error Desacola: Cola Vacia");
+            cv.avisa("Desacola: Cola Vacia");
+            throw new Exception("Desacola: Cola Vacia");
         }
         Object obj = datos[head];
         datos[head] = 0;
         numElementos--;
         head = ++head % capacidad;
-        Thread.sleep(100);
+        
+        cv.representa(datos, head, tail, numElementos);
+
         return obj;
     }
 
@@ -70,12 +80,13 @@ public class ColaLenta implements ICola {
      * Comprueba que existan elementos, busca el primero y lo devuelve
      *
      * @return Primer elemento de la cola
+     *
      * @throws java.lang.Exception Si la cola está vacía
      */
     @Override
     public Object Primero() throws Exception {
         if (colavacia()) {
-            throw new Exception("Error Primero: Cola Vacia");
+            throw new Exception("Primero: Cola Vacia");
         }
         return datos[head];
 
@@ -97,7 +108,8 @@ public class ColaLenta implements ICola {
         while (i < tamano) {
             if (!datos[i].equals(0)) {
                 str += " - " + datos[i].toString() + " - ";
-            } else {
+            }
+            else {
                 str += " - ~ - ";
             }
             i++;
@@ -107,3 +119,4 @@ public class ColaLenta implements ICola {
     }
 
 }
+

@@ -8,33 +8,48 @@ import java.awt.Image;
 
 public class MiCanvas extends Canvas {
 
-    private int contadores[] = {0,0};
-    
-    
+    private int contadores[] = {0, 0};
+
+    /**
+     *
+     * @param ancho
+     * @param alto
+     */
     public MiCanvas(int ancho, int alto) {
         super();
         this.setSize(ancho, alto);
         this.setBackground(Color.LIGHT_GRAY);
     }
 
+    /**
+     *
+     * @param contadores
+     */
     public void representa(int[] contadores) {
         this.contadores = contadores;
         repaint();  //Borra lo que hay y vuelve a invocar el paint
-            //repaint -> update -> borrar y paint
+        //repaint -> update -> borrar y paint
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
-    public void update(Graphics g){
+    public void update(Graphics g) {
         paint(g);
     }
-    
+
+    /**
+     *
+     * @param g
+     */
     @Override
     public void paint(Graphics g) {
-
         //Cambiar la fuente
         Font f1 = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
         Font f2 = new Font("Algerian", Font.BOLD + Font.CENTER_BASELINE, 20);
-        
+
         Image img = createImage(getWidth(), getHeight());   //Crea una Imagen del ancho y alto del Canvas
         Graphics og = img.getGraphics();  //Obtengo la capacidad de pintar en la imagen, lo pinto en ella y LUEGO plasmo la imagen
 
@@ -51,7 +66,9 @@ public class MiCanvas extends Canvas {
         og.setFont(f2);
         og.drawString("Contador 2 = " + contadores[1], 100, 100);
         og.fillOval(50, 80, 20, 30);
-        
+
         g.drawImage(img, 0, 0, null);
     }
+
 }
+

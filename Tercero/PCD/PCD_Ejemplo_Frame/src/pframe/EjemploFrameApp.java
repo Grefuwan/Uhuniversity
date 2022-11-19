@@ -4,7 +4,6 @@
  */
 package pframe;
 
-import java.awt.Color;
 
 /**
  *
@@ -62,8 +61,10 @@ public class EjemploFrameApp extends java.awt.Frame {
 
     /**
      * @param args the command line arguments
+     *
+     * @throws java.lang.Exception
      */
-    public static void main(String args[]) throws InterruptedException {
+    public static void main(String args[]) throws Exception {
 
         int alto = 400, ancho = 600;
 
@@ -74,10 +75,9 @@ public class EjemploFrameApp extends java.awt.Frame {
         frame.setVisible(true);
         frame.setSize(ancho, alto);
         frame.setLocation(200, 100);    //Hace que se ponga 200-> 100↓
-        frame.setBackground(Color.yellow);
         frame.setTitle("Ejemplo de Frame");
         frame.add(cv);  //Añado el canvas
-        
+
         Recurso r = new Recurso(cv);
 
         //Sumador s1 = new Sumador(r, 0);
@@ -95,6 +95,8 @@ public class EjemploFrameApp extends java.awt.Frame {
         h2.join();
         h3.join();
 
+        
+        //Pone en el Output los Contadores al final: 1-100 y 2-200
         int contadores[] = r.getContadores();
         System.out.println("Contador 1 - " + contadores[0]);
         System.out.println("Contador 2 - " + contadores[1]);
@@ -105,3 +107,4 @@ public class EjemploFrameApp extends java.awt.Frame {
     public javax.swing.JButton jButton_Salir;
     // End of variables declaration//GEN-END:variables
 }
+
