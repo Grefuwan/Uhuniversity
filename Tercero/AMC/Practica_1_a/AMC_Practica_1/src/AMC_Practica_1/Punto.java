@@ -2,6 +2,7 @@ package AMC_Practica_1;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 public class Punto {
 
@@ -31,6 +32,11 @@ public class Punto {
 
     public void dibujaPuntos(Graphics g, Punto p1) {
         g.setColor(Color.black);
+        g.fillOval((int) p1.getX(), (int) p1.getY(), 3, 3);
+    }
+
+    public void dibujaPuntosCriticos(Graphics g, Punto p1) {
+        g.setColor(Color.red);
         g.fillOval((int) p1.getX(), (int) p1.getY(), 3, 3);
     }
 

@@ -3,6 +3,7 @@ package AMC_Practica_1;
 import Algoritmos.Distancias;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 /**
  *
@@ -64,18 +65,27 @@ public class Triangulo {
 
     /**
      *
-     * @return Devuelve la suma de los dos lados menores del triangulo formado por p1, p2 y p3
+     * @return Devuelve la suma de los dos lados menores del triangulo formado
+     *         por p1, p2 y p3
      */
     public double sumaLadoMenores() {
         double dist1 = Distancias.distancia2(a, b);
         double dist2 = Distancias.distancia2(b, c);
         double dist3 = Distancias.distancia2(a, c);
-        
+
         double suma = dist1 + dist2 < dist1 + dist3 ? dist1 + dist2 : dist1 + dist3;
         suma = dist2 + dist3 < suma ? dist2 + dist3 : suma;
-        
+
         return suma;
 
+    }
+
+    public ArrayList<Punto> trianguloToArrayList() {
+        ArrayList arrResult = new ArrayList();
+        arrResult.add(a);
+        arrResult.add(b);
+        arrResult.add(c);
+        return arrResult;
     }
 
 }

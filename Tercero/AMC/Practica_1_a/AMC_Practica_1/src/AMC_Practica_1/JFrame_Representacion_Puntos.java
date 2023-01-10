@@ -1,12 +1,10 @@
 package AMC_Practica_1;
 
-import Algoritmos.Distancias;
+import Algoritmos.*;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 
 /**
  *
@@ -45,7 +43,7 @@ public class JFrame_Representacion_Puntos extends javax.swing.JFrame {
         jButton_Borrar = new javax.swing.JButton();
         jButton_Buscar = new javax.swing.JButton();
         jButton_PuntosAleatorios = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jLabel_Solucion = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
@@ -130,24 +128,14 @@ public class JFrame_Representacion_Puntos extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         jLabel_Solucion.setBackground(new java.awt.Color(0, 0, 0));
         jLabel_Solucion.setForeground(new java.awt.Color(51, 153, 255));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel_Solucion, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel_Solucion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-        );
+        jLabel_Solucion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel_Solucion.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jScrollPane1.setViewportView(jLabel_Solucion);
 
         setJMenuBar(jMenuBar1);
 
@@ -159,24 +147,25 @@ public class JFrame_Representacion_Puntos extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(jPanel_Lienzo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton_SeleccionArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(108, 108, 108)
+                        .addComponent(jButton_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jComboBox_Metodos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton_Dibujar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton_Borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton_SeleccionArchivo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton_PuntosAleatorios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(225, Short.MAX_VALUE))
+                            .addComponent(jButton_PuntosAleatorios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jButton_Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBox_Metodos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton_Dibujar, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                    .addComponent(jButton_Borrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addContainerGap(437, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,13 +185,13 @@ public class JFrame_Representacion_Puntos extends javax.swing.JFrame {
                     .addComponent(jButton_Borrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton_PuntosAleatorios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_SeleccionArchivo)
                     .addComponent(jButton_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGap(45, 45, 45))
         );
 
         pack();
@@ -214,6 +203,7 @@ public class JFrame_Representacion_Puntos extends javax.swing.JFrame {
         int coordXRescaled, coordYRescaled;
         int minX = 500, minY = 500, maxX = 0, maxY = 0;
         ArrayList<Punto> puntosRescalados = new ArrayList<>();
+        Triangulo t;
 
         if (arrPuntos.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Error: ArrayList de Puntos Vacío");
@@ -247,6 +237,18 @@ public class JFrame_Representacion_Puntos extends javax.swing.JFrame {
 
                 puntosRescalados.get(i).dibujaPuntos(dibujaLienzo, puntosRescalados.get(i));
             }
+
+            if (!solucion.isEmpty()) {
+                for (int i = 0; i < solucion.size(); i++) {
+                    coordXRescaled = (450 * ((int) solucion.get(i).getX() - minX) / (maxX - minX));
+                    coordYRescaled = (450 * ((int) solucion.get(i).getY() - minY) / (maxY - minY));
+                    solucion.set(i, new Punto(coordXRescaled, coordYRescaled));
+                }
+
+                t = new Triangulo(solucion.get(0), solucion.get(1), solucion.get(2));
+                System.out.println("Solucion: " + solucion.get(0).toString() + solucion.get(1).toString() + solucion.get(2).toString());
+                t.dibujaLados(dibujaLienzo, solucion.get(0), solucion.get(1), solucion.get(2));
+            }
         }
 
 
@@ -273,6 +275,7 @@ public class JFrame_Representacion_Puntos extends javax.swing.JFrame {
         // TODO add your handling code here:
         validate();
         repaint();
+        jLabel_Solucion.setText("");
     }//GEN-LAST:event_jButton_BorrarActionPerformed
 
     private void jComboBox_MetodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_MetodosActionPerformed
@@ -282,28 +285,56 @@ public class JFrame_Representacion_Puntos extends javax.swing.JFrame {
 
     private void jButton_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_BuscarActionPerformed
         // TODO add your handling code here:
+        long startTime = System.currentTimeMillis();
+        solucion.clear();
+        String metodo = "";
+        String textito = "";
         switch (metodoSeleccionado) {
             case ("Dijkstra"):
-                System.out.println("Dijkstra Seleccionado");
+                metodo = "Dijkstra";
+                String getMessage = JOptionPane.showInputDialog(rootPane, "Introduce el número del punto Origen");
+                startTime = System.currentTimeMillis();
+                int numOrigen = Integer.parseInt(getMessage);
+                System.out.println("Dijkstra Seleccionado con Origen: " + numOrigen);
+                Alg_Dijkstra_AdjMatrix dij = new Alg_Dijkstra_AdjMatrix(arrPuntos, numOrigen);
+                textito = dij.retornaString() + "<br>";
                 break;
             case ("Divide y Vencerás"):
+                metodo = "DyV";
                 System.out.println("DyV Seleccionado");
                 Algoritmos.Alg_DyV.minDistanTresPuntosDyV(arrPuntos);
                 solucion = Algoritmos.Alg_DyV.convierteTrianguloArray();
+                textito = solucion.toString() + "<br>";
                 break;
             case ("Exhaustivo"):
+                metodo = "Exhaustivo";
                 System.out.println("Exhaustivo Seleccionado");
-                solucion = Algoritmos.Alg_Exhaustivo.minDistanTresPuntosExhaustivo(arrPuntos);
+                Triangulo t = Algoritmos.Alg_Exhaustivo.minDistanTresPuntosExhaustivo(arrPuntos);
+                solucion = t.trianguloToArrayList();
+                textito = solucion.toString() + "<br>";
                 break;
         }
+        long endTime = System.currentTimeMillis();
+        long tiempoEstimado = endTime - startTime;
         
-        System.out.println("Solucion: " + solucion.toString());
-
-        jLabel_Solucion.setText("Solucion: " + solucion.toString());
+        System.out.println("Solucion para " + metodo + ": " + textito);
+        String texto = "<html><body>Solucion para " + metodo + ": <br>" + textito + "y el tiempo transcurrido es " + tiempoEstimado + "ms</body></html>";
+        
+        
+        jLabel_Solucion.setText(texto);
     }//GEN-LAST:event_jButton_BuscarActionPerformed
 
     private void jButton_PuntosAleatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_PuntosAleatoriosActionPerformed
         // TODO add your handling code here:
+        try {
+            String getMessage = JOptionPane.showInputDialog(rootPane, "Introduce el número de puntos aleatorios");
+            int numRandoms = Integer.parseInt(getMessage);
+            arrPuntos = PuntosAleatorios.creaArrayAleatorios(numRandoms);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Error: ArrayList de Puntos Vacío");
+        }
+
+
     }//GEN-LAST:event_jButton_PuntosAleatoriosActionPerformed
 
     /**
@@ -331,10 +362,10 @@ public class JFrame_Representacion_Puntos extends javax.swing.JFrame {
     public javax.swing.JButton jButton_SeleccionArchivo;
     public javax.swing.JComboBox<String> jComboBox_Metodos;
     private javax.swing.JLabel jLabel1;
-    public javax.swing.JLabel jLabel_Solucion;
+    private javax.swing.JLabel jLabel_Solucion;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
     public javax.swing.JPanel jPanel_Lienzo;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
 

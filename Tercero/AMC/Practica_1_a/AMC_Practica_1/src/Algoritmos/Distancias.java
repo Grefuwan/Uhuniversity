@@ -38,8 +38,8 @@ public class Distancias {
         int i = e - 1;
         int j = d + 1;
         for (;;) {
-            while (x < P.get(--j).getX());
-            while (P.get(++i).getX() < x);
+            while (x > P.get(--j).getX());
+            while (P.get(++i).getX() > x);
             if (i >= j) {
                 return j;
             }
