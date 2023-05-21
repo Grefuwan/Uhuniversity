@@ -13,10 +13,11 @@ public class Ordenador {
     }
 
     public synchronized void cogerTurno(int id) {
-        while (turno != id)
+        while (turno != id) {
             try {
-            wait();
-        } catch (InterruptedException ex) {
+                wait();
+            } catch (InterruptedException ex) {
+            }
         }
     }
 
@@ -24,4 +25,6 @@ public class Ordenador {
         turno = (turno + 1) % 5;
         notifyAll();
     }
+
 }
+

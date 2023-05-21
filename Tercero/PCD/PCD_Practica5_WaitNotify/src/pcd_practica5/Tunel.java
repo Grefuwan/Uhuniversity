@@ -9,24 +9,17 @@ public class Tunel {
     char lateralIzq = 'L';
     char centro = 'L'; //L - Libre || C - Coche || F - Furgo
     char lateralDcha = 'L';
-    
-    private MiCanvas cv;
-    
+
+    private final MiCanvas cv;
+
     public Tunel(MiCanvas cv) {
         this.cv = cv;
     }
 
-    /**
-     *
-     * @return Devuelve la posición donde ha entrado el coche
-     *
-     * @throws InterruptedException
-     */
     public synchronized char entraCoche(int id) throws InterruptedException {
         while (lateralIzq != 'L' && centro != 'L' && lateralDcha != 'L') {
             wait();
         }
-
         if (centro == 'L') {
             centro = 'C';
             cv.insertaCoche(id, centro);
@@ -42,13 +35,8 @@ public class Tunel {
             cv.insertaCoche(id, lateralDcha);
             return 'D';
         }
-
     }
 
-    /**
-     *
-     * @param donde
-     */
     public synchronized void saleCoche(char donde) {
         switch (donde) {
             case 'I' ->
@@ -58,19 +46,13 @@ public class Tunel {
             default ->
                 centro = 'L';
         }
-
         notifyAll();
     }
 
-    /**
-     *
-     * @return @throws InterruptedException
-     */
     public synchronized char entraFurgo(int id) throws InterruptedException {
         while (centro != 'L' && lateralIzq != 'L' && lateralDcha != 'L') {
             wait();
         }
-
         if (centro == 'L') { //Si el centro está Libre
             if (lateralIzq == 'L') {        //Si el lateralIzq está Libre
                 lateralIzq = 'F';               //lateralIzq <- Furgo
@@ -100,13 +82,11 @@ public class Tunel {
             default ->
                 centro = 'L';
         }
-
         notifyAll();
     }
 
     @Override
     public String toString() {
-
         return "Tunel actual: [" + this.lateralDcha + "] -- [" + this.centro + "] -- [" + this.lateralIzq + "]";
     }
 

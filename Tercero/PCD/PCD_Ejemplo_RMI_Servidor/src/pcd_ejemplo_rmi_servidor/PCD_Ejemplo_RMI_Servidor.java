@@ -14,6 +14,7 @@ public class PCD_Ejemplo_RMI_Servidor {
 
     /**
      * @param args the command line arguments
+     * @throws java.rmi.RemoteException
      */
     public static void main(String[] args) throws RemoteException, IOException {
 
@@ -25,7 +26,7 @@ public class PCD_Ejemplo_RMI_Servidor {
         //Creo el servidor
         //Creo el registro: guarda peticiones de acceso
         Registry reg = LocateRegistry.createRegistry(2022);
-        reg.rebind("ejemremoto", reg);
+        reg.rebind("ejemremoto", e);
 
         System.out.println("Pulsa intro para terminar");
         System.in.read();

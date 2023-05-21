@@ -8,10 +8,9 @@ import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
+/*
  *  Si quiero hacer que un hilo devuelva algo, tiene que hacerse con implements Callable<Object>, siendo Object el tipo de objeto que quiero que devuelva
  *  Luego, en vez de hacer public void run, deberia hacer public Object call()
- * 
  */
 public class HiloC implements Callable<Integer> {
 

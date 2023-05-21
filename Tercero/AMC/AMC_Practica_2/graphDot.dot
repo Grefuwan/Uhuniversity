@@ -1,0 +1,15 @@
+digraph L {
+fontname="Helvetica, Arial, sans-serif"
+node [fontname ="Helvetica, Arial, sans-serif" ]
+edge [fontname ="Helvetica, Arial, sans-serif" ]
+rankdir = LR;
+node [shape = doublecircle];Q99 Q3
+node [shape = circle]; 
+Q1 -> Q2[label = a]
+Q1 -> Q3[label = b]
+Q1 -> Q4[label = c]
+Q2 -> Q3[label = b]
+Q4 -> Q5[label = b]
+Q5 -> Q3[label = a]
+Q1 -> Q99[label = x]
+}

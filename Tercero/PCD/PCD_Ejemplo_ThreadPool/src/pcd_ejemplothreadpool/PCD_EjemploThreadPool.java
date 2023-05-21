@@ -13,6 +13,8 @@ public class PCD_EjemploThreadPool {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.InterruptedException
+     * @throws java.util.concurrent.ExecutionException
      */
     public static void main(String[] args) throws InterruptedException, ExecutionException {
 
