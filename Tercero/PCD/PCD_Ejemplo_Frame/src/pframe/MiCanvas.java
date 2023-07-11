@@ -53,7 +53,7 @@ public class MiCanvas extends Canvas {
         Image img = createImage(getWidth(), getHeight());   //Crea una Imagen del ancho y alto del Canvas
         Graphics og = img.getGraphics();  //Obtengo la capacidad de pintar en la imagen, lo pinto en ella y LUEGO plasmo la imagen
 
-        //Color de la letra -> g.setcolor( ) - Va a pintar del color que le ponga todo lo que le siga hasta el proximo g.setColor()
+        //Color     -> g.setcolor( ) - Va a pintar del color que le ponga todo lo que le siga hasta el proximo g.setColor()
         //Fuentes   -> g.setFont(fuente) - Igual que arriba
         //Cuadrado  -> g.drawRect(posX, posY, Ancho, Alto)  //  g.fillRect
         //Circulo   -> g.drawOval(posX, posY, Ancho, Alto)  //  g.fillOval

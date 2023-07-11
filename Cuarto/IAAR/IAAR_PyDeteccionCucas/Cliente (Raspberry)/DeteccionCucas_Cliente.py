@@ -3,10 +3,10 @@ import time
 
 import Pyro4
 
-numero = 5
+numero = 1
 numCuca = 2
 
-uri = "PYRO:Robot_3@192.168.50.14:9090"
+uri = "PYRO:Robot_3@192.168.1.10:9090"
 o = Pyro4.Proxy(uri)
 
 print("Robot " + str(numero) + " conectando...")
@@ -22,6 +22,7 @@ if persecucion:
 elif not persecucion:
     print("Persecucion NO valida")
 
+time.sleep(11)
 o.libera_cuca(numero, numCuca)
 # Devolver true si puede perseguirla y comenzar a perseguirla
 # Devolver false si no puede, y buscar otra
