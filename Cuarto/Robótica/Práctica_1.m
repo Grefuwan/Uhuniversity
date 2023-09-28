@@ -31,24 +31,24 @@ distancia(1) = double(readDistance(Sonar));	%Guarda en el array "distancia" la
 
 while tiempo_real(k) < 4*pi
 	k = k+1;
-	tiempo_real(k) = toc(tStart);
-	referencia(k) = signal_vf_v2(tiempo_real(k), Periodo, Delay, Amplitud);
+ 	tiempo_real(k) = toc(tStart);
+  	referencia(k) = signal_vf_v2(tiempo_real(k), Periodo, Delay, Amplitud);
     
-    	%------------------------------------------
+    %------------------------------------------
 	% Aqui en el futuro:
 	%   1- Leeremos la posicion del motor
 	%   2- El controlador calculará la acción de control a partir de la referencia(i)
 	%   3- Mandaremos el comando con la acción de control al ladrillo
 	%------------------------------------------
    
-	%---Motor Cabeza---
-  	motor_Cabeza.Speed = 10;	%Establece la velocidad de giro de motor_Cabeza
+	%---Motor Cabeza----------------
+ 	motor_Cabeza.Speed = 10;	%Establece la velocidad de giro de motor_Cabeza
   	giro_cabeza(k) = double(readRotation(motor_Cabeza));	%Guarda en el array giro_cabeza lo que va rotando
     
-	%---Sonar---
+	%---Sonar----------------
   	distancia(k) = double(readDistance(Sonar));	%Guarda en distancia(k) la distancia leida por el Sonar en cada instante k
     
-	%---Dibujar gráfica---
+	%---Dibujar gráfica----------------
 	addpoints(punto, tiempo_real(k), distancia(k));	%Añade el siguiente punto a dibujar, sin necesidad de repintar el canvas entero
   	axis([0 4*pi -Amplitud Amplitud]);	%Establecer las dimensiones de la gráfica a dibujar. Si no se usa, la gráfica crece dinámicamente
   	drawnow	%Va dibujando constantemente mientras dure el bucle while
