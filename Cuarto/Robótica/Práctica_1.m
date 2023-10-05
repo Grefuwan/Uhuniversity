@@ -33,13 +33,13 @@ giro_cabeza(1) = double(readRotation(motor_Cabeza));  %Inicializa el giro_cabeza
 pulsador = touchSensor(mi_Robot, 1);
 
 
-while (pulsador == 0)
+while (readTouch(pulsador == 0))
 end
 
-while (pulsador == 1)
+while (readTouch(pulsador == 1))
 end
 
-while ((tiempo_real(k) < 4*pi) && (pulsador == 0))
+while ((tiempo_real(k) < 4*pi) && (readTouch(pulsador == 0)))
 	k = k+1;
  	tiempo_real(k) = toc(tStart);
   	referencia(k) = signal_vf_v2(tiempo_real(k), Periodo, Delay, Amplitud);
@@ -60,3 +60,5 @@ while ((tiempo_real(k) < 4*pi) && (pulsador == 0))
     disp 'Salir'
 
 end
+
+stop(motor_Cabeza);	%Hace que la cabeza pare de girar
