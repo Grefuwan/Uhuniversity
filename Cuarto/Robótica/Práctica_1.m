@@ -59,23 +59,24 @@ while ( (tiempo_real(k) < 2*pi) && (readTouch(pulsador) == 0))
    
    
    	%---Power---
-    kp = 0.6;
-    controlador = kp * error(k);
+    	kp = 0.6;
+    	controlador = kp * error(k);
    
 	Power = int8(controlador);
-    if Power>100
-        Power=100;
-    end
-    if Power<-100
-        Power=-100;
-    end
+    	if Power > 100
+        	Power = 100;
+    	end
+	if Power < -100
+		Power = -100;
+	end
+ 
 	%---Dibujar gráfica----------------
 	%addpoints(punto, tiempo_real(k), distancia(k));      %Añade el siguiente punto a dibujar, sin necesidad de repintar el canvas entero
 	%axis([0 4*pi -Amplitud Amplitud]); %Establecer las dimensiones de la gráfica a dibujar. Si no se usa, la gráfica crece dinámicamente
 	%drawnow    %Va dibujando constantemente mientras dure el bucle while
        
-    motor_Cabeza.Speed = Power;
-    %disp 'Salir'
+	motor_Cabeza.Speed = Power;
+	%disp 'Salir'
 
 end
 
