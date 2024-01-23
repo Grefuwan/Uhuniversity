@@ -1,0 +1,184 @@
+/* ===== Google Font Import - Poppins ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ===== Colores ===== */
+:root{
+    --body-color: #E4E9F7;
+    --nav-color: #4070F4;
+    --side-nav: #010718;
+    --text-color: #FFF;
+    --search-bar: #F2F2F2;
+    --search-text: #010718;
+}
+
+body{
+    height: 100vh;
+    background-color: var(--body-color);
+}
+
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 70px;
+    width: 100%;
+    background-color: var(--nav-color);
+}
+
+.nav-bar{
+    position: relative;
+    height: 100%;
+    max-width: 1000px;
+    width: 100%;
+    background-color: var(--nav-color);
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-bar .logo a{
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.nav-bar .nav-links{
+    display: flex;
+    align-items: center;
+}
+
+.nav-bar .nav-links li{
+    margin: 0 5px;
+    list-style: none;
+}
+
+.nav-links li a{
+    position: relative;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 10px;
+}
+
+.nav-links li a::before{
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+    transform: translateX(-50%);
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+    background-color: var(--text-color);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.nav-links li:hover a::before{
+    opacity: 1;
+}
+
+.cPresentacion-text{
+    margin-top: 100px;
+}
+
+/* ===== FORMULARIO AÑADIR COCHES/USUARIO ===== */
+.formularioAnadir{
+    margin-top: 90px;
+    padding-left: 15px;
+}
+
+
+
+/* ===== TABLA CATÁLOGO ===== */
+.class_TablaCatalogo-Filtro{
+    margin-top: 90px;
+}
+
+.class_TablaCatalogo{
+    width: 90%;
+    border: 10px solid green;
+    caption-side:bottom;
+    font-size:2.5ex;
+    position: relative;
+    top: 90px;
+    left: 10px;
+    right: 10px;
+}
+
+
+.class_TablaCatalogo th{
+    background-color:red;
+    color:white;
+    height:25px;
+    font-size:1.2em;
+}
+
+.class_TablaCatalogo tr:nth-child(odd){
+    background-color: pink;
+    border: black 1px solid;
+}
+
+.class_TablaCatalogo tr{
+    background-color: aquamarine;
+    border: black 1px solid;
+}
+
+.class_InicioSesion{
+    background-color: #fffffe;
+    color: black;
+}
+
+.class_Categorias p{
+    display:inline-block;
+    background-color: #fffffe;
+    border-radius: 2px;
+    padding: 3px;
+}
+
+.class_Categorias ul{
+    background-color: darkcyan;
+    border-radius: 5px;
+    display:none;
+    list-style-type: upper-roman;
+}
+
+.class_Categorias p:hover + ul{
+    display: block;
+    border-bottom: 5px solid white;
+    padding-bottom: 3px;
+}
+
+
+/*-------------- FORMULARIO --------------*/
+.class_InicioSesion{
+    background-color: bisque;
+    border-radius: 5px;
+    padding:5px;
+}
+
+.class_InicioSesion input{
+
+}
+
+
+/*-------------- FOOTER --------------*/
+.footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: wheat;
+    text-align: center;
+}
